@@ -1,0 +1,30 @@
+import React, {Component} from "react";
+import {Route, Redirect, RouteComponentProps} from "react-router-dom";
+import {isLoggedIn} from "../services/UserService";
+import {RouteProps} from "react-router";
+import {RouterConstants} from "./RouterConstants";
+import DashboardContainer from "../components/dashboardcontainer/DashboardContainer";
+
+interface Props extends RouteProps {
+    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>
+}
+
+export class DashboardRoute extends Route<Props> {
+    render () {
+        const {component: Component, ...rest}: Props = this.props;
+        if (isLoggedIn()){
+            return <Route {...rest} render={props => (
+                <DashboardContainer>
+                    <Component {...props} />
+                </DashboardContainer>
+
+            )} />
+        }
+
+        return (
+            <Route {...rest} render={props => <Redirect to={RouterConstants.login} />} />
+        );
+    }
+}
+
+export default DashboardRoute;
