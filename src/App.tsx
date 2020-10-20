@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {RouterConstants} from "./routes/RouterConstants";
 import TestPage from "./pages/test";
 import DashboardRoute from "./routes/DashboardRoute";
+import DepartmentsList from "./components/departmentslist/DepartmentsList";
 
 export default class App extends React.Component<any, any> {
 
@@ -14,8 +15,9 @@ export default class App extends React.Component<any, any> {
             <div>
                 <BrowserRouter>
                     <Switch>
-                        <Route path={RouterConstants.login} component={LoginPage}/>
-                        <DashboardRoute path={RouterConstants.home} component={TestPage}/>
+                        <Route exact path={RouterConstants.login} component={LoginPage}/>
+                        <DashboardRoute exact path={RouterConstants.home} component={TestPage}/>
+                        <DashboardRoute exact path={RouterConstants.departments} component={DepartmentsList}/>
                     </Switch>
                 </BrowserRouter>
             </div>)

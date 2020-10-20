@@ -1,4 +1,6 @@
 export const RouterConstants = {
     home : "/",
-    login : "/login"
+    login : "/login",
+    departments : "/departments",
+    departmentInfo : "/departments/:id"
 }

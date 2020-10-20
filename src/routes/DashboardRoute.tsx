@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {Route, Redirect, RouteComponentProps} from "react-router-dom";
 import {isLoggedIn} from "../services/UserService";
 import {RouteProps} from "react-router";
@@ -10,19 +10,18 @@ interface Props extends RouteProps {
 }
 
 export class DashboardRoute extends Route<Props> {
-    render () {
+    render() {
         const {component: Component, ...rest}: Props = this.props;
-        if (isLoggedIn()){
+        if (isLoggedIn()) {
             return <Route {...rest} render={props => (
                 <DashboardContainer>
                     <Component {...props} />
                 </DashboardContainer>
-
-            )} />
+            )}/>
         }
 
         return (
-            <Route {...rest} render={props => <Redirect to={RouterConstants.login} />} />
+            <Route {...rest} render={props => <Redirect to={RouterConstants.login}/>}/>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import CheckBox from "../../components/checkbox/Checkbox";
+import CheckBox from "../../components/common/checkbox/Checkbox";
 import "./LoginPage.css"
 import {login} from "../../services/UserService";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -47,7 +47,7 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
                     </div>
                 </header>
                 <main>
-                    <div className="container">
+                    <div className="login-page-container">
                         <div className="row">
                             <div className="col-md-4 offset-md-4">
                                 <h4 className="text-center mb-3">Login to VetAlmael</h4>
