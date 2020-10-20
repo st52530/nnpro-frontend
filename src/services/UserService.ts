@@ -1,5 +1,3 @@
-
-
 const TOKEN_KEY = "token"
 
 
@@ -30,4 +28,10 @@ export const login = (username : string, password : string, permanent : boolean)
         return true;
     }
     return false;
+}
+
+export const logout = () : void => {
+    localStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(TOKEN_KEY);
+    window.location.reload();
 }

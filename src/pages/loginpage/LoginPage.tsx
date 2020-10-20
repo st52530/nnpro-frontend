@@ -19,7 +19,7 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
         rememberMe : false
     }
 
-    _onSubmit = (e : any) : void => {
+    _onSubmit = () : void => {
         let {username, password, rememberMe} = this.state
         if (login(username, password, rememberMe)){
             this.props.history.push(RouterConstants.home)
@@ -47,7 +47,7 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
                     </div>
                 </header>
                 <main>
-                    <div className="login-page-container">
+                    <div className="container login-page-container">
                         <div className="row">
                             <div className="col-md-4 offset-md-4">
                                 <h4 className="text-center mb-3">Login to VetAlmael</h4>
