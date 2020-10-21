@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 import {Department, getDepartments} from "../../services/DepartmentService";
 import DepartmentListItem from "./DepartmentListItem";
+import LoadingPage from "../loadingpage/LoadingPage";
 
 interface Props {
 
@@ -8,18 +9,25 @@ interface Props {
 
 interface State {
     departments : Department[]
+
+    isLoading : boolean
 }
 
 
 
 class DepartmentsList extends React.Component<Props, State> {
     state : Readonly<State> = {
-        departments : []
+        departments : [],
+        isLoading : false
     }
 
     componentDidMount() {
-        let departments : Department[] = getDepartments();
-        this.setState({departments : departments})
+        this.setState({isLoading : true})
+        getDepartments().then(value => {
+            this.setState({departments : value, isLoading : false});
+        }).catch(reason =>{
+            this.setState({isLoading : false})
+        })
     }
 
     _renderDepartmentList = () : ReactNode => {

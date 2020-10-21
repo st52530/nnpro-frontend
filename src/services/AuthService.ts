@@ -17,7 +17,8 @@ export const isLoggedIn = () : boolean => {
     return false;
 }
 
-export const login = (username : string, password : string, permanent : boolean) : boolean => {
+export async function login(username : string, password : string, permanent : boolean) : Promise<boolean> {
+    await new Promise( resolve  => setTimeout(resolve, 3000));
     if (testuser.username === username && testuser.password === password){
         if (permanent) {
             localStorage.setItem(TOKEN_KEY, "todo");

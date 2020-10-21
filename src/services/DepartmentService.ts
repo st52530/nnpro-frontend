@@ -15,10 +15,12 @@ const testDepatmentsList : Department[] = [
 ]
 
 
-export const getDepartments = () : Department[] => {
+export async function getDepartments() : Promise<Department[]> {
+    await new Promise( resolve  => setTimeout(resolve, 3000));
     return testDepatmentsList;
 }
 
-export const getDepartment = (id : number) : Department | undefined => {
+export async function getDepartment(id : number) : Promise<Department | undefined> {
+    await new Promise( resolve  => setTimeout(resolve, 3000));
     return testDepatmentsList.find(d => d.id === id);
 }

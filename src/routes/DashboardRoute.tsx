@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Redirect, RouteComponentProps} from "react-router-dom";
-import {isLoggedIn} from "../services/UserService";
+import {isLoggedIn} from "../services/AuthService";
 import {RouteProps} from "react-router";
 import {RouterConstants} from "./RouterConstants";
 import DashboardContainer from "../components/dashboardcontainer/DashboardContainer";
