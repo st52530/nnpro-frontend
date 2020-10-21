@@ -25,19 +25,19 @@ const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
                             <Link className="nav-link" to={RouterConstants.departments}>Departments</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/staff">Staff</a>
+                            <Link className="nav-link" to="/staff">Staff</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/materials">Materials</a>
+                            <Link className="nav-link" to="/materials">Materials</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/reservations">Reservations</a>
+                            <Link className="nav-link" to="/reservations">Reservations</Link>
                         </li>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item mr-3">
-                            <a className="nav-link" href="#">SomeUsername</a>
+                            <span className="nav-link" >SomeUsername</span>
                         </li>
                         <li className="nav-item">
                             <button type="button" className="btn btn-outline-info" onClick={_onLogout}>Logout</button>

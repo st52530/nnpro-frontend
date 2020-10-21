@@ -8,7 +8,7 @@ const NotFound: FC<PropsWithChildren<any>> = () => {
     return (
         <div className="col text-center">
             <NavLink to={RouterConstants.home} className="notfound">
-                <h1>4<img src={Dog}/>4</h1>
+                <h1>4<img src={Dog} alt="0"/>4</h1>
             </NavLink>
         </div>
     )

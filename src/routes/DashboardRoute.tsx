@@ -3,7 +3,7 @@ import {Route, Redirect, RouteComponentProps} from "react-router-dom";
 import {isLoggedIn} from "../services/AuthService";
 import {RouteProps} from "react-router";
 import {RouterConstants} from "./RouterConstants";
-import DashboardContainer from "../components/common/dashboardcontainer/DashboardContainer";
+import DashboardContainer from "../components/content/dashboardcontainer/DashboardContainer";
 
 interface Props extends RouteProps {
     component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>

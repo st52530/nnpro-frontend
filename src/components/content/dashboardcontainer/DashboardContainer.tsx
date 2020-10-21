@@ -1,6 +1,7 @@
 import React, {FunctionComponent, PropsWithChildren} from "react";
-import TopMenu from "../../content/menu/TopMenu";
+import TopMenu from "../menu/TopMenu";
 import "./DashboardContainer.css"
+import Logo from "../../../images/logo.png"
 
 
 const DashboardContainer: FunctionComponent = (props: PropsWithChildren<any>) => {
@@ -11,7 +12,7 @@ const DashboardContainer: FunctionComponent = (props: PropsWithChildren<any>) =>
                     <header className="">
                         <div className="p-2 border-bottom">
                             <a href="/">
-                                <img className="d-block" src="./logo.png" alt="" height="80"/>
+                                <img className="d-block" src={Logo} alt="" height="80"/>
                             </a>
                         </div>
                         <TopMenu/>
