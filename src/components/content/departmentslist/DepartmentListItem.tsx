@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from "react";
-import {Department} from "../../services/DepartmentService";
+import {Department} from "../../../services/DepartmentService";
 import React from "react";
-import {RouterConstants} from "../../routes/RouterConstants";
+import {RouterConstants} from "../../../routes/RouterConstants";
 import {NavLink} from "react-router-dom";
 import "./DepartmentsListItem.css"
 

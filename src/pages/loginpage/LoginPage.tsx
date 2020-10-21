@@ -4,7 +4,7 @@ import "./LoginPage.css"
 import {login} from "../../services/AuthService";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {RouterConstants} from "../../routes/RouterConstants";
-import LoadingPage from "../../components/loadingpage/LoadingPage";
+import Loader from "../../components/content/loader/Loader";
 
 
 interface State {
@@ -49,7 +49,7 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
     render() {
         return (
             <div className="h-100">
-                <LoadingPage show={this.state.isLoading}/>
+                <Loader show={this.state.isLoading}/>
                 <header className="pb-5">
                     <div className="py-5 text-center">
                         <img className="d-block mx-auto" src="./logo.png" alt="" height="120"/>

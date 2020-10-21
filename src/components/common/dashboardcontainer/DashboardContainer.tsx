@@ -1,5 +1,5 @@
 import React, {FunctionComponent, PropsWithChildren} from "react";
-import TopMenu from "../menu/TopMenu";
+import TopMenu from "../../content/menu/TopMenu";
 import "./DashboardContainer.css"
 
 

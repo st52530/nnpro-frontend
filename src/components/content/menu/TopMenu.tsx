@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {RouterConstants} from "../../routes/RouterConstants";
-import {logout} from "../../services/AuthService";
+import {RouterConstants} from "../../../routes/RouterConstants";
+import {logout} from "../../../services/AuthService";
 
 interface Props {
 

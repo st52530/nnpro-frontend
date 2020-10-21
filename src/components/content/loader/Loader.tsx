@@ -1,12 +1,12 @@
 import React, {FC} from "react";
-import "./LoadingPage.css"
+import "./Loader.css"
 
 
 interface Props {
     show : boolean
 }
 
-const LoadingPage : FC<Props> = (props => {
+const Loader : FC<Props> = (props => {
     let className = "loader";
     if (!props.show) {
         className += " d-none"
@@ -63,4 +63,4 @@ const LoadingPage : FC<Props> = (props => {
     )
 })
 
-export default LoadingPage
+export default Loader

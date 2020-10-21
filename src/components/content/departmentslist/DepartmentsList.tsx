@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
-import {Department, getDepartments} from "../../services/DepartmentService";
+import {Department, getDepartments} from "../../../services/DepartmentService";
 import DepartmentListItem from "./DepartmentListItem";
-import LoadingPage from "../loadingpage/LoadingPage";
+import Loader from "../loader/Loader";
 
 interface Props {
 
@@ -47,6 +47,7 @@ class DepartmentsList extends React.Component<Props, State> {
     render() {
         return (
             <div>
+                <Loader show={this.state.isLoading}/>
                 <div className="row mb-5">
                     <div className="col">
                         <h1>Departments</h1>
