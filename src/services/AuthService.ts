@@ -1,10 +1,12 @@
-const TOKEN_KEY = "token"
+import API from "../utils/API";
+import {TOKEN_KEY} from "../utils/Constants";
+import User from "../entities/User";
+import {USER_LOGIN} from "../utils/APIPaths";
+import CurrentUserStore from "../storage/CurrentUserStore";
 
-
-
-const testuser = {
-    username : "admin",
-    password : "admin"
+interface LoginRequest {
+    username : string,
+    password : string
 }
 
 export const isLoggedIn = () : boolean => {
@@ -17,18 +19,19 @@ export const isLoggedIn = () : boolean => {
     return false;
 }
 
-export async function login(username : string, password : string, permanent : boolean) : Promise<boolean> {
-    await new Promise( resolve  => setTimeout(resolve, 3000));
-    if (testuser.username === username && testuser.password === password){
-        if (permanent) {
-            localStorage.setItem(TOKEN_KEY, "todo");
-        } else {
-            sessionStorage.setItem(TOKEN_KEY, "todo");
-        }
-
-        return true;
+export async function login(username : string, password : string, permanent : boolean) : Promise<User> {
+    let request : LoginRequest = {
+        username : username,
+        password : password
     }
-    return false;
+    let user : User = await API.post(USER_LOGIN, request);
+    if (permanent) {
+        localStorage.setItem(TOKEN_KEY, user.token);
+    } else {
+        sessionStorage.setItem(TOKEN_KEY, user.token);
+    }
+    CurrentUserStore.user = user;
+    return user;
 }
 
 export const logout = () : void => {

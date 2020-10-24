@@ -29,9 +29,10 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
         this.setState({isLoading : true})
         login(username, password, rememberMe).then(value => {
             this.setState({isLoading : false})
-            if(value) {
-                this.props.history.push(RouterConstants.home)
-            }
+            this.props.history.push(RouterConstants.home)
+        }).catch(reason => {
+            this.setState({isLoading : false})
+            console.error("Login error", reason)
         })
     }
 
