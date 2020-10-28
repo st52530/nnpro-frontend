@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {RouterConstants} from "../../../routes/RouterConstants";
 import {logout} from "../../../services/AuthService";
+import CurrentUserStore from "../../../storage/CurrentUserStore";
 
 interface Props {
 
@@ -37,7 +38,7 @@ const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
 
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item mr-3">
-                            <span className="nav-link" >SomeUsername</span>
+                            <span className="nav-link" >{CurrentUserStore.user?.fullName}</span>
                         </li>
                         <li className="nav-item">
                             <button type="button" className="btn btn-outline-info" onClick={_onLogout}>Logout</button>

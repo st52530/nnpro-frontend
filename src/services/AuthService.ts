@@ -1,6 +1,7 @@
-import API from "../utils/API";
-import {TOKEN_KEY} from "../utils/Constants";
+
 import User from "../entities/User";
+import {TOKEN_KEY} from "../Constants";
+import API from "../utils/API";
 import {USER_LOGIN} from "../utils/APIPaths";
 import CurrentUserStore from "../storage/CurrentUserStore";
 
@@ -24,7 +25,8 @@ export async function login(username : string, password : string, permanent : bo
         username : username,
         password : password
     }
-    let user : User = await API.post(USER_LOGIN, request);
+    let response = await API.post(USER_LOGIN, request);
+    let user : User = await response.data
     if (permanent) {
         localStorage.setItem(TOKEN_KEY, user.token);
     } else {

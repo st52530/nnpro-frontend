@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {API_ADDRESS, REQUEST_TOKEN_PREFIX, TOKEN_KEY} from "./Constants";
+import {API_ADDRESS, REQUEST_TOKEN_PREFIX, TOKEN_KEY} from "../Constants";
 
 
 const API = axios.create({
@@ -20,6 +20,12 @@ API.interceptors.request.use(
     }
 )
 
+API.interceptors.response.use(
+    value => {return value},
+    error => {
+        console.warn(error);
+    }
+)
 function getAuthenticationToken() : string | undefined {
     let token = sessionStorage.getItem(TOKEN_KEY);
     if (token) {

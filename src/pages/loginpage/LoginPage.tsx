@@ -1,11 +1,12 @@
 import React from "react";
-import CheckBox from "../../components/common/checkbox/Checkbox";
+import Checkbox from "../../components/common/checkbox/Checkbox";
 import "./LoginPage.css"
 import {login} from "../../services/AuthService";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {RouterConstants} from "../../routes/RouterConstants";
 import Loader from "../../components/content/loader/Loader";
 import Logo from "../../images/logo.png"
+import ErrorMessage from "../../components/common/errormessage/ErrorMessage";
+import {RouterConstants} from "../../routes/RouterConstants";
 
 
 interface State {
@@ -14,14 +15,25 @@ interface State {
     rememberMe : boolean,
 
     isLoading : boolean
+    isError : boolean
 }
+
+const WRONG_CREDENTIALS : string = "Wrong password or login"
 
 class LoginPage extends React.Component<RouteComponentProps, State> {
     state : Readonly<State> = {
         username : "",
         password : "",
         rememberMe : false,
-        isLoading : false
+
+        isLoading : false,
+        isError : false
+    }
+
+    _onKeyUp = (e : any) => {
+        if (e.which === 13) {
+            this._onSubmit();
+        }
     }
 
     _onSubmit = () : void => {
@@ -31,17 +43,16 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
             this.setState({isLoading : false})
             this.props.history.push(RouterConstants.home)
         }).catch(reason => {
-            this.setState({isLoading : false})
-            console.error("Login error", reason)
+            this.setState({isLoading : false, isError : true})
         })
     }
 
     _onUsernameInput = (e :  React.ChangeEvent<HTMLInputElement>) : void => {
-        this.setState({username : e.target.value})
+        this.setState({username : e.target.value, isError : false})
     }
 
     _onPasswordInput = (e :  React.ChangeEvent<HTMLInputElement>) : void => {
-        this.setState({password : e.target.value})
+        this.setState({password : e.target.value, isError : false})
     }
 
     _onRememberMe = (value : boolean) : void => {
@@ -52,6 +63,7 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
         return (
             <div className="h-100">
                 <Loader show={this.state.isLoading}/>
+                <ErrorMessage show={this.state.isError} text={WRONG_CREDENTIALS}/>
                 <header className="pb-5">
                     <div className="py-5 text-center">
                         <img className="d-block mx-auto" src={Logo} alt="" height="120"/>
@@ -72,10 +84,10 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
                                 </div>
 
                                 <div className="mb-3">
-                                    <CheckBox text={"Remember me"} isChecked={this.state.rememberMe} onChange={this._onRememberMe}/>
+                                    <Checkbox text={"Remember me"} isChecked={this.state.rememberMe} onChange={this._onRememberMe}/>
                                 </div>
 
-                                <button className="btn btn-success btn-lg btn-block" type="submit" onClick={this._onSubmit}>Login</button>
+                                <button className="btn btn-success btn-lg btn-block focus" type="submit" onClick={this._onSubmit} onInput={this._onKeyUp}>Login</button>
 
                             </div>
                         </div>
