@@ -27,6 +27,9 @@ export const CzechTranslations = {
     delete : "Odstranit",
     update : "Aktualizovat",
     address : "Adresa",
+    save : "Uložit",
+    cancel : "Zrušit",
+
 
     yes : "Ano",
     no : "Ne"

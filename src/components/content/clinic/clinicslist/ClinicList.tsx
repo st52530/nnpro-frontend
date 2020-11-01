@@ -87,7 +87,7 @@ class ClinicList extends React.Component<Props, State> {
                         <h1>{t("cpHeader")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}>Add new</button>
+                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}>{t("add")}</button>
                     </div>
                 </div>
                 {this._renderClinicsList()}
