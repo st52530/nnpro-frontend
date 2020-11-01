@@ -76,6 +76,7 @@ class ClinicList extends React.Component<Props, State> {
     }
 
     render() {
+        let t = this.props.t
         return (
             <div>
                 <Loader show={this.state.isLoading}/>
@@ -83,7 +84,7 @@ class ClinicList extends React.Component<Props, State> {
                 <AddEditClinicDialog onSubmit={this.onAddNewClinicSubmit} onCancel={this.onAddNewClinicCancel} isOpen={this.state.addNewClinicOpen}/>
                 <div className="row mb-5">
                     <div className="col">
-                        <h1>Departments</h1>
+                        <h1>{t("cpHeader")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}>Add new</button>

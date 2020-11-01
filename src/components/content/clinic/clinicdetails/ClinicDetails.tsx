@@ -6,7 +6,8 @@ import {deleteClinic, getClinic} from "../../../../services/ClinicService";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import Loader from "../../loader/Loader";
 import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
-import {WithTranslation} from "react-i18next";
+import {withTranslation, WithTranslation} from "react-i18next";
+import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -29,7 +30,7 @@ class ClinicDetails extends Component<Props, State> {
 
     state: Readonly<State> = {
         isLoading: true,
-        isError : true,
+        isError : false,
         isOpenDeleteDialog: false,
         clinic: {} as Clinic
     }
@@ -44,8 +45,7 @@ class ClinicDetails extends Component<Props, State> {
         getClinic(id).then(response => {
             this.setState({isLoading: false, clinic: response})
         }).catch(reason => {
-            console.error(reason);
-            this.props.history.push(RouterConstants.notFound);
+            this.setState({isError : true, isLoading : false});
         })
     }
 
@@ -59,7 +59,7 @@ class ClinicDetails extends Component<Props, State> {
         deleteClinic(id).then(resp => {
             this.props.history.push(RouterConstants.departments);
         }).catch(reason => {
-
+            this.setState({isError : true, isLoading : false})
         })
     }
 
@@ -75,19 +75,27 @@ class ClinicDetails extends Component<Props, State> {
     }
 
     render() {
+        let t = this.props.t;
         let clinic: Clinic = this.state.clinic;
         if (this.state.isLoading) {
             return <Loader show={true}/>
         }
         return (
             <div>
+                <ErrorMessage show={this.state.isError}/>
                 {this.renderDeleteDialog()}
-                <h1>{clinic.name}</h1>
-                <div className="col d-flex justify-content-end align-items-center">
-                    <button type="button" className="btn btn-info px-4" onClick={this.onDeleteButtonClick}>Edit</button>
+                <div className="row mb-5">
+                    <div className="col">
+                        <h1>{clinic.name}</h1>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                        <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                    </div>
                 </div>
+
+
                 <div className="col">
-                    <h2>Address</h2>
+                    <h3>Address</h3>
                     <p>{clinic.address}</p>
                 </div>
             </div>
@@ -95,4 +103,4 @@ class ClinicDetails extends Component<Props, State> {
     }
 }
 
-export default withRouter(ClinicDetails)
+export default withTranslation()(withRouter(ClinicDetails))

@@ -66,7 +66,7 @@ class LoginPage extends React.Component<Props, State> {
         return (
             <div className="h-100">
                 <Loader show={this.state.isLoading}/>
-                <ErrorMessage show={this.state.isError} text={t("badUsernameOrPassword")}/>
+                <ErrorMessage show={this.state.isError} text={t("lpCredentialsError")}/>
                 <header className="pb-5">
                     <div className="py-5 text-center">
                         <img className="d-block mx-auto" src={Logo} alt="" height="120"/>

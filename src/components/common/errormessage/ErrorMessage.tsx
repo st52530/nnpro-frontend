@@ -1,15 +1,15 @@
 import React, {FC} from "react";
 import {Alert} from "react-bootstrap";
+import {withTranslation, WithTranslation} from "react-i18next";
 
-interface Props {
+interface Props extends WithTranslation{
     show : boolean,
     text? : string
 }
 
-const DEFAULT_TEXT = "Something wrong, please try again page"
 const ErrorMessage : FC<Props> = (props => {
 
-    let onClick = (e : any) => {
+    let onClick = () => {
         window.location.reload();
     }
 
@@ -23,9 +23,9 @@ const ErrorMessage : FC<Props> = (props => {
 
     return (
         <Alert show={props.show} variant="warning" className="text-center w-100">
-            {DEFAULT_TEXT} <button onClick={onClick}/>
+            {props.t("error")}
         </Alert>
     )
 })
 
-export default ErrorMessage;
+export default withTranslation()(ErrorMessage);

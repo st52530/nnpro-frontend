@@ -1,31 +1,34 @@
 export const CzechTranslations = {
 
     // Login page
-    loginPageHeader : "Login to VetAlmael",
-    badUsernameOrPassword : "Wrong credentials",
+    lpHeader : "Přihlásit se do VetAlmael",
+    lpCredentialsError : "Chybně zadané heslo nebo uživatelsk? jméno",
 
 
     //Top menu
-    tmHome : "Home",
-    tmClinics : "Clinics",
-    tmStaff : "Staff",
-    tmMaterials : "Materials",
-    tmReservations : "Reservations",
+    tmHome : "Domů",
+    tmClinics : "Kliniky",
+    tmStaff : "Personál",
+    tmMaterials : "Medikamenty",
+    tmReservations : "Rezervace",
 
     // Clinics page
-    cpHeader : "Clinics",
+    cpHeader : "Kliniky",
 
     //Common
-    username : "Username",
-    password: "Password",
-    rememberMe : "Remember me",
-    loadError : "Something going wrong, please try again",
-    login : "Login",
-    logout : "Logout",
+    username : "Uživatelské jméno",
+    password: "Heslo",
+    rememberMe : "Zapamatuj mě",
+    error : "Něco šlo špatně, zkuste to znovu",
+    login : "Přihlásit se",
+    logout : "Odhlásit se",
 
-    add : "Add new",
-    delete : "Delete",
-    update : "Update",
-    address : "Address",
+    add : "Přidat nové",
+    delete : "Odstranit",
+    update : "Aktualizovat",
+    address : "Adresa",
+
+    yes : "Ano",
+    no : "Ne"
 
 }

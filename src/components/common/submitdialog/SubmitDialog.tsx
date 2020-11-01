@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import {Modal, ModalBody, ModalFooter, Button} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import "./SubminDialog.css"
+import {withTranslation, WithTranslation} from "react-i18next";
 
-interface Props {
+interface Props extends WithTranslation {
     header : string,
     body? : string
     isOpen : boolean
@@ -17,7 +18,7 @@ interface State {
     body? : string
 }
 
-abstract class SubmitDialog<T> extends Component<Props, State> {
+class SubmitDialog<T> extends Component<Props, State> {
 
     state : Readonly<State> = {
         header : this.props.header,
@@ -34,6 +35,7 @@ abstract class SubmitDialog<T> extends Component<Props, State> {
     }
 
     render() {
+        let t = this.props.t
         return (
             <Modal className="submit-dialog-body" show={this.state.isOpen} size="lg" onHide={this.props.onCancel}>
                 <ModalHeader >{this.state.header}</ModalHeader>
@@ -41,12 +43,12 @@ abstract class SubmitDialog<T> extends Component<Props, State> {
                     {this.state.body}
                 </ModalBody>
                 <ModalFooter>
-                    <Button variant="success" onClick={this.props.onSubmit} style={{ minWidth: 100 }}>Submit</Button>
-                    <Button variant="secondary" onClick={this.props.onCancel} style={{ minWidth: 100 }}>Cancel</Button>
+                    <Button variant="success" onClick={this.props.onSubmit} style={{ minWidth: 100 }}>{t("yes")}</Button>
+                    <Button variant="secondary" onClick={this.props.onCancel} style={{ minWidth: 100 }}>{t("no")}</Button>
                 </ModalFooter>
             </Modal>
         )
     }
 }
 
-export default SubmitDialog;
+export default  withTranslation()(SubmitDialog);
