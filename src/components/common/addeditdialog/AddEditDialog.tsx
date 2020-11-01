@@ -73,7 +73,7 @@ abstract class AddEditDialog<T> extends Component<Props<T>, State<T>> {
 
     render() {
         return (
-            <Modal className="add-edit-clinic-modal-content" show={this.state.isOpen} size="lg" >
+            <Modal className="add-edit-dialog-body" show={this.state.isOpen} size="lg" onHide={this._close}>
                 <ModalHeader >{this.getHeader()}</ModalHeader>
                 <ErrorMessage show={this.state.isError} text={this.state.errorMessage}/>
                 <ModalBody>
