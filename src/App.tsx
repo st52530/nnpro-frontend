@@ -8,9 +8,13 @@ import DashboardRoute from "./routes/DashboardRoute";
 import ClinicList from "./components/content/clinic/clinicslist/ClinicList";
 import NotFound from "./components/content/notfound/NotFound";
 import ClinicDetails from "./components/content/clinic/clinicdetails/ClinicDetails";
+import {me} from "./services/AuthService";
 
 export default class App extends React.Component<any, any> {
 
+    componentDidMount() {
+        me();
+    }
 
     render() {
         return (
