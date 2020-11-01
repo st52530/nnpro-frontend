@@ -7,7 +7,11 @@ import Loader from "../../components/content/loader/Loader";
 import Logo from "../../images/logo.png"
 import ErrorMessage from "../../components/common/errormessage/ErrorMessage";
 import {RouterConstants} from "../../routes/RouterConstants";
+import {withTranslation, WithTranslation} from "react-i18next";
 
+interface Props extends RouteComponentProps, WithTranslation {
+
+}
 
 interface State {
     username : string,
@@ -18,9 +22,7 @@ interface State {
     isError : boolean
 }
 
-const WRONG_CREDENTIALS : string = "Wrong password or login"
-
-class LoginPage extends React.Component<RouteComponentProps, State> {
+class LoginPage extends React.Component<Props, State> {
     state : Readonly<State> = {
         username : "",
         password : "",
@@ -60,10 +62,11 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
     }
 
     render() {
+        let {t} = this.props
         return (
             <div className="h-100">
                 <Loader show={this.state.isLoading}/>
-                <ErrorMessage show={this.state.isError} text={WRONG_CREDENTIALS}/>
+                <ErrorMessage show={this.state.isError} text={t("badUsernameOrPassword")}/>
                 <header className="pb-5">
                     <div className="py-5 text-center">
                         <img className="d-block mx-auto" src={Logo} alt="" height="120"/>
@@ -73,21 +76,21 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
                     <div className="container login-page-container">
                         <div className="row">
                             <div className="col-md-4 offset-md-4">
-                                <h4 className="text-center mb-3">Login to VetAlmael</h4>
+                                <h4 className="text-center mb-3">{t("loginPageHeader")}</h4>
 
                                 <div className="mb-3">
-                                    <input type="text" className="form-control" placeholder="Login" value={this.state.username} onChange={this._onUsernameInput}/>
+                                    <input type="text" className="form-control" placeholder={t("username")} value={this.state.username} onChange={this._onUsernameInput}/>
                                 </div>
 
                                 <div className="mb-3">
-                                    <input type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this._onPasswordInput}/>
+                                    <input type="password" className="form-control" placeholder={t("password")} value={this.state.password} onChange={this._onPasswordInput}/>
                                 </div>
 
                                 <div className="mb-3">
-                                    <Checkbox text={"Remember me"} isChecked={this.state.rememberMe} onChange={this._onRememberMe}/>
+                                    <Checkbox text={t('rememberMe')} isChecked={this.state.rememberMe} onChange={this._onRememberMe}/>
                                 </div>
 
-                                <button className="btn btn-success btn-lg btn-block focus" type="submit" onClick={this._onSubmit} onInput={this._onKeyUp}>Login</button>
+                                <button className="btn btn-success btn-lg btn-block focus" type="submit" onClick={this._onSubmit} onInput={this._onKeyUp}>{t('login')}</button>
 
                             </div>
                         </div>
@@ -98,4 +101,4 @@ class LoginPage extends React.Component<RouteComponentProps, State> {
     }
 }
 
-export default withRouter(LoginPage)
+export default withRouter(withTranslation()(LoginPage))

@@ -2,5 +2,7 @@ export const RouterConstants = {
     home : "/",
     login : "/login",
     departments : "/departments",
-    departmentInfo : "/departments/:id"
+    departmentDetails : "/departments/:id",
+
+    notFound : "404"
 }

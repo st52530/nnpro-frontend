@@ -3,12 +3,13 @@ import {Link} from "react-router-dom";
 import {RouterConstants} from "../../../routes/RouterConstants";
 import {logout} from "../../../services/AuthService";
 import CurrentUserStore from "../../../storage/CurrentUserStore";
+import {withTranslation, WithTranslation} from "react-i18next";
 
-interface Props {
+interface Props extends WithTranslation{
 
 }
 
-const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
+const TopMenu: React.FunctionComponent<Props> = ({t}) => {
 
     let _onLogout = (e : any) => {
         logout();
@@ -20,19 +21,19 @@ const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <Link className="nav-link" to={RouterConstants.home}>Home</Link>
+                            <Link className="nav-link" to={RouterConstants.home}>{t("tmHome")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.departments}>Departments</Link>
+                            <Link className="nav-link" to={RouterConstants.departments}>{t("tmClinics")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/staff">Staff</Link>
+                            <Link className="nav-link" to="/staff">{t("tmStaff")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/materials">Materials</Link>
+                            <Link className="nav-link" to="/materials">{t("tmMaterials")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/reservations">Reservations</Link>
+                            <Link className="nav-link" to="/reservations">{t("tmReservations")}</Link>
                         </li>
                     </ul>
 
@@ -41,7 +42,7 @@ const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
                             <span className="nav-link" >{CurrentUserStore.user?.fullName}</span>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className="btn btn-outline-info" onClick={_onLogout}>Logout</button>
+                            <button type="button" className="btn btn-outline-info" onClick={_onLogout}>{t("logout")}</button>
                         </li>
                     </ul>
                 </div>
@@ -50,4 +51,4 @@ const TopMenu: React.FunctionComponent<Props> = (props: Props) => {
     )
 }
 
-export default TopMenu
+export default withTranslation()(TopMenu)

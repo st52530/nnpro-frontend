@@ -12,7 +12,7 @@ interface Props {
 const ClinicListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
     let clinic : Clinic = props.clinic;
 
-    const URL = RouterConstants.departmentInfo.replace(":id", String(clinic.idClinic))
+    const URL = RouterConstants.departmentDetails.replace(":id", String(clinic.idClinic))
     return (
         <NavLink to={URL} className="card-link mb-3">
             <div className="card">

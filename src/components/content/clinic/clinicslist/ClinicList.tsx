@@ -5,8 +5,9 @@ import Clinic from "../../../../entities/Clinic";
 import {getClinics, saveNewClinic} from "../../../../services/ClinicService";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import AddEditClinicDialog from "../addeditclinicdialog/AddEditClinicDialog";
+import {WithTranslation, withTranslation} from "react-i18next";
 
-interface Props {
+interface Props extends WithTranslation{
 
 }
 
@@ -94,4 +95,4 @@ class ClinicList extends React.Component<Props, State> {
     }
 }
 
-export default ClinicList
+export default withTranslation()(ClinicList)
