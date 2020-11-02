@@ -11,6 +11,7 @@ export const CzechTranslations = {
     tmStaff : "Personál",
     tmMaterials : "Medikamenty",
     tmReservations : "Rezervace",
+    tmClients : "Klienti",
 
     // Clinics page
     cpHeader : "Kliniky",

@@ -1,9 +1,11 @@
 
 
 export default interface User {
+    idUser : number
     username : string,
     email : string,
     fullName : string,
+    password? : string,
     roles : UserRole,
     token : string
 }

@@ -1,5 +1,5 @@
 import User from "../entities/User";
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 
 class CurrentUserStore {
     @observable
@@ -9,6 +9,7 @@ class CurrentUserStore {
         return this._user;
     }
 
+    @action
     set user(value: User | undefined) {
         this._user = value;
     }

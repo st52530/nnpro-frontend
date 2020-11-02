@@ -9,6 +9,8 @@ import ClinicList from "./components/content/clinic/clinicslist/ClinicList";
 import NotFound from "./components/content/notfound/NotFound";
 import ClinicDetails from "./components/content/clinic/clinicdetails/ClinicDetails";
 import {me} from "./services/AuthService";
+import ClientList from "./components/content/client/clientslist/ClientList";
+import ClientDetails from "./components/content/client/clientdetails/ClientDetails";
 
 export default class App extends React.Component<any, any> {
 
@@ -25,6 +27,8 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.home} component={TestPage}/>
                         <DashboardRoute exact path={RouterConstants.departments} component={ClinicList}/>
                         <DashboardRoute exact path={RouterConstants.departmentDetails} component={ClinicDetails}/>
+                        <DashboardRoute exact path={RouterConstants.clients} component={ClientList}/>
+                        <DashboardRoute exact path={RouterConstants.clientDetails} component={ClientDetails}/>
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>
