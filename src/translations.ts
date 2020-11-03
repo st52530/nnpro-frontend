@@ -2,7 +2,7 @@ export const CzechTranslations = {
 
     // Login page
     lpHeader : "Přihlásit se do VetAlmael",
-    lpCredentialsError : "Chybně zadané heslo nebo uživatelsk? jméno",
+    lpCredentialsError : "Chybně zadané heslo nebo uživatelské jméno",
 
 
     //Top menu
@@ -33,6 +33,28 @@ export const CzechTranslations = {
 
 
     yes : "Ano",
-    no : "Ne"
+    no : "Ne",
+
+    // add/edit client form
+    dfEditClient : "Opravit",
+    dfAddClient : "Přidat nového klienta",
+
+    dfEmptyName : "Prázdné uživatelské jméno",
+    dfEmptyFullName : "Prázdné plné jméno uživatele",
+    dfEmptyMail : "Prazdný e-mail",
+    dfEmptyPassword : "Prazdné heslo",
+
+    dfFullName : "Plné jméno",
+    dfName : "Uživatelské jméno",
+    dfEmail : "E-mail",
+    dfPassword : "Heslo",
+
+    // add/edit clinic form
+    dfEmptyAddress : "Prazdná adresa",
+    dfClinicName : "Jméno klinily",
+    dfAddress : "Adresa"
+
+
+
 
 }

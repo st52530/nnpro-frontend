@@ -2,6 +2,7 @@ import AddEditDialog from "../../../common/addeditdialog/AddEditDialog";
 import Clinic from "../../../../entities/Clinic";
 import React from "react";
 import {Col, Row, Form} from "react-bootstrap";
+import i18n from "../../../../i18n";
 
 
 export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
@@ -16,10 +17,10 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
     protected validate(): string | undefined {
         let {name , address} = this.state.item
         if (!name || name.trim().length === 0) {
-            return "Name is empty";
+            return i18n.t("dfEmptyName");
         }
         if (!address || address.trim().length === 0) {
-            return "Address is empty";
+            return i18n.t("dfEmptyAddress");
         }
 
         return undefined;
@@ -57,7 +58,7 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
                         Name
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeName} value={name || ""} placeholder="Clinic name"/>
+                        <Form.Control type="text" onChange={this.onChangeName} value={name || ""} placeholder={i18n.t("dfClinicName")}/>
                     </Col>
                 </Form.Group>
 
@@ -66,7 +67,7 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
                         Address
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control as="textarea" onChange={this.onChangeAddress} value={address || ""} placeholder="Address"/>
+                        <Form.Control as="textarea" onChange={this.onChangeAddress} value={address || ""} placeholder={i18n.t("dfAddress")}/>
                     </Col>
                 </Form.Group>
             </Form>

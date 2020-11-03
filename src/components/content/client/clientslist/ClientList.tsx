@@ -84,7 +84,7 @@ class ClientList extends React.Component<Props, State> {
                 <AddEditClientDialog onSubmit={this.onAddNewClientSubmit} onCancel={this.onAddNewClinicCancel} isOpen={this.state.addNewClientOpen}/>
                 <div className="row mb-5">
                     <div className="col">
-                        <h1>{t("cpHeader")}</h1>
+                        <h1>{t("tmClients")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClient}>{t("add")}</button>

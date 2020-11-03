@@ -1,32 +1,32 @@
 import AddEditDialog from "../../../common/addeditdialog/AddEditDialog";
-import Clinic from "../../../../entities/Clinic";
 import React from "react";
-import {Col, Row, Form} from "react-bootstrap";
+import {Col, Form, Row} from "react-bootstrap";
 import User from "../../../../entities/User";
+import i18n from "../../../../i18n";
 
 
 export default class AddEditClientDialog extends AddEditDialog<User> {
 
     getHeader(): string {
         if (this.props.item) {
-            return "Edit client"
+            return i18n.t("dfEditClient")
         }
-        return "Add new client"
+        return i18n.t("dfAddClient")
     }
 
     protected validate(): string | undefined {
         let {username , fullName, email, password} = this.state.item
         if (!username || username.trim().length === 0) {
-            return "User name is empty";
+            return i18n.t("dfEmptyName");
         }
         if (!fullName || fullName.trim().length === 0) {
-            return "User full name is empty";
+            return i18n.t("dfEmptyFullName");
         }
         if (!email || email.trim().length === 0) {
-            return "Email is empty";
+            return i18n.t("dfEmptyMail");
         }
         if (this.props.item || !password || password.trim().length === 0) {
-            return "Password is empty";
+            return i18n.t("dfEmptyPassword");
         }
 
         return undefined;
@@ -78,7 +78,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         Full name
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeFullName} value={fullName || ""} placeholder="Full name"/>
+                        <Form.Control type="text" onChange={this.onChangeFullName} value={fullName || ""} placeholder={i18n.t("dfFullName")}/>
                     </Col>
                 </Form.Group>
 
@@ -87,7 +87,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         Username
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeUserName} value={username || ""} placeholder="Username"/>
+                        <Form.Control type="text" onChange={this.onChangeUserName} value={username || ""} placeholder={i18n.t("dfName")}/>
                     </Col>
                 </Form.Group>
 
@@ -96,7 +96,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         Email
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""} placeholder="User email"/>
+                        <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""} placeholder={i18n.t("dfEmail")}/>
                     </Col>
                 </Form.Group>
 
@@ -105,7 +105,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         Password
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="password" onChange={this.onChangePassword} value={password || ""} placeholder="Password"/>
+                        <Form.Control type="password" onChange={this.onChangePassword} value={password || ""} placeholder={i18n.t("dfPassword")}/>
                     </Col>
                 </Form.Group>
             </Form>
