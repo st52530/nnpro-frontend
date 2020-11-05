@@ -15,6 +15,15 @@ export const CzechTranslations = {
 
     // Clinics page
     cpHeader : "Kliniky",
+    cpDelete : "Odstranit kliniku",
+    cpEdit : "Upravit kliniku",
+    cpAdd : "Přidat novou kliniku",
+
+    // Staff page
+    spHeader : "Personál",
+    spDelete : "Odstranit zaměstnance",
+    spEdit : "Upravit zaměstnance",
+    spAdd : "Přidat nového zaměstnance",
 
     //Common
     username : "Uživatelské jméno",
@@ -52,8 +61,10 @@ export const CzechTranslations = {
     // add/edit clinic form
     dfEmptyAddress : "Prazdná adresa",
     dfClinicName : "Jméno klinily",
-    dfAddress : "Adresa"
+    dfAddress : "Adresa",
 
+    // add/edit staff form
+    dfStaffUsername : "Uživatelské jméno"
 
 
 

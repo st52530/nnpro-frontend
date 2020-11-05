@@ -1,14 +1,14 @@
-import {Component, ReactNode} from "react";
-import React from "react";
+import React, {Component, ReactNode} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
-import Clinic from "../../../../entities/Clinic";
-import {deleteClinic, getClinic} from "../../../../services/ClinicService";
+import {deleteClinic} from "../../../../services/ClinicService";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import Loader from "../../loader/Loader";
 import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import i18n from "../../../../i18n";
+import Staff from "../../../../entities/Staff";
+import {getCertainStaff} from "../../../../services/StaffService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -21,19 +21,19 @@ interface MatchParams {
 interface State {
     isLoading: boolean,
     isOpenDeleteDialog: boolean
-    clinic: Clinic
+    staff: Staff
 
     isError : boolean,
     errorText? : string
 }
 
-class ClinicDetails extends Component<Props, State> {
+class StaffDetails extends Component<Props, State> {
 
     state: Readonly<State> = {
         isLoading: true,
         isError : false,
         isOpenDeleteDialog: false,
-        clinic: {} as Clinic
+        staff: {} as Staff
     }
 
     componentDidMount() {
@@ -43,8 +43,8 @@ class ClinicDetails extends Component<Props, State> {
     loadData = () => {
         let id = Number(this.props.match.params.id);
         console.warn(id);
-        getClinic(id).then(response => {
-            this.setState({isLoading: false, clinic: response})
+        getCertainStaff(id).then(response => {
+            this.setState({isLoading: false, staff: response})
         }).catch(reason => {
             this.setState({isError : true, isLoading : false});
         })
@@ -69,8 +69,8 @@ class ClinicDetails extends Component<Props, State> {
     }
 
     private renderDeleteDialog = () : ReactNode => {
-        let header : string = i18n.t("cpDelete");
-        let body : string = i18n.t("cpDelete")+ ": " + this.state.clinic.name + "?";
+        let header : string = i18n.t("spDelete");
+        let body : string = i18n.t("spDelete")+ ": " + this.state.staff.username + "?";
 
         return <SubmitDialog header={header} body={body} isOpen={this.state.isOpenDeleteDialog} onSubmit={this.onDeleteSubmit} onCancel={this.onDeleteCancel}/>
     }
@@ -79,32 +79,32 @@ class ClinicDetails extends Component<Props, State> {
 
     render() {
         let t = this.props.t;
-        let clinic: Clinic = this.state.clinic;
+        let staff: Staff = this.state.staff;
         if (this.state.isLoading) {
             return <Loader show={true}/>
         }
         return (
-            <div>
-                <ErrorMessage show={this.state.isError}/>
-                {this.renderDeleteDialog()}
-                <div className="row mb-5">
-                    <div className="col">
-                        <h1>{clinic.name}</h1>
-                    </div>
-                    <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
-                    </div>
-                </div>
-
-
+        <div>
+            <ErrorMessage show={this.state.isError}/>
+            {this.renderDeleteDialog()}
+            <div className="row mb-5">
                 <div className="col">
-                    <h3>{t("dfAddress")}</h3>
-                    <p>{clinic.address}</p>
-                    <h3>{t("tmStaff")}</h3>
+                    <h1>{staff.username}</h1>
+                </div>
+                <div className="col d-flex justify-content-end align-items-center">
+                    <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
                 </div>
             </div>
-        )
+
+
+            <div className="col">
+                <h3>{t("dfAddress")}</h3>
+                <p>{staff.fullName}</p>
+                <h3>{t("tmStaff")}</h3>
+            </div>
+        </div>
+    )
     }
 }
 
-export default withTranslation()(withRouter(ClinicDetails))
+export default withTranslation()(withRouter(StaffDetails))

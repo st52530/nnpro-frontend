@@ -1,7 +1,7 @@
 import AddEditDialog from "../../../common/addeditdialog/AddEditDialog";
 import Clinic from "../../../../entities/Clinic";
 import React from "react";
-import {Col, Row, Form} from "react-bootstrap";
+import {Col, Form, Row} from "react-bootstrap";
 import i18n from "../../../../i18n";
 
 
@@ -9,9 +9,9 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
 
     getHeader(): string {
         if (this.props.item) {
-            return "Edit clinic"
+            return i18n.t("cpEdit")
         }
-        return "Add new clinic"
+        return i18n.t("cpAdd")
     }
 
     protected validate(): string | undefined {
@@ -55,7 +55,7 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
             <Form>
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        Name
+                        {i18n.t("dfClinicName")}
                     </Form.Label>
                     <Col sm="10">
                         <Form.Control type="text" onChange={this.onChangeName} value={name || ""} placeholder={i18n.t("dfClinicName")}/>
@@ -64,7 +64,7 @@ export default class AddEditClinicDialog extends AddEditDialog<Clinic> {
 
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        Address
+                        {i18n.t("dfAddress")}
                     </Form.Label>
                     <Col sm="10">
                         <Form.Control as="textarea" onChange={this.onChangeAddress} value={address || ""} placeholder={i18n.t("dfAddress")}/>

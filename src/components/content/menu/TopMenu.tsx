@@ -24,7 +24,7 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                             <Link className="nav-link" to={RouterConstants.home}>{t("tmHome")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.departments}>{t("tmClinics")}</Link>
+                            <Link className="nav-link" to={RouterConstants.clinics}>{t("tmClinics")}</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/staff">{t("tmStaff")}</Link>
