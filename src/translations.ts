@@ -5,7 +5,7 @@ export const CzechTranslations = {
     lpCredentialsError : "Chybně zadané heslo nebo uživatelské jméno",
 
 
-    //Top menu
+    // Top menu
     tmHome : "Domů",
     tmClinics : "Kliniky",
     tmStaff : "Personál",
@@ -25,7 +25,10 @@ export const CzechTranslations = {
     spEdit : "Upravit zaměstnance",
     spAdd : "Přidat nového zaměstnance",
 
-    //Common
+    // Medicine page
+    mpHeader : "Medikamenty",
+
+    // Common
     username : "Uživatelské jméno",
     password: "Heslo",
     rememberMe : "Zapamatuj mě",
@@ -64,7 +67,12 @@ export const CzechTranslations = {
     dfAddress : "Adresa",
 
     // add/edit staff form
-    dfStaffUsername : "Uživatelské jméno"
+    dfStaffUsername : "Uživatelské jméno",
+
+    // add/edit medicine form
+    dfEmptyCode : "Prazdný kód",
+    dfMedicineCode : "Kód medikamenta",
+    dfMedicineName : "Jméno medikamentu",
 
 
 

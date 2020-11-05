@@ -13,6 +13,8 @@ import ClientList from "./components/content/client/clientslist/ClientList";
 import ClientDetails from "./components/content/client/clientdetails/ClientDetails";
 import StaffList from "./components/content/staff/stafflist/StaffList";
 import StaffDetails from "./components/content/staff/staffdetails/StaffDetails";
+import MedicineDetails from "./components/content/medicine/medicinedetails/MedicineDetails";
+import MedicineList from "./components/content/medicine/medicinelist/MedicineList";
 
 export default class App extends React.Component<any, any> {
 
@@ -33,6 +35,8 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.clientDetails} component={ClientDetails}/>
                         <DashboardRoute exact path={RouterConstants.staff} component={StaffList}/>
                         <DashboardRoute exact path={RouterConstants.staffDetails} component={StaffDetails}/>
+                        <DashboardRoute exact path={RouterConstants.medicine} component={MedicineList}/>
+                        <DashboardRoute exact path={RouterConstants.medicineDetails} component={MedicineDetails}/>
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>
