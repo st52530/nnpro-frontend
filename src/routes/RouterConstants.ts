@@ -14,5 +14,8 @@ export const RouterConstants = {
     medicine : "/medicine",
     medicineDetails : "/medicine/:id",
 
+    reservation : "/reservations",
+    reservationDetails : "/reservations/:id",
+
     notFound : "404"
 }

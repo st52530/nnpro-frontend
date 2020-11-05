@@ -57,7 +57,7 @@ class MedicineDetails extends Component<Props, State> {
         this.setState({isOpenDeleteDialog: false, isLoading : true})
         let id = Number(this.props.match.params.id);
         deleteMedicine(id).then(resp => {
-            this.props.history.push(RouterConstants.clinics);
+            this.props.history.push(RouterConstants.medicine);
         }).catch(reason => {
             this.setState({isError : true, isLoading : false})
         })

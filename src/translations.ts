@@ -28,6 +28,12 @@ export const CzechTranslations = {
     // Medicine page
     mpHeader : "Medikamenty",
 
+    // Reservation page
+    rpHeader : "Rezervace",
+    rpDelete : "Odstranit rezervace",
+    rpEdit : "Upravit rezervace",
+    rpAdd : "Přidat novou rezervace",
+
     // Common
     username : "Uživatelské jméno",
     password: "Heslo",
@@ -73,6 +79,9 @@ export const CzechTranslations = {
     dfEmptyCode : "Prazdný kód",
     dfMedicineCode : "Kód medikamenta",
     dfMedicineName : "Jméno medikamentu",
+
+    // add/edit reservation form
+    dfDate : "Datum"
 
 
 

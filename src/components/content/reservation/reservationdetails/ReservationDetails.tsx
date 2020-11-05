@@ -1,14 +1,13 @@
 import React, {Component, ReactNode} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
-import {deleteClinic} from "../../../../services/ClinicService";
+import {deleteReservation, getReservation} from "../../../../services/ReservationService";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import Loader from "../../loader/Loader";
 import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import i18n from "../../../../i18n";
-import Staff from "../../../../entities/Staff";
-import {getCertainStaff} from "../../../../services/StaffService";
+import Reservation from "../../../../entities/Reservation";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -21,19 +20,19 @@ interface MatchParams {
 interface State {
     isLoading: boolean,
     isOpenDeleteDialog: boolean
-    staff: Staff
+    reservation: Reservation
 
     isError : boolean,
     errorText? : string
 }
 
-class StaffDetails extends Component<Props, State> {
+class ReservationDetails extends Component<Props, State> {
 
     state: Readonly<State> = {
         isLoading: true,
         isError : false,
         isOpenDeleteDialog: false,
-        staff: {} as Staff
+        reservation: {} as Reservation
     }
 
     componentDidMount() {
@@ -43,8 +42,8 @@ class StaffDetails extends Component<Props, State> {
     loadData = () => {
         let id = Number(this.props.match.params.id);
         console.warn(id);
-        getCertainStaff(id).then(response => {
-            this.setState({isLoading: false, staff: response})
+        getReservation(id).then(response => {
+            this.setState({isLoading: false, reservation : response})
         }).catch(reason => {
             this.setState({isError : true, isLoading : false});
         })
@@ -57,8 +56,8 @@ class StaffDetails extends Component<Props, State> {
     private onDeleteSubmit = (): void => {
         this.setState({isOpenDeleteDialog: false, isLoading : true})
         let id = Number(this.props.match.params.id);
-        deleteClinic(id).then(resp => {
-            this.props.history.push(RouterConstants.staff);
+        deleteReservation(id).then(resp => {
+            this.props.history.push(RouterConstants.reservation);
         }).catch(reason => {
             this.setState({isError : true, isLoading : false})
         })
@@ -69,8 +68,8 @@ class StaffDetails extends Component<Props, State> {
     }
 
     private renderDeleteDialog = () : ReactNode => {
-        let header : string = i18n.t("spDelete");
-        let body : string = i18n.t("spDelete")+ ": " + this.state.staff.username + "?";
+        let header : string = i18n.t("cpDelete");
+        let body : string = i18n.t("cpDelete")+ ": " + this.state.reservation.date + "?";
 
         return <SubmitDialog header={header} body={body} isOpen={this.state.isOpenDeleteDialog} onSubmit={this.onDeleteSubmit} onCancel={this.onDeleteCancel}/>
     }
@@ -79,32 +78,25 @@ class StaffDetails extends Component<Props, State> {
 
     render() {
         let t = this.props.t;
-        let staff: Staff = this.state.staff;
+        let reservation: Reservation = this.state.reservation;
         if (this.state.isLoading) {
             return <Loader show={true}/>
         }
         return (
-        <div>
-            <ErrorMessage show={this.state.isError}/>
-            {this.renderDeleteDialog()}
-            <div className="row mb-5">
-                <div className="col">
-                    <h1>{staff.username}</h1>
-                </div>
-                <div className="col d-flex justify-content-end align-items-center">
-                    <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+            <div>
+                <ErrorMessage show={this.state.isError}/>
+                {this.renderDeleteDialog()}
+                <div className="row mb-5">
+                    <div className="col">
+                        <h1>{reservation.date}</h1>
+                    </div>
+                    <div className="col d-flex justify-content-end align-items-center">
+                        <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                    </div>
                 </div>
             </div>
-
-
-            <div className="col">
-                <h3>{t("dfAddress")}</h3>
-                <p>{staff.fullName}</p>
-                <h3>{t("tmStaff")}</h3>
-            </div>
-        </div>
-    )
+        )
     }
 }
 
-export default withTranslation()(withRouter(StaffDetails))
+export default withTranslation()(withRouter(ReservationDetails))
