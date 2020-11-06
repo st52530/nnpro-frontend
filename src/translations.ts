@@ -12,6 +12,7 @@ export const CzechTranslations = {
     tmMaterials : "Medikamenty",
     tmReservations : "Rezervace",
     tmClients : "Klienti",
+    tmAnimals : "Zvířata",
 
     // Clinics page
     cpHeader : "Kliniky",
@@ -33,6 +34,13 @@ export const CzechTranslations = {
     rpDelete : "Odstranit rezervace",
     rpEdit : "Upravit rezervace",
     rpAdd : "Přidat novou rezervace",
+
+    // Animal page
+    apHeader : "Zvířata",
+    apDelete : "Odstranit zvíře",
+    apEdit : "Upravit zvíře",
+    apAdd : "Přidat nové zvíře",
+    apOwnerUsername : "Uživatelské jméno majitele",
 
     // Common
     username : "Uživatelské jméno",
@@ -81,8 +89,10 @@ export const CzechTranslations = {
     dfMedicineName : "Jméno medikamentu",
 
     // add/edit reservation form
-    dfDate : "Datum"
+    dfDate : "Datum",
 
+    // add/edit animal form
+    dfEmptyOwner : "Prázdné id majitele",
 
 
 }

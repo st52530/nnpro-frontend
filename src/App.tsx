@@ -17,6 +17,8 @@ import MedicineDetails from "./components/content/medicine/medicinedetails/Medic
 import MedicineList from "./components/content/medicine/medicinelist/MedicineList";
 import ReservationDetails from "./components/content/reservation/reservationdetails/ReservationDetails";
 import ReservationList from "./components/content/reservation/reservationlist/ReservationList";
+import AnimalList from "./components/content/animal/animallist/AlnimalList";
+import AnimalDetails from "./components/content/animal/animaldetails/AnimalDetails";
 
 export default class App extends React.Component<any, any> {
 
@@ -41,6 +43,8 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.medicineDetails} component={MedicineDetails}/>
                         <DashboardRoute exact path={RouterConstants.reservation} component={ReservationList}/>
                         <DashboardRoute exact path={RouterConstants.reservationDetails} component={ReservationDetails}/>
+                        <DashboardRoute exact path={RouterConstants.animals} component={AnimalList}/>
+                        <DashboardRoute exact path={RouterConstants.animalDetails} component={AnimalDetails}/>
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>

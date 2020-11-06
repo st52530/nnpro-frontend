@@ -1,6 +1,5 @@
-import Clinic from "../entities/Clinic";
 import API from "../utils/API";
-import {CLIENTS, CLINICS} from "../utils/APIPaths";
+import {CLIENTS} from "../utils/APIPaths";
 import User from "../entities/User";
 
 export async function getClients() : Promise<User[]> {

@@ -17,5 +17,8 @@ export const RouterConstants = {
     reservation : "/reservations",
     reservationDetails : "/reservations/:id",
 
+    animals : "/animals",
+    animalDetails : "/animals/:id",
+
     notFound : "404"
 }
