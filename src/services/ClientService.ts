@@ -3,20 +3,8 @@ import {CLIENTS} from "../utils/APIPaths";
 import User from "../entities/User";
 
 export async function getClients() : Promise<User[]> {
-    //let response = await API.get(CLIENTS)
-    //return await response.data;
-
-    return [
-        {
-            idUser : 1,
-            username : 'Client test username',
-            email : 'Client test email',
-            fullName : 'Client test fullname',
-            password : '',
-            roles : null,
-            token : ''
-        }
-    ]
+    let response = await API.get(CLIENTS)
+    return await response.data;
 }
 
 export async function getClient(id : number) : Promise<User> {
