@@ -4,13 +4,22 @@ import Staff from "../entities/Staff";
 
 
 export async function getAllStaff() : Promise<Staff[]> {
-    let response = await API.get(STAFF)
-    return await response.data;
+    //let response = await API.get(STAFF)
+    //return await response.data;
+    
+    return [{idStaff : 1, username : 'Test Staff username',fullName : 'Test Staff full name', password : 'password'}]
 }
 
 export async function getCertainStaff(id : number) : Promise<Staff> {
     let response = await API.get(STAFF + "/" + id)
     return await response.data;
+}
+
+export async function getStaffByClinic(clinicId : number) : Promise<Staff[]> {
+    //let response = await API.get(STAFF + "/clinic/" + clinicId)
+    //return await response.data;
+
+    return [{idStaff : 1, username : 'username',fullName : 'full name', password : 'password'}]
 }
 
 export async function saveNewStaff(staff : Staff) : Promise<void> {

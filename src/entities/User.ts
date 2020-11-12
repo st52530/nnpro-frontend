@@ -6,7 +6,7 @@ export default interface User {
     email : string,
     fullName : string,
     password? : string,
-    roles : UserRole,
+    roles : UserRole | null,
     token : string
 }
 

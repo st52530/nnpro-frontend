@@ -14,13 +14,13 @@ const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
 
     const URL = RouterConstants.clinicDetails.replace(":id", String(reservation.idReservation))
     return (
-        <NavLink to={URL} className="card-link mb-3">
+        <div className="card-link mb-3">
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">{reservation.date}</h5>
+                    <h5 className="card-title">Rezervace </h5>
                 </div>
             </div>
-        </NavLink>
+        </div>
     )
 }
 

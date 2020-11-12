@@ -4,8 +4,24 @@ import User from "../entities/User";
 import Animal from "../entities/Animal";
 
 export async function getAnimals() : Promise<Animal[]> {
-    let response = await API.get(ANIMALS)
-    return await response.data;
+    //let response = await API.get(ANIMALS)
+    //return await response.data;
+
+    
+    return [
+        {
+            idAnimal : 1, 
+            name : 'Test Animal name',
+            owner : {
+                idUser : 1,
+                username : 'Owner username',
+                email : 'Owner email',
+                fullName : 'Owner fullname',
+                password : '',
+                roles : null,
+                token : ''
+            }
+        }]
 }
 
 export async function getAnimal(id : number) : Promise<Animal> {

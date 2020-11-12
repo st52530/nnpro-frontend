@@ -19,6 +19,10 @@ export const CzechTranslations = {
     cpDelete : "Odstranit kliniku",
     cpEdit : "Upravit kliniku",
     cpAdd : "Přidat novou kliniku",
+    cpAddress : "Adresa",
+    cpStaff : "Personál",
+    cpMedicine : "Medikamenty",
+    cpConsumable : "Spotřební materiál",
 
     // Staff page
     spHeader : "Personál",
@@ -60,6 +64,7 @@ export const CzechTranslations = {
 
     yes : "Ano",
     no : "Ne",
+    nothingFound : "Nic nalezeno",
 
     // add/edit client form
     dfEditClient : "Opravit",
@@ -92,6 +97,8 @@ export const CzechTranslations = {
     dfDate : "Datum",
 
     // add/edit animal form
+    dfAnimalName : "Zvířě jmeno",
+    dfAnimalOwner : "Majitel zvířě",
     dfEmptyOwner : "Prázdné id majitele",
 
 

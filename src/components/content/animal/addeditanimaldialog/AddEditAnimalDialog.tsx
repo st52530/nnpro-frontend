@@ -46,13 +46,21 @@ export default class AddEditAnimalDialog extends AddEditDialog<Animal> {
             <Form>
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        {i18n.t("dfClinicName")}
+                        {i18n.t("dfAnimalName")}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeName} value={name || ""} placeholder={i18n.t("dfClinicName")}/>
+                        <Form.Control type="text" onChange={this.onChangeName} value={name || ""} placeholder={i18n.t("dfAnimalName")}/>
                     </Col>
                 </Form.Group>
 
+                <Form.Group as={Row} >
+                    <Form.Label column sm="2">
+                        {i18n.t("dfAnimalOwner")}
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control type="text" value={name || ""} placeholder={i18n.t("dfAnimalOwner")}/>
+                    </Col>
+                </Form.Group>
             </Form>
         );
     }

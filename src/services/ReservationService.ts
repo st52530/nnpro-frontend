@@ -4,8 +4,17 @@ import Reservation from "../entities/Reservation";
 
 
 export async function getReservations() : Promise<Reservation[]> {
-    let response = await API.get(RESERVATION)
-    return await response.data;
+    //let response = await API.get(RESERVATION)
+    //return await response.data;
+
+    return [
+        {
+            idReservation : 1,
+            date : null,
+            clinic : null,
+            client : null
+        }
+    ]
 }
 
 export async function getReservation(id : number) : Promise<Reservation> {
