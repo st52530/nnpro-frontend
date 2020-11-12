@@ -2,10 +2,17 @@ import React, {ReactNode} from "react";
 import ReservationListItem from "./ReservationListItem";
 import Loader from "../../loader/Loader";
 import Reservation from "../../../../entities/Reservation";
-import {getReservations, saveNewReservation} from "../../../../services/ReservationService";
+import {
+    deleteReservation,
+    getReservations,
+    saveNewReservation,
+    updateReservation
+} from "../../../../services/ReservationService";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import AddEditReservationDialog from "../addeditreservationdialog/AddEditReservationDialog";
 import {WithTranslation, withTranslation} from "react-i18next";
+import {observe} from "mobx";
+import {observer} from "mobx-react";
 
 interface Props extends WithTranslation{
 
@@ -15,18 +22,22 @@ interface State {
     reservation : Reservation[]
 
     addNewReservationOpen : boolean
+    editReservationOpen : boolean
+
+    editReservation? : Reservation
 
     isLoading : boolean
     isError : boolean
 }
 
 
-
+@observer
 class ReservationList extends React.Component<Props, State> {
     state : Readonly<State> = {
         reservation : [],
 
         addNewReservationOpen : false,
+        editReservationOpen : false,
         isLoading : false,
         isError : false,
     }
@@ -61,9 +72,36 @@ class ReservationList extends React.Component<Props, State> {
         this.setState({addNewReservationOpen : false})
     }
 
+    onEditReservation = (reservation : Reservation) : void => {
+        this.setState({editReservationOpen : true, editReservation : reservation})
+    }
+
+    onEditReservationSubmit = (reservation : Reservation) => {
+        this.setState({editReservationOpen : false, isLoading : true})
+        updateReservation(reservation).then(value => {
+            this.setState({editReservation : undefined})
+            this.loadReservations();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onEditReservationCancel = () => {
+        this.setState({editReservationOpen : false, editReservation : undefined})
+    }
+
+    onDeleteReservation = (reservation : Reservation) => {
+        this.setState({isLoading : true})
+        deleteReservation(reservation.idReservation || 0).then(value => {
+            this.loadReservations();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
     _renderReservationList = () : ReactNode => {
         let elements : ReactNode[] = this.state.reservation.map(reservation => {
-            return <ReservationListItem reservation={reservation} key={reservation.idReservation}/>
+            return <ReservationListItem onEdit={this.onEditReservation} onDelete={this.onDeleteReservation} reservation={reservation} key={reservation.idReservation}/>
         })
 
         return (
@@ -82,6 +120,7 @@ class ReservationList extends React.Component<Props, State> {
                 <Loader show={this.state.isLoading}/>
                 <ErrorMessage show={this.state.isError}/>
                 <AddEditReservationDialog onSubmit={this.onAddNewReservationSubmit} onCancel={this.onAddNewReservationCancel} isOpen={this.state.addNewReservationOpen}/>
+                <AddEditReservationDialog item={this.state.editReservation} onSubmit={this.onEditReservationSubmit} onCancel={this.onEditReservationCancel} isOpen={this.state.editReservationOpen}/>
                 <div className="row mb-5">
                     <div className="col">
                         <h1>{t("rpHeader")}</h1>

@@ -19,11 +19,17 @@ import ReservationDetails from "./components/content/reservation/reservationdeta
 import ReservationList from "./components/content/reservation/reservationlist/ReservationList";
 import AnimalList from "./components/content/animal/animallist/AlnimalList";
 import AnimalDetails from "./components/content/animal/animaldetails/AnimalDetails";
+import DateStorage from "./services/DataStorage";
 
 export default class App extends React.Component<any, any> {
 
     componentDidMount() {
-        //me();
+        me().then(user => {
+            if (user) {
+                DateStorage.initStorages();
+            }
+        })
+
     }
 
     render() {

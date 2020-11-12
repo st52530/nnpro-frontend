@@ -1,11 +1,14 @@
 import Clinic from "../entities/Clinic";
 import API from "../utils/API";
 import {CLINICS} from "../utils/APIPaths";
+import DateStorage from "./DataStorage";
 
 
 export async function getClinics() : Promise<Clinic[]> {
     let response = await API.get(CLINICS)
-    return await response.data;
+    let clinics = await response.data;
+    DateStorage.clinicsStorage.replace(clinics);
+    return clinics;
 }
 
 export async function getClinic(id : number) : Promise<Clinic> {

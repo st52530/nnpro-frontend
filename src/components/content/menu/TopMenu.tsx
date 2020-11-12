@@ -2,8 +2,8 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {RouterConstants} from "../../../routes/RouterConstants";
 import {logout} from "../../../services/AuthService";
-import CurrentUserStore from "../../../storage/CurrentUserStore";
 import {withTranslation, WithTranslation} from "react-i18next";
+import DateStorage from "../../../services/DataStorage";
 
 interface Props extends WithTranslation{
 
@@ -45,7 +45,7 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
 
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item mr-3">
-                            <span className="nav-link" >{CurrentUserStore.user?.fullName}</span>
+                            <span className="nav-link" >{DateStorage.currentUser?.fullName}</span>
                         </li>
                         <li className="nav-item">
                             <button type="button" className="btn btn-outline-info" onClick={_onLogout}>{t("logout")}</button>

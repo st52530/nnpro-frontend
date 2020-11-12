@@ -10,6 +10,13 @@ export default interface User {
     token : string
 }
 
+export const getUserId = (user : User) => {
+    return user.idUser;
+}
+
+export const getUserLabel = (user : User) => {
+    return user.fullName;
+}
 
 export enum UserRole {
     ADMINISTRATOR = "ADMINISTRATOR",

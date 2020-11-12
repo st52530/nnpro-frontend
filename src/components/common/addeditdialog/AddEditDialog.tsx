@@ -50,6 +50,10 @@ abstract class AddEditDialog<T> extends Component<Props<T>, State<T>> {
 
     protected abstract renderForm() : ReactNode;
 
+    public isNew = () : boolean => {
+        return this.props.item === undefined
+    }
+
     private _onSubmit = () => {
         let errorMessage : string | undefined = this.validate();
         if (errorMessage){

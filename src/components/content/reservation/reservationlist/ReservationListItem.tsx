@@ -1,12 +1,14 @@
 import {FC, PropsWithChildren} from "react";
 import {RouterConstants} from "../../../../routes/RouterConstants";
-import {NavLink} from "react-router-dom";
 import "./ReservationListItem.css"
 import Reservation from "../../../../entities/Reservation";
 import React from "react";
+import {Button, ButtonGroup} from "react-bootstrap";
 
 interface Props {
     reservation : Reservation
+    onDelete : (reservation : Reservation) => void;
+    onEdit : (reservation : Reservation) => void;
 }
 
 const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
@@ -14,10 +16,22 @@ const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
 
     const URL = RouterConstants.clinicDetails.replace(":id", String(reservation.idReservation))
     return (
-        <div className="card-link mb-3">
+        <div className="mb-3">
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Rezervace </h5>
+                    <div className="row">
+                        <div className="col-10">
+                            <h5 className="card-title">Rezervace {new Date(reservation.date).toUTCString()}</h5>
+                            <h6>{reservation.client?.fullName}</h6>
+                        </div>
+                        <div className="col-2">
+                            <ButtonGroup>
+                                <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>Edit</Button>
+                                <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>Delete</Button>
+                            </ButtonGroup>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

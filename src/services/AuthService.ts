@@ -3,7 +3,7 @@ import User from "../entities/User";
 import {TOKEN_KEY} from "../Constants";
 import API from "../utils/API";
 import {ME, USER_LOGIN} from "../utils/APIPaths";
-import CurrentUserStore from "../storage/CurrentUserStore";
+import DataStorage from "./DataStorage";
 
 interface LoginRequest {
     username : string,
@@ -32,7 +32,7 @@ export async function login(username : string, password : string, permanent : bo
     } else {
         sessionStorage.setItem(TOKEN_KEY, user.token);
     }
-    CurrentUserStore.user = user.user;
+    DataStorage.currentUser = user.user;
     return user;
 }
 
@@ -47,7 +47,7 @@ export async function me() : Promise<User | undefined> {
 
     let response = await API.get(ME)
     let user : User = await response.data;
-    CurrentUserStore.user = user;
+    DataStorage.currentUser = user;
     return user;
 }
 

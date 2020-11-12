@@ -1,10 +1,14 @@
 import API from "../utils/API";
 import {CLIENTS} from "../utils/APIPaths";
 import User from "../entities/User";
+import DataStorage from "./DataStorage"
+
 
 export async function getClients() : Promise<User[]> {
     let response = await API.get(CLIENTS)
-    return await response.data;
+    let clients = await response.data;
+    DataStorage.clientsStorage = clients;
+    return clients;
 }
 
 export async function getClient(id : number) : Promise<User> {
