@@ -39,6 +39,13 @@ export default class AddEditAnimalDialog extends AddEditDialog<Animal> {
             }})
     }
 
+    private onChangeOwner = (e : any) : void => {
+        this.setState({ item : {
+                ...this.state.item,
+                name : e.target.value,
+            }})
+    }
+
     protected renderForm(): React.ReactNode {
         let {name} = this.state.item
         return (
@@ -58,7 +65,7 @@ export default class AddEditAnimalDialog extends AddEditDialog<Animal> {
                         {i18n.t("dfAnimalOwner")}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="text" value={name || ""} placeholder={i18n.t("dfAnimalOwner")}/>
+                        <Form.Control type="text" onChange={this.onChangeOwner} value={name || ""} placeholder={i18n.t("dfAnimalOwner")}/>
                     </Col>
                 </Form.Group>
             </Form>

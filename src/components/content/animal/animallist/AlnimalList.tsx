@@ -86,9 +86,6 @@ class AnimalList extends React.Component<Props, State> {
                     <div className="col">
                         <h1>{t("apHeader")}</h1>
                     </div>
-                    <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewAnimal}>{t("add")}</button>
-                    </div>
                 </div>
                 {this._renderAnimalsList()}
             </div>
@@ -97,3 +94,9 @@ class AnimalList extends React.Component<Props, State> {
 }
 
 export default withTranslation()(AnimalList)
+
+/* 
+<div className="col d-flex justify-content-end align-items-center">
+    <button type="button" className="btn btn-success px-4" onClick={this.onAddNewAnimal}>{t("add")}</button>
+</div> 
+*/
