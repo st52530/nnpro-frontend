@@ -1,0 +1,15 @@
+a {
+    color: #2B9348;
+}
+
+a:hover {
+    color: #007F5F;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #80B918!important;
+}
+
+.clinic-title {
+    color: #2B9348;
+}
