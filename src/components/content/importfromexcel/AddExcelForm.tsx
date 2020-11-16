@@ -14,15 +14,11 @@ export default class AddExcelForm extends AddEditDialog<Blob> {
     }
 
     protected validate(): string | undefined {
-        /*let {name , address} = this.state.item
-        if (!name || name.trim().length === 0) {
-            return i18n.t("dfEmptyName");
-        }
-        if (!address || address.trim().length === 0) {
-            return i18n.t("dfEmptyAddress");
-        }
-        */
         return undefined;
+    }
+
+    onChangeFile = (e : any) => {
+        this.setState({item : e.target.files[0]})
     }
 
     protected onCancel(): void {
@@ -43,7 +39,7 @@ export default class AddExcelForm extends AddEditDialog<Blob> {
                         Choose file
                     </Form.Label>
                     <Col sm="10">
-                        <Form.File/>
+                        <Form.File onChange={this.onChangeFile} />
                     </Col>
                 </Form.Group>
             </Form>
