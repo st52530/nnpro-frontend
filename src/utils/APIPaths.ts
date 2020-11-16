@@ -19,3 +19,4 @@ export const MEDICINES = "/medicines"
 
 export const CONSUMABLE = "/consumable"
 export const CONSUMABLES = "/consumables"
+export const EXCEL = "/consumables/excel"

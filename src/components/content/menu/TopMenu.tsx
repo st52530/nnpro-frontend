@@ -41,6 +41,9 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                         <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.clients}>{t("tmClients")}</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={RouterConstants.excel}>{t("excel")}</Link>
+                        </li>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">

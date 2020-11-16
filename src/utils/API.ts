@@ -26,7 +26,7 @@ API.interceptors.response.use(
         console.warn(error);
     }
 )
-function getAuthenticationToken() : string | undefined {
+export function getAuthenticationToken() : string | undefined {
     let token = sessionStorage.getItem(TOKEN_KEY);
     if (token) {
         return REQUEST_TOKEN_PREFIX + token;

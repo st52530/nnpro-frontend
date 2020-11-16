@@ -20,5 +20,7 @@ export const RouterConstants = {
     animals : "/animals",
     animalDetails : "/animals/:id",
 
+    excel : "/consumables/excel",
+
     notFound : "404"
 }

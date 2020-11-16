@@ -66,6 +66,9 @@ export const CzechTranslations = {
     save : "Uložit",
     cancel : "Zrušit",
 
+    //Excel
+    excel : "Import z Excel",
+
 
     yes : "Ano",
     no : "Ne",
