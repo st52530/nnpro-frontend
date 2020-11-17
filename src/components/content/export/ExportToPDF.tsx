@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import Loader from "../loader/Loader";
-import {getPDF, getPDFs} from "../../../services/PDFService";
+import {downloadReport, getPDFs} from "../../../services/PDFService";
 import ErrorMessage from "../../common/errormessage/ErrorMessage";
 import {WithTranslation, withTranslation} from "react-i18next";
 
@@ -28,7 +28,7 @@ class ExportToPDF extends React.Component<Props, State> {
 
     downloadPdf = () : void => {
         this.setState({isLoading : true})
-        getPDF(749).then(value => {
+        downloadReport(749).then(value => {
             this.setState({/*clinics : value,*/ isLoading : false});
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })

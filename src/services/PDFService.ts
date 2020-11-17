@@ -10,7 +10,17 @@ export async function getPDFs() : Promise<File[]> {
     return clinics;
 }
 
-export async function getPDF(id : number) : Promise<File> {
-    let response = await API.get(PDF + "/" + id)
-    return await response.data;
+export async function downloadReport(id : number) : Promise<void> {
+    let req = new XMLHttpRequest();
+    req.open("GET", PDF + "/" + id, true)
+    req.responseType = "blob"
+
+    req.onload = () => {
+        let file = new File([req.response], "Report.pdf" ,{ type : 'application/pdf'})
+        let fileUrl = URL.createObjectURL(file);
+        window.open(fileUrl, "_blank")
+    }
+
+
+    req.send();
 }
