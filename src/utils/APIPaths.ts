@@ -24,3 +24,5 @@ export const EXCEL_OPERATIONS = "/operations/excel"
 export const EXCEL_CONSUMABLES = "/consumables/excel"
 export const EXCEL_DIAGNOSES = "/diagnoses/excel"
 export const EXCEL_MEDICINES = "/medicines/excel"
+
+export const PDF = "/export"

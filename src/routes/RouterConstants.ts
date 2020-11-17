@@ -21,6 +21,8 @@ export const RouterConstants = {
     animalDetails : "/animals/:id",
 
     import : "/import",
+    export : "/export",
+    exportDownload : "/export:id",
 
     notFound : "404"
 }

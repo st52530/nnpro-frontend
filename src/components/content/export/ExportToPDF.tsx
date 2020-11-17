@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import Loader from "../loader/Loader";
-import {getClinics, saveNewClinic} from "../../../services/PDFService";
+import {getPDF, getPDFs} from "../../../services/PDFService";
 import ErrorMessage from "../../common/errormessage/ErrorMessage";
 import {WithTranslation, withTranslation} from "react-i18next";
 
@@ -26,23 +26,20 @@ class ExportToPDF extends React.Component<Props, State> {
         isError : false,
     }
 
-    componentDidMount() {
-        this.loadClinics();
-    }
-
-    loadClinics = () : void => {
+    downloadPdf = () : void => {
         this.setState({isLoading : true})
-        getClinics().then(value => {
-            this.setState({isLoading : false});
+        getPDF(749).then(value => {
+            this.setState({/*clinics : value,*/ isLoading : false});
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
     }
 
+/*
     onAddNewClinic = () : void => {
         this.setState({addNewClinicOpen : true})
     }
-/*
+
     onAddNewClinicSubmit = (clinic : Clinic) => {
         this.setState({addNewClinicOpen : false, isLoading : true})
         saveNewClinic(clinic).then(value => {
@@ -71,18 +68,17 @@ class ExportToPDF extends React.Component<Props, State> {
     }
 */
     render() {
-        //let t = this.props.t
+        let t = this.props.t
         return (
             <div>
                 <Loader show={this.state.isLoading}/>
                 <ErrorMessage show={this.state.isError}/>
+                <div className="mb-5">
 
-                <div className="row mb-5">
-                    <div className="col">
+                    <h1>{t("export")}</h1>
 
-                    </div>
-                    <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}></button>
+                    <div className="col d-flex align-items-center">
+                        <button type="button" className="btn btn-success px-4" onClick={this.downloadPdf}>{t("download")}</button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-import {importExcelConsumables} from "./services/ExcelService";
 
 export const CzechTranslations = {
 
@@ -74,6 +73,10 @@ export const CzechTranslations = {
     iMedicines : "Import biopreparátů a léčiv",
     iDiagnoses : "Import diagnózů",
     iOperations : "Import výkonů",
+
+    //PDF
+    export : "Export",
+    download : "Stáhnout PDF",
 
 
     yes : "Ano",
