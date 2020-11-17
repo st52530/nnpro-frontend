@@ -7,10 +7,7 @@ import i18n from "../../../i18n";
 export default class AddExcelForm extends AddEditDialog<Blob> {
 
     getHeader(): string {
-        if (this.props.item) {
-            return i18n.t("cpEdit")
-        }
-        return i18n.t("cpAdd")
+        return i18n.t("import")
     }
 
     protected validate(): string | undefined {
@@ -30,18 +27,16 @@ export default class AddExcelForm extends AddEditDialog<Blob> {
     }
 
     protected renderForm(): React.ReactNode {
-        //let {name , address} = this.state.item
         return (
-
             <Form>
-                <Form.Group as={Row} >
-                    <Form.Label column sm="2">
+                <div className="file-field">
+                    <Form.Label>
                         Choose file
                     </Form.Label>
-                    <Col sm="10">
-                        <Form.File onChange={this.onChangeFile} />
-                    </Col>
-                </Form.Group>
+                    <div className="file-path-wrapper">
+                        <Form.File className="btn btn-success btn-sm float-left w-100" onChange={this.onChangeFile}/>
+                    </div>
+                </div>
             </Form>
         );
     }

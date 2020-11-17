@@ -1,3 +1,5 @@
+import {importExcelConsumables} from "./services/ExcelService";
+
 export const CzechTranslations = {
 
     // Login page
@@ -67,7 +69,11 @@ export const CzechTranslations = {
     cancel : "Zrušit",
 
     //Excel
-    excel : "Import z Excel",
+    import : "Import",
+    iConsumables : "Import spotřebních předmětů",
+    iMedicines : "Import biopreparátů a léčiv",
+    iDiagnoses : "Import diagnózů",
+    iOperations : "Import výkonů",
 
 
     yes : "Ano",

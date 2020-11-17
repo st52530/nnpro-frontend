@@ -52,7 +52,7 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.reservationDetails} component={ReservationDetails}/>
                         <DashboardRoute exact path={RouterConstants.animals} component={AnimalList}/>
                         <DashboardRoute exact path={RouterConstants.animalDetails} component={AnimalDetails}/>
-                        <DashboardRoute exact path={RouterConstants.excel} component={ImportFromExcel}/>
+                        <DashboardRoute exact path={RouterConstants.import} component={ImportFromExcel}/>
                         <Route component={NotFound} />
                     </Switch>
                 </BrowserRouter>
