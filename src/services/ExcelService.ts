@@ -22,26 +22,28 @@ FileAPI.interceptors.request.use(
     }
 )
 
-export async function importExcelOperations(file : Blob) : Promise<void> {
+function formatFile(file: Blob) {
     let formData = new FormData()
     formData.append("file", file)
+    return formData;
+}
+
+export async function importExcelOperations(file : Blob) : Promise<void> {
+    let formData = formatFile(file);
     return FileAPI.post(EXCEL_OPERATIONS, formData)
 }
 
 export async function importExcelConsumables(file : Blob) : Promise<void> {
-    let formData = new FormData()
-    formData.append("file", file)
+    let formData = formatFile(file);
     return FileAPI.post(EXCEL_CONSUMABLES, formData)
 }
 
 export async function importExcelDiagnoses(file : Blob) : Promise<void> {
-    let formData = new FormData()
-    formData.append("file", file)
+    let formData = formatFile(file);
     return FileAPI.post(EXCEL_DIAGNOSES, formData)
 }
 
 export async function importExcelMedicines(file : Blob) : Promise<void> {
-    let formData = new FormData()
-    formData.append("file", file)
+    let formData = formatFile(file);
     return FileAPI.post(EXCEL_MEDICINES, formData)
 }
