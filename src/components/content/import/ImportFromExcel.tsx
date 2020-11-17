@@ -30,7 +30,7 @@ interface State {
 
 
 
-class ClinicList extends React.Component<Props, State> {
+class ImportFromExcel extends React.Component<Props, State> {
     state : Readonly<State> = {
         currentWindow : OPENED_WINDOW.NONE,
 
@@ -98,4 +98,4 @@ class ClinicList extends React.Component<Props, State> {
     }
 }
 
-export default withTranslation()(ClinicList)
+export default withTranslation()(ImportFromExcel)
