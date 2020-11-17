@@ -20,7 +20,7 @@ import ReservationList from "./components/content/reservation/reservationlist/Re
 import AnimalList from "./components/content/animal/animallist/AlnimalList";
 import AnimalDetails from "./components/content/animal/animaldetails/AnimalDetails";
 import DateStorage from "./services/DataStorage";
-import ImportFromExcel from "./components/content/importfromexcel/ImportFromExcel";
+import ImportFromExcel from "./components/content/import/ImportFromExcel";
 
 export default class App extends React.Component<any, any> {
 
