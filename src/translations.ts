@@ -78,6 +78,9 @@ export const CzechTranslations = {
     export : "Export",
     download : "Stáhnout PDF",
 
+    // statistics
+    statistics : "Statistiky",
+
 
     yes : "Ano",
     no : "Ne",
