@@ -35,9 +35,9 @@ export const CzechTranslations = {
 
     // Client page 
     clientPageInformation : 'Informace',
-    clientPageAnimals : 'Zvěře',
+    clientPageAnimals : 'Zvířata',
     clientPageReservations : 'Rezervace',
- 
+
     // Medicine page
     mpHeader : "Medikamenty",
 
@@ -58,8 +58,8 @@ export const CzechTranslations = {
     // Common
     username : "Uživatelské jméno",
     password: "Heslo",
-    rememberMe : "Zapamatuj mě",
-    error : "Něco šlo špatně, zkuste to znovu",
+    rememberMe : "Zapamatuj si mě",
+    error : "Něco se nepovedlo, zkuste to prosím znovu.",
     login : "Přihlásit se",
     logout : "Odhlásit se",
 
@@ -74,7 +74,7 @@ export const CzechTranslations = {
     import : "Import",
     iConsumables : "Import spotřebních předmětů",
     iMedicines : "Import biopreparátů a léčiv",
-    iDiagnoses : "Import diagnózů",
+    iDiagnoses : "Import diagnóz",
     iOperations : "Import výkonů",
 
     //PDF
@@ -123,10 +123,10 @@ export const CzechTranslations = {
     dfEmptyProtectionPeriod : "Prázdná doba ochrany",
     dfEmptyType : "Prázdný typ",
     dfEmptyPackageSize : "Prázdný rozměr balíku",
-    dfMedicineCode : "Kód medikamenta",
+    dfMedicineCode : "Kód medikamentu",
     dfMedicineName : "Jméno medikamentu",
     dfMedicineSubstances : "Substance",
-    dfMedicineTargetAnimals : "Cílové zvířata",
+    dfMedicineTargetAnimals : "Cílová zvířata",
     dfMedicineForm : "Forma",
     dfMedicineNumberOfApproval : "Číslo schválení",
     dfMedicineDateOfApproval : "Datum schválení",
@@ -144,8 +144,8 @@ export const CzechTranslations = {
     dfEmptyClient : "Prázdný klient",
 
     // add/edit animal form
-    dfAnimalName : "Zvířě jmeno",
-    dfAnimalOwner : "Majitel zvířě",
+    dfAnimalName : "Jméno zvířete",
+    dfAnimalOwner : "Majitel zvířete",
     dfEmptyOwner : "Prázdné id majitele",
 
     // months

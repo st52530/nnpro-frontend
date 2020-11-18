@@ -17,3 +17,7 @@ a:hover {
 .card:hover {
     background: #80B918;
 }
+
+.card:hover .card-title {
+    color: #fff;
+}

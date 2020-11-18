@@ -76,7 +76,7 @@ class LoginPage extends React.Component<Props, State> {
                     <div className="container login-page-container">
                         <div className="row">
                             <div className="col-md-4 offset-md-4">
-                                <h4 className="text-center mb-3">{t("loginPageHeader")}</h4>
+                                <h4 className="text-center mb-3">{t("lpHeader")}</h4>
 
                                 <div className="mb-3">
                                     <input type="text" className="form-control" placeholder={t("username")} value={this.state.username} onChange={this._onUsernameInput}/>

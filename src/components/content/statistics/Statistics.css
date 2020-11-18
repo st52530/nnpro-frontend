@@ -9,3 +9,16 @@
 .card-link:hover {
     color: #80B918;
 }
+
+.list-group-flush li:hover {
+    color: #fff;
+    background-color: #80B918;
+}
+
+.card-wo-hover:hover .card-body {
+    background-color: #fff;
+}
+
+.card-wo-hover:hover .card-body .card-title {
+    color: #2B9348;
+}
