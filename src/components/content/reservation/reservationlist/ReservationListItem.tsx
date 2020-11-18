@@ -4,6 +4,7 @@ import "./ReservationListItem.css"
 import Reservation from "../../../../entities/Reservation";
 import React from "react";
 import {Button, ButtonGroup} from "react-bootstrap";
+import i18n from "../../../../i18n";
 
 interface Props {
     reservation : Reservation
@@ -27,8 +28,8 @@ const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
                         </div>
                         <div className="col-2">
                             <ButtonGroup>
-                                <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>Edit</Button>
-                                <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>Delete</Button>
+                                <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>{i18n.t("update")}</Button>
+                                <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>{i18n.t("delete")}</Button>
                             </ButtonGroup>
                         </div> 
                     </div>

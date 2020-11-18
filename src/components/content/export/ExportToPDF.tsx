@@ -73,10 +73,10 @@ class ExportToPDF extends React.Component<Props, State> {
             <div>
                 <Loader show={this.state.isLoading}/>
                 <ErrorMessage show={this.state.isError}/>
-                <div className="mb-5">
-
+                <div className="col">
                     <h1>{t("export")}</h1>
-
+                </div>
+                <div className="mb-5 py-4">
                     <div className="col d-flex align-items-center">
                         <button type="button" className="btn btn-success px-4" onClick={this.downloadPdf}>{t("download")}</button>
                     </div>

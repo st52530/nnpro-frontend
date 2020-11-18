@@ -36,13 +36,13 @@ export default class AddEditReservationDialog extends AddEditDialog<Reservation>
     protected validate(): string | undefined {
         let {date, clinic, client} = this.state.item 
         if (!date) {
-            return i18n.t("Date is empty");
+            return i18n.t("dfEmptyDate");
         }
         if (!clinic) {
-            return i18n.t("Clinic is empty");
+            return i18n.t("dfEmptyClinic");
         }
         if (!client) {
-            return i18n.t("Client is empty");
+            return i18n.t("dfEmptyClient");
         }
 
         return undefined;

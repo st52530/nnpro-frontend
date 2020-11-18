@@ -324,13 +324,13 @@ class ClinicDetails extends Component<Props, State> {
                             <h5 className="mt-1 mb-3">Řízení</h5>
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="information">Information</Nav.Link>
+                                    <Nav.Link eventKey="information">{t("cpInformation")}</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="medicine">Medicine</Nav.Link>
+                                    <Nav.Link eventKey="medicine">{t("cpMedicine")}</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="consumables">Consumables</Nav.Link>
+                                    <Nav.Link eventKey="consumables">{t("cpConsumable")}</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>
@@ -338,7 +338,7 @@ class ClinicDetails extends Component<Props, State> {
                             <Tab.Content>
                                 <Tab.Pane eventKey="information">
                                     <Row className="mb-3">
-                                        <Col sm={12}><h3 className="mb-3">This week</h3></Col>
+                                        <Col sm={12}><h3 className="mb-3">{t("cpThisWeek")}</h3></Col>
                                         <Col sm={12}>some data</Col>
                                     </Row>
                                     <Row>

@@ -23,6 +23,9 @@ export const CzechTranslations = {
     cpStaff : "Personál",
     cpMedicine : "Medikamenty",
     cpConsumable : "Spotřební materiál",
+    cpInformation : "Informace",
+    cpThisWeek : "Tento týden",
+
 
     // Staff page
     spHeader : "Personál",
@@ -49,7 +52,7 @@ export const CzechTranslations = {
     apDelete : "Odstranit zvíře",
     apEdit : "Upravit zvíře",
     apAdd : "Přidat nové zvíře",
-    apOwner: "Animal owner", /* TRANSLATE */
+    apOwner: "Majitel",
     apOwnerUsername : "Uživatelské jméno majitele",
 
     // Common
@@ -84,7 +87,7 @@ export const CzechTranslations = {
 
     yes : "Ano",
     no : "Ne",
-    nothingFound : "Nic nalezeno",
+    nothingFound : "Nic nenalezeno",
 
     // add/edit client form
     dfEditClient : "Opravit",
@@ -107,40 +110,62 @@ export const CzechTranslations = {
 
     // add/edit staff form
     dfStaffUsername : "Uživatelské jméno",
+    dfStaffRole : "Role uživatele",
 
     // add/edit medicine form
-    dfEmptyCode : "Prazdný kód",
-    dfEmptySubstances : "Empty Substances",
-    dfEmptyTargetAnimals : "Empty Target animals",
-    dfEmptyForm : "Empty Form",
-    dfEmptyDateOfApproval : "Empty Date of approval",
-    dfEmptyNumberOfApproval : "Empty Number of approval",
-    dfEmptyApprovalHolder : "Empty Approval holder",
-    dfEmptyProtectionPeriod : "Empty Protection period",
-    dfEmptyType : "Empty Type",
-    dfEmptyPackageSize : "Empty Package size",
+    dfEmptyCode : "Prázdný kód",
+    dfEmptySubstances : "Prázdná substance",
+    dfEmptyTargetAnimals : "Prázdné cílové zvířata",
+    dfEmptyForm : "Prázdná forma",
+    dfEmptyDateOfApproval : "Prázdné datum schválení",
+    dfEmptyNumberOfApproval : "Prázdné číslo schválení",
+    dfEmptyApprovalHolder : "Prázdný držitel schválení",
+    dfEmptyProtectionPeriod : "Prázdná doba ochrany",
+    dfEmptyType : "Prázdný typ",
+    dfEmptyPackageSize : "Prázdný rozměr balíku",
     dfMedicineCode : "Kód medikamenta",
     dfMedicineName : "Jméno medikamentu",
-    dfMedicineSubstances : "Substances",
-    dfMedicineTargetAnimals : "Target animals",
-    dfMedicineForm : "Form",
-    dfMedicineNumberOfApproval : "Number of approval",
-    dfMedicineDateOfApproval : "Date of approval",
-    dfMedicineApprovalHolder : "Approval holder",
-    dfMedicineProtectionPeriod : "Protection period",
-    dfMedicineType : "Type",
-    dfMedicinePackageSize : "Package size",
+    dfMedicineSubstances : "Substance",
+    dfMedicineTargetAnimals : "Cílové zvířata",
+    dfMedicineForm : "Forma",
+    dfMedicineNumberOfApproval : "Číslo schválení",
+    dfMedicineDateOfApproval : "Datum schválení",
+    dfMedicineApprovalHolder : "Držitel schválení",
+    dfMedicineProtectionPeriod : "Doba ochrany",
+    dfMedicineType : "Typ",
+    dfMedicinePackageSize : "Rozměr balíku",
 
     // add/edit reservation form
     dfDate : "Datum",
+    dfClient : "Klient",
+    dfClinic : "Klinika",
+    dfEmptyDate : "Prázdné datum",
+    dfEmptyClinic : "Prázdná klinika",
+    dfEmptyClient : "Prázdný klient",
 
     // add/edit animal form
     dfAnimalName : "Zvířě jmeno",
     dfAnimalOwner : "Majitel zvířě",
     dfEmptyOwner : "Prázdné id majitele",
 
+    // months
+    January : "Leden",
+    February : "Únor",
+    March : "Březen",
+    April : "Duben",
+    May : "Květen",
+    June : "Červen",
+    July : "Červenec",
+    August : "Srpen",
+    September : "Září",
+    October : "Říjen",
+    November : "Listopad",
+    December : "Prosinec",
 
-
-
+    // Roles
+    CLIENT : "KLIENT",
+    ADMINISTRATOR : "ADMINISTRATOR",
+    VETERINARY : "VETERINÁŘ",
+    VETERINARY_TECHNICIAN : "VETERINÁŘ_TECHNIK",
 
 }

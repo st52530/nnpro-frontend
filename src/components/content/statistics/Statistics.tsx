@@ -62,6 +62,7 @@ class Statistics extends React.Component<Props, State> {
     _renderStatistics = () : ReactNode => {
         let clientsStatistics = this.state.clientsStatistics
         let vaccinationsStatistics = this.state.vaccinationsStatistics
+        let t = this.props.t
         return (
             <div className="col mb-5">
                 <div className="card">
@@ -82,27 +83,27 @@ class Statistics extends React.Component<Props, State> {
                                     <div className="col-5">
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Leden:
+                                                {t("January")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[0]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Únor:
+                                                {t("February")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[1]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Březen:
+                                                {t("March")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[2]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Duben:
+                                                {t("April")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[3]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Květen:
+                                                {t("May")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[4]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Červen:
+                                                {t("June")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[5]}</span>
                                             </li>
                                         </ul>
@@ -110,27 +111,27 @@ class Statistics extends React.Component<Props, State> {
                                     <div className="col-5">
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Červenec:
+                                                {t("July")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[6]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Srpen:
+                                                {t("August")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[7]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Září:
+                                                {t("September")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[8]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Říjen:
+                                                {t("October")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[9]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Listopad:
+                                                {t("November")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[10]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Prosinec:
+                                                {t("December")}:
                                                 <span className="badge badge-primary badge-pill">{clientsStatistics[11]}</span>
                                             </li>
                                         </ul>
@@ -149,27 +150,27 @@ class Statistics extends React.Component<Props, State> {
                                     <div className="col-5">
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Leden:
+                                                {t("January")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[0]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Únor:
+                                                {t("February")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[1]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Březen:
+                                                {t("March")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[2]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Duben:
+                                                {t("April")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[3]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Květen:
+                                                {t("May")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[4]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Červen:
+                                                {t("June")}:
                                                 <span className="badge badge-primary badge-pill">{vaccinationsStatistics[5]}</span>
                                             </li>
                                         </ul>
@@ -177,28 +178,28 @@ class Statistics extends React.Component<Props, State> {
                                     <div className="col-5">
                                         <ul className="list-group list-group-flush">
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Červenec:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[6]}</span>
+                                                {t("July")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[6]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Srpen:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[7]}</span>
+                                                {t("August")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[7]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Září:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[8]}</span>
+                                                {t("September")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[8]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Říjen:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[9]}</span>
+                                                {t("October")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[9]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Listopad:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[10]}</span>
+                                                {t("November")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[10]}</span>
                                             </li>
                                             <li className="list-group-item d-flex justify-content-between align-items-center">
-                                                Prosinec:
-                                                <span className="badge badge-primary badge-pill">{clientsStatistics[11]}</span>
+                                                {t("December")}:
+                                                <span className="badge badge-primary badge-pill">{vaccinationsStatistics[11]}</span>
                                             </li>
                                         </ul>
                                     </div>
