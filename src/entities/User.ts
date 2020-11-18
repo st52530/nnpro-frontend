@@ -1,4 +1,4 @@
-
+import i18n from "../i18n"
 
 export default interface User {
     idUser : number
@@ -16,6 +16,14 @@ export const getUserId = (user : User) => {
 
 export const getUserLabel = (user : User) => {
     return user.fullName;
+}
+
+export const getRoleId = (role : UserRole) : string => {
+    return role;
+}
+
+export const getRoleLabel= (role : UserRole) : string => {
+    return i18n.t(role);
 }
 
 export enum UserRole {

@@ -5,7 +5,7 @@ import i18n from "../../../../i18n";
 import Staff from "../../../../entities/Staff";
 import DataStorage from "../../../../services/DataStorage";
 import Combobox from "../../../common/combobox/Combobox";
-import { UserRole } from "../../../../entities/User";
+import {getRoleId, getRoleLabel, UserRole} from "../../../../entities/User";
 
 
 export default class AddEditStaffDialog extends AddEditDialog<Staff> {
@@ -83,9 +83,6 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
             }})
     }
 
-    private getRoleId = (role : UserRole) : string => {
-        return role;
-    }
 
     private onRoleSelect = (role : UserRole) : void => {
         this.setState({ item : {
@@ -104,7 +101,7 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
                         {i18n.t("dfStaffRole")}
                     </Form.Label>
                     <Col sm="10">
-                        <Combobox items={Object.values(UserRole)} getID={this.getRoleId} getLabel={this.getRoleId} onSelect={this.onRoleSelect} />
+                        <Combobox items={Object.values(UserRole)} getID={getRoleId} getLabel={getRoleLabel} onSelect={this.onRoleSelect} />
                     </Col>
                 </Form.Group>
 
@@ -140,7 +137,7 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
                         {i18n.t("dfPassword")}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control as="textarea" onChange={this.onChangePassword} value={password || ""} placeholder={i18n.t("dfPassword")}/>
+                        <Form.Control type="password" onChange={this.onChangePassword} value={password || ""} placeholder={i18n.t("dfPassword")}/>
                     </Col>
                 </Form.Group>
             </Form>
