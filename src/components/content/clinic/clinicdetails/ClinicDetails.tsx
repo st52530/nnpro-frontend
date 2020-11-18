@@ -1,8 +1,7 @@
-import {Component, ReactNode} from "react";
-import React from "react";
+import React, {Component, ReactNode} from "react";
 
 import {RouteComponentProps, withRouter} from "react-router";
-import {deleteClinic, getClinic} from "../../../../services/ClinicService";
+import {deleteClinic, getClinic, updateClinic} from "../../../../services/ClinicService";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import Loader from "../../loader/Loader";
 import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
@@ -14,18 +13,18 @@ import "./ClinicDetails.css"
 import Clinic from "../../../../entities/Clinic";
 
 import Staff from "../../../../entities/Staff";
-import {getStaffByClinic} from "../../../../services/StaffService";
+import {deleteStaff, getAllStaff, saveNewStaff, updateStaff} from "../../../../services/StaffService";
 import ClinicStaffListItem from "./ClinicStaffListItem";
 
-import Medicine from "../../../../entities/Medicine";
-import { getMedicineByClinic } from "../../../../services/MedicineService";
+import ClinicMedicine from "../../../../entities/ClinicMedicine";
+import {getMedicinesByClinic} from "../../../../services/MedicineService";
 import ClinicMedicineListItem from "./ClinicMedicineListItem";
-
-import Consumable from "../../../../entities/Consumable";
-import { getConsumableByClinic } from "../../../../services/ConsumableService";
+import ClinicConsumable from "../../../../entities/ClinicConsumable";
+import {getConsumablesByClinic} from "../../../../services/ConsumableService";
 import ClinicConsumableListItem from "./ClinicConsumableListItem";
 
-import { Col, Nav, Row, Tab } from "react-bootstrap";
+import {Col, Nav, Row, Tab} from "react-bootstrap";
+import AddEditStaffDialog from "../../staff/addeditstaffdialog/AddEditStaffDialog";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -38,10 +37,19 @@ interface MatchParams {
 interface State {
     isLoading : boolean,
     isOpenDeleteDialog : boolean
+    isOpenUpdateDialog : boolean
+    addNewStaffOpen : boolean
+    addNewMedicineOpen : boolean
+    addNewConsumableOpen : boolean
     clinic : Clinic
     staff : Staff[]
-    medicine : Medicine[]
-    consumables : Consumable[]
+    clinicMedicine : ClinicMedicine[]
+    consumables : ClinicConsumable[]
+
+    editStaffOpen : boolean
+    editStaff? : Staff
+
+    updateClinic? : Clinic
 
     isError : boolean,
     errorText? : string
@@ -53,14 +61,52 @@ class ClinicDetails extends Component<Props, State> {
         isLoading: true,
         isError : false,
         isOpenDeleteDialog: false,
+        isOpenUpdateDialog: false,
         clinic: {} as Clinic,
         staff : [],
-        medicine : [],
+        clinicMedicine : [],
         consumables : [],
+        
+        addNewStaffOpen : false,
+        editStaffOpen : false,
+        addNewMedicineOpen : false,
+        addNewConsumableOpen : false,
     }
 
     componentDidMount() {
         this.loadData();
+        this.loadStaff();
+        this.loadMedicines();
+        this.loadConsumables();
+    }
+    
+    loadStaff = () : void => {
+        this.setState({isLoading : true})
+        getAllStaff().then(value => {
+            this.setState({staff : value, isLoading : false});
+        }).catch(reason =>{
+            this.setState({isLoading : false, isError : true, })
+        })
+    }
+    
+    loadMedicines = () : void => {
+        this.setState({isLoading : true})
+        let clinicId = Number(this.props.match.params.id);
+        getMedicinesByClinic(clinicId).then(value => {
+            this.setState({clinicMedicine : value, isLoading : false});
+        }).catch(reason =>{
+            this.setState({isLoading : false, isError : true, })
+        })
+    }
+
+    loadConsumables = () : void => {
+        this.setState({isLoading : true})
+        let clinicId = Number(this.props.match.params.id);
+        getConsumablesByClinic(clinicId).then(value => {
+            this.setState({consumables : value, isLoading : false});
+        }).catch(reason =>{
+            this.setState({isLoading : false, isError : true, })
+        })
     }
 
     loadData = () => {
@@ -72,25 +118,46 @@ class ClinicDetails extends Component<Props, State> {
         }).catch(reason => {
             this.setState({isError : true, isLoading : false});
         })
+    }
 
-        getStaffByClinic(id).then(value => {
-            this.setState({staff : value, isLoading : false});
-        }).catch(reason =>{
-            this.setState({isLoading : false, isError : true, })
-        })
+    /* UPDATE */
 
-        getMedicineByClinic(id).then(value => {
-            this.setState({medicine : value, isLoading : false});
-        }).catch(reason =>{
-            this.setState({isLoading : false, isError : true, })
-        })
+    onUpdateClinic = () : void => {
+        let clinic = this.state.clinic;
+        this.setState({isOpenUpdateDialog : true, updateClinic : clinic})
+    }
 
-        getConsumableByClinic(id).then(value => {
-            this.setState({consumables : value, isLoading : false});
-        }).catch(reason =>{
-            this.setState({isLoading : false, isError : true, })
+    onUpdateClinicSubmit = () => {
+        this.setState({isOpenUpdateDialog : false, isLoading : true})
+        let clinic = this.state.clinic;
+        updateClinic(clinic).then(value => {
+            this.setState({updateClinic : undefined})
+            this.loadData();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
         })
     }
+
+    onUpdateClinicCancel = () => {
+        this.setState({isOpenUpdateDialog : false, updateClinic : undefined})
+    }
+
+    private renderUpdateDialog = () : ReactNode => {
+        let header : string = i18n.t("cpUpdate");
+        let body : string = i18n.t("cpUpdate")+ ": " + this.state.clinic.name + "?";
+
+        return <SubmitDialog 
+                    header={header} 
+                    body={body} 
+                    isOpen={this.state.isOpenUpdateDialog} 
+                    onSubmit={this.onUpdateClinicSubmit} 
+                    onCancel={this.onUpdateClinicCancel}/>
+    }
+
+
+
+    /* DELETE */
+    
 
     private onDeleteButtonClick = (): void => {
         this.setState({isOpenDeleteDialog: true})
@@ -120,10 +187,10 @@ class ClinicDetails extends Component<Props, State> {
     _renderClinicStaffList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.staff.map(staff => {
-            return <ClinicStaffListItem staff={staff} key={staff.idStaff}/>
+            return <ClinicStaffListItem onEdit={this.onEditStaff} onDelete={this.onDeleteStaff} staff={staff} key={staff.idUser}/>
         })
 
-        if (elements.length == 0 || elements === undefined) {
+        if (elements.length === 0 || elements === undefined) {
             return (
                 <p>{i18n.t("nothingFound")}</p>
             )
@@ -138,8 +205,8 @@ class ClinicDetails extends Component<Props, State> {
 
     _renderClinicMedicineList = () : ReactNode => {
 
-        let elements : ReactNode[] = this.state.medicine.map(medicine => {
-            return <ClinicMedicineListItem medicine={medicine} key={medicine.idMedicine}/>
+        let elements : ReactNode[] = this.state.clinicMedicine.map(clinicMedicine => {
+            return <ClinicMedicineListItem clinicMedicine={clinicMedicine} key={clinicMedicine.medicine.idMedicine}/>
         })
 
         if (elements.length == 0 || elements === undefined) {
@@ -158,7 +225,7 @@ class ClinicDetails extends Component<Props, State> {
     _renderClinicConsumableList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.consumables.map(consumable => {
-            return <ClinicConsumableListItem consumable={consumable} key={consumable.idConsumable}/>
+            return <ClinicConsumableListItem clinicConsumable={consumable} key={consumable.idClinicConsumable}/>
         })
 
         if (elements.length == 0 || elements === undefined) {
@@ -175,6 +242,57 @@ class ClinicDetails extends Component<Props, State> {
     }
 
 
+
+    /* Staff */
+    
+    onAddNewStaff = () : void => {
+        this.setState({addNewStaffOpen : true})
+    }
+
+    onAddNewStaffSubmit = (staff : Staff) => {
+        this.setState({addNewStaffOpen : false, isLoading : true})
+        let id = parseInt(this.props.match.params.id)
+        saveNewStaff(staff, id).then(value => {
+            this.loadStaff();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onAddNewStaffCancel = () => {
+        this.setState({addNewStaffOpen : false})
+    }
+
+    onEditStaff = (staff : Staff) : void => {
+        this.setState({editStaffOpen : true, editStaff : staff})
+    }
+
+    onEditStaffSubmit = (staff : Staff) => {
+        this.setState({editStaffOpen : false, isLoading : true})
+        let clinicId = Number(this.props.match.params.id);
+        updateStaff(staff, clinicId).then(value => {
+            this.setState({editStaff : undefined})
+            this.loadStaff();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onEditStaffCancel = () => {
+        this.setState({editStaffOpen : false, editStaff : undefined})
+    }
+
+    onDeleteStaff = (staff : Staff) => {
+        this.setState({isLoading : true})
+        console.log(staff)
+        deleteStaff(staff.idUser).then(value => {
+            this.loadStaff();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+
     render() {
         let t = this.props.t;
         let clinic: Clinic = this.state.clinic;
@@ -185,6 +303,9 @@ class ClinicDetails extends Component<Props, State> {
         return (
             <div>
                 <ErrorMessage show={this.state.isError}/>
+                <AddEditStaffDialog onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
+                <AddEditStaffDialog item={this.state.editStaff} onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
+                {this.renderUpdateDialog()}
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">
@@ -192,7 +313,7 @@ class ClinicDetails extends Component<Props, State> {
                         <p>Adresa: {clinic.address}</p>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-info px-4 mr-2">{t("update")}</button>
+                        <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onUpdateClinic}>{t("update")}</button>
                         <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
                     </div>
                 </div>
@@ -222,21 +343,23 @@ class ClinicDetails extends Component<Props, State> {
                                     </Row>
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpStaff")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4" >+</button></Col>
+                                        <Col className="text-right">
+                                            <button type="button" className="btn btn-success px-4" onClick={this.onAddNewStaff}>+</button>
+                                        </Col>
                                     </Row>
                                     {this._renderClinicStaffList()}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="medicine">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpMedicine")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4" >+</button></Col>
+                                        <Col className="text-right"><button type="button" className="btn btn-success px-4">+</button></Col>
                                     </Row>
                                     {this._renderClinicMedicineList()}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="consumables">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpConsumable")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4" >+</button></Col>
+                                        <Col className="text-right"><button type="button" className="btn btn-success px-4">+</button></Col>
                                     </Row>
                                     {this._renderClinicConsumableList()}
                                 </Tab.Pane>

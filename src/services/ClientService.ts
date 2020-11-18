@@ -1,5 +1,5 @@
 import API from "../utils/API";
-import {CLIENTS} from "../utils/APIPaths";
+import {CLIENTS, STAFF} from "../utils/APIPaths";
 import User from "../entities/User";
 import DataStorage from "./DataStorage"
 
@@ -21,7 +21,8 @@ export async function saveNewClient(client : User) : Promise<void> {
     await response.data;
 }
 
+/* Todo:  */
 export async function deleteClient(id : number) : Promise<void> {
-    let response = await API.delete(CLIENTS + "/" + id)
+    let response = await API.delete(STAFF + "/" + id)
     await response;
 }

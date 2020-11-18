@@ -97,7 +97,7 @@ class ReservationList extends React.Component<Props, State> {
         }).catch(reason => {
             this.setState({isLoading : false, isError : true})
         })
-    }
+    } 
 
     _renderReservationList = () : ReactNode => {
         let elements : ReactNode[] = this.state.reservation.map(reservation => {

@@ -1,6 +1,8 @@
 export default interface Staff {
-    idStaff? : number,
+    idUser : number,
+    email : string,
     username : string,
     fullName : string,
-    password : string
+    password : string,
+    role: string
 }

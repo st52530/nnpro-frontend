@@ -6,6 +6,7 @@ import {getClinics, saveNewClinic} from "../../../../services/ClinicService";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import AddEditClinicDialog from "../addeditclinicdialog/AddEditClinicDialog";
 import {WithTranslation, withTranslation} from "react-i18next";
+import { Col, Row } from "react-bootstrap";
 
 interface Props extends WithTranslation{
 
@@ -61,17 +62,24 @@ class ClinicList extends React.Component<Props, State> {
         this.setState({addNewClinicOpen : false})
     }
 
+    loadClinicData = (clinic_id : number) => {
+        return clinic_id;
+    }
+
     _renderClinicsList = () : ReactNode => {
         let elements : ReactNode[] = this.state.clinics.map(clinic => {
-            return <ClinicListItem clinic={clinic} key={clinic.idClinic}/>
+            
+            return <ClinicListItem 
+                clinic={clinic} 
+                key={clinic.idClinic}/>
         })
 
         return (
-            <div className="row">
-                <div className="col">
+            <Row>
+                <Col>
                     {elements}
-                </div>
-            </div>
+                </Col>
+            </Row>
         )
     }
 

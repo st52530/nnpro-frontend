@@ -19,6 +19,7 @@ import ClientAnimalsListItem from "./ClientAnimalsListItem";
 import Reservation from "../../../../entities/Reservation";
 import ClientReservationsListItem from "./ClientReservationsListItem";
 import { getReservationsByClient } from "../../../../services/ReservationService";
+import DataStorage from "../../../../services/DataStorage";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -57,12 +58,17 @@ class ClientDetails extends Component<Props, State> {
         this.loadData();
     }
 
+    componentWillUnmount() {
+        DataStorage.currentClient = undefined
+    }
+
     loadData = () => {
         let id = Number(this.props.match.params.id);        
         this.setState({isLoading : true})
 
         getClient(id).then(response => {
             this.setState({isLoading: false, client: response})
+            DataStorage.currentClient = response
         }).catch(reason => {
             this.setState({isError : true, isLoading : false});
         })

@@ -13,3 +13,7 @@ a:hover {
 .clinic-title {
     color: #2B9348;
 }
+
+.card:hover {
+    background: #80B918;
+}

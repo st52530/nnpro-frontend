@@ -4,7 +4,6 @@ export const CzechTranslations = {
     lpHeader : "Přihlásit se do VetAlmael",
     lpCredentialsError : "Chybně zadané heslo nebo uživatelské jméno",
 
-
     // Top menu
     tmHome : "Domů",
     tmClinics : "Kliniky",
@@ -49,6 +48,7 @@ export const CzechTranslations = {
     apDelete : "Odstranit zvíře",
     apEdit : "Upravit zvíře",
     apAdd : "Přidat nové zvíře",
+    apOwner: "Animal owner", /* TRANSLATE */
     apOwnerUsername : "Uživatelské jméno majitele",
 
     // Common

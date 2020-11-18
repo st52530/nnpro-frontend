@@ -21,6 +21,11 @@ export async function saveNewClinic(clinic : Clinic) : Promise<void> {
     await response.data;
 }
 
+export async function updateClinic(clinic : Clinic) : Promise<void> {
+    let response = await API.put(CLINICS + '/' + clinic.idClinic, clinic)
+    await response.data;
+}
+
 export async function deleteClinic(id : number) : Promise<void> {
     let response = await API.delete(CLINICS + "/" + id)
     await response;

@@ -13,11 +13,13 @@ const MedicineListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
 
     const URL = RouterConstants.medicineDetails.replace(":id", String(medicine.idMedicine))
     return (
-        <div className="card-link mb-3">
-            <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">{medicine.name}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">{medicine.code}</h6>
+        <div>
+            <div className="card-link mb-3">
+                <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">{medicine.name}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">{medicine.code}</h6>
+                    </div>
                 </div>
             </div>
         </div>

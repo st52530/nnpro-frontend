@@ -1,4 +1,5 @@
 import Medicine from "../entities/Medicine";
+import ClinicMedicine from "../entities/ClinicMedicine"
 import API from "../utils/API";
 import {CLINICS, CLINIC_MEDICINE, MEDICINE, MEDICINES} from "../utils/APIPaths";
 
@@ -13,13 +14,13 @@ export async function getMedicine(id : number) : Promise<Medicine> {
     return await response.data;
 }
 
-export async function getMedicineByClinic(clinicId : number) : Promise<Medicine[]> {
+export async function getMedicinesByClinic(clinicId : number) : Promise<ClinicMedicine[]> { 
     let response = await API.get(CLINICS + '/' + clinicId + CLINIC_MEDICINE + MEDICINES)
     return await response.data;
 }
 
-export async function saveNewMedicine(clinic : Medicine) : Promise<void> {
-    let response = await API.post(MEDICINES, clinic)
+export async function saveNewMedicine(medicine : Medicine) : Promise<void> {
+    let response = await API.post(MEDICINES, medicine)
     await response.data;
 }
 

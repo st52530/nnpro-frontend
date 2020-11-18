@@ -11,7 +11,7 @@ interface Props {
 const StaffListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
     let staff : Staff = props.staff;
 
-    const URL = RouterConstants.staffDetails.replace(":id", String(staff.idStaff))
+    const URL = RouterConstants.staffDetails.replace(":id", String(staff.idUser))
     return (
         <div className="card-link mb-3">
             <div className="card">

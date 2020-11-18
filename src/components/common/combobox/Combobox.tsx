@@ -6,7 +6,7 @@ interface Props<T> {
     items: T[]
     onSelect: (item: T) => void
     getLabel: (item: T) => string
-    getID: (item: T) => number
+    getID: (item: T) => number | string
 }
 
 interface State<T> {

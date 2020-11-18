@@ -5,7 +5,6 @@ import {getAllStaff, saveNewStaff} from "../../../../services/StaffService";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import {WithTranslation, withTranslation} from "react-i18next";
 import Staff from "../../../../entities/Staff";
-import AddEditStaffDialog from "../addeditstaffdialog/AddEditStaffDialog";
 
 interface Props extends WithTranslation{
 
@@ -43,27 +42,10 @@ class StaffList extends React.Component<Props, State> {
             this.setState({isLoading : false, isError : true, })
         })
     }
-
-    onAddNewStaff = () : void => {
-        this.setState({addNewStaffOpen : true})
-    }
-
-    onAddNewStaffSubmit = (staff : Staff) => {
-        this.setState({addNewStaffOpen : false, isLoading : true})
-        saveNewStaff(staff).then(value => {
-            this.loadStaff();
-        }).catch(reason => {
-            this.setState({isLoading : false, isError : true})
-        })
-    }
-
-    onAddNewStaffCancel = () => {
-        this.setState({addNewStaffOpen : false})
-    }
-
+    
     _renderStaffList = () : ReactNode => {
         let elements : ReactNode[] = this.state.staff.map(staff => {
-            return <StaffListItem staff={staff} key={staff.idStaff}/>
+            return <StaffListItem staff={staff} key={staff.idUser}/>
         })
 
         return (
@@ -81,7 +63,6 @@ class StaffList extends React.Component<Props, State> {
             <div>
                 <Loader show={this.state.isLoading}/>
         <ErrorMessage show={this.state.isError}/>
-        <AddEditStaffDialog onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
         <div className="row mb-5">
             <div className="col">
                 <h1>{t("spHeader")}</h1>
@@ -94,9 +75,3 @@ class StaffList extends React.Component<Props, State> {
 }
 
 export default withTranslation()(StaffList)
-
-/*
-<div className="col d-flex justify-content-end align-items-center">
-    <button type="button" className="btn btn-success px-4" onClick={this.onAddNewStaff}>{t("add")}</button>
-</div> 
-*/

@@ -30,7 +30,7 @@ const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
                                 <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>Edit</Button>
                                 <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>Delete</Button>
                             </ButtonGroup>
-                        </div>
+                        </div> 
                     </div>
 
                 </div>

@@ -1,12 +1,13 @@
-import {FC, PropsWithChildren} from "react";
-import {RouterConstants} from "../../../../routes/RouterConstants";
-import {NavLink} from "react-router-dom";
-import "./ClinicStaffListItem.css"
-import Staff from "../../../../entities/Staff";
 import React from "react";
+import { FC, PropsWithChildren } from "react";
+import { Button, ButtonGroup } from "react-bootstrap";
+
+import Staff from "../../../../entities/Staff";
 
 interface Props {
     staff : Staff
+    onDelete : (staff : Staff) => void;
+    onEdit : (staff : Staff) => void;
 }
 
 const ClinicStaffListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
@@ -15,7 +16,19 @@ const ClinicStaffListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
     return (
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">{staff.username}</h5>
+                <div className="row">
+                    <div className="col-8">
+                        <h5 className="card-title">{staff.username}</h5>
+                        <h6 className="card-title">{staff.fullName}</h6>
+                        <h6 className="card-title">{staff.email}</h6>
+                    </div>
+                    <div className="col-4 text-right">
+                        <ButtonGroup>
+                            <Button variant="primary" onClick={event => {props.onEdit(staff)}}>Edit</Button>
+                            <Button variant="danger" onClick={event => {props.onDelete(staff)}}>Delete</Button>
+                        </ButtonGroup>
+                    </div>
+                </div>
             </div>
         </div>
     )

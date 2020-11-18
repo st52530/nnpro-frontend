@@ -1,5 +1,5 @@
 export default interface Consumable {
-    idConsumable? : number,
+    idConsumable : number,
     name : string,
     code : string,
     price : number,
@@ -9,6 +9,14 @@ export default interface Consumable {
     unitOfMeasure : string,
     producer : string,
     countryOfOrigin : string,
-    dateOfExpiration : Date | null,
-    dateOfChange : Date | null
+    dateOfExpiration : Date,
+    dateOfChange : Date
+}
+
+export const getConsumableId = (consumable : Consumable) : number => {
+    return consumable.idConsumable;
+}
+
+export const getConsumableLabel = (consumable : Consumable) => {
+    return consumable.name
 }

@@ -10,6 +10,7 @@ export const RESERVATIONS = "/reservations"
 
 export const ANIMALS = "/animals"
 
+export const CLINIC = "/clinic"
 export const CLINICS = "/clinics"
 export const CLINIC_CONSUMABLE = "/clinic-consumable"
 export const CLINIC_MEDICINE = "/clinic-medicine"
