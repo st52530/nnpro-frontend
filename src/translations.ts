@@ -1,3 +1,4 @@
+
 export const CzechTranslations = {
 
     // Login page
@@ -65,6 +66,20 @@ export const CzechTranslations = {
     address : "Adresa",
     save : "Uložit",
     cancel : "Zrušit",
+
+    //Excel
+    import : "Import",
+    iConsumables : "Import spotřebních předmětů",
+    iMedicines : "Import biopreparátů a léčiv",
+    iDiagnoses : "Import diagnózů",
+    iOperations : "Import výkonů",
+
+    //PDF
+    export : "Export",
+    download : "Stáhnout PDF",
+
+    // statistics
+    statistics : "Statistiky",
 
 
     yes : "Ano",

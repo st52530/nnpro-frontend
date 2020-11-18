@@ -20,3 +20,14 @@ export const MEDICINES = "/medicines"
 
 export const CONSUMABLE = "/consumable"
 export const CONSUMABLES = "/consumables"
+
+export const EXCEL_OPERATIONS = "/operations/excel"
+export const EXCEL_CONSUMABLES = "/consumables/excel"
+export const EXCEL_DIAGNOSES = "/diagnoses/excel"
+export const EXCEL_MEDICINES = "/medicines/excel"
+
+export const PDF = "/export"
+
+export const STATISTICS_DIAGNOSIS = "/statistics/most-common-diagnosis"
+export const STATISTICS_CLIENTS = "/statistics/different-clients-in-month"
+export const STATISTICS_VACCINATION = "/statistics/vaccination-count"
