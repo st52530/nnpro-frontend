@@ -1,25 +1,23 @@
-import {Component, ReactNode} from "react";
-import React from "react";
+import React, {Component, ReactNode} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
-import Clinic from "../../../../entities/Clinic";
-import {deleteClinic, getClinic} from "../../../../services/ClinicService";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import Loader from "../../loader/Loader";
 import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
-import User from "../../../../entities/User";
+import User, {UserRole} from "../../../../entities/User";
 import {deleteClient, getClient} from "../../../../services/ClientService";
-import { Col, Nav, Row, Tab } from "react-bootstrap";
+import {Col, Nav, Row, Tab} from "react-bootstrap";
 import AddEditAnimalDialog from "../../animal/addeditanimaldialog/AddEditAnimalDialog";
-import { getAnimalsByClient, saveNewAnimal } from "../../../../services/AnimalService";
+import {getAnimalsByClient, saveNewAnimal} from "../../../../services/AnimalService";
 import Animal from "../../../../entities/Animal";
 import i18n from "../../../../i18n";
 import ClientAnimalsListItem from "./ClientAnimalsListItem";
 import Reservation from "../../../../entities/Reservation";
 import ClientReservationsListItem from "./ClientReservationsListItem";
-import { getReservationsByClient } from "../../../../services/ReservationService";
+import {getReservationsByClient} from "../../../../services/ReservationService";
 import DataStorage from "../../../../services/DataStorage";
+import Securable from "../../../common/secureable/Securable";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -185,8 +183,10 @@ class ClientDetails extends Component<Props, State> {
                         <p>{client.email}</p>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-info px-4 mr-2">{t("update")}</button>
-                        <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                            <button type="button" className="btn btn-info px-4 mr-2">{t("update")}</button>
+                            <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                        </Securable>
                     </div>
                 </div>
 
@@ -216,14 +216,22 @@ class ClientDetails extends Component<Props, State> {
                                 <Tab.Pane eventKey="animals">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageAnimals")}</h3></Col>
-                                        <Col className="text-right"><button type="button" onClick={this.onAddNewAnimal} className="btn btn-success px-4" >+</button></Col>
+                                        <Col className="text-right">
+                                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                                <button type="button" onClick={this.onAddNewAnimal} className="btn btn-success px-4" >+</button>
+                                            </Securable>
+                                        </Col>
                                     </Row>
                                     {this._renderClientAnimalsList()}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="reservations">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageReservations")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4" >+</button></Col>
+                                        <Col className="text-right">
+                                            <Securable access={[UserRole.ADMINISTRATOR, UserRole.VETERINARY_TECHNICIAN]}>
+                                                <button type="button" className="btn btn-success px-4" >+</button>
+                                            </Securable>
+                                        </Col>
                                     </Row>
                                     {this._renderClientReservationsList()}
                                 </Tab.Pane>

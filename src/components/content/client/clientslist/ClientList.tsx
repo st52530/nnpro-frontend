@@ -2,12 +2,13 @@ import React, {ReactNode} from "react";
 import ClientListItem from "./ClientListItem";
 import Loader from "../../loader/Loader";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
-import {WithTranslation, withTranslation} from "react-i18next";
+import {withTranslation, WithTranslation} from "react-i18next";
 import AddEditClientDialog from "../addeditclientdialog/AddEditClientDialog";
 import {getClients, saveNewClient} from "../../../../services/ClientService";
-import User from "../../../../entities/User";
+import User, {UserRole} from "../../../../entities/User";
+import Securable from "../../../common/secureable/Securable";
 
-interface Props extends WithTranslation{
+interface Props extends WithTranslation {
 
 }
 
@@ -87,7 +88,9 @@ class ClientList extends React.Component<Props, State> {
                         <h1>{t("tmClients")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClient}>{t("add")}</button>
+                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                            <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClient}>{t("add")}</button>
+                        </Securable>
                     </div>
                 </div>
                 {this._renderClinicsList()}

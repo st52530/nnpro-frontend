@@ -39,10 +39,11 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
         if (!fullName || fullName.trim().length === 0) {
             return i18n.t("dfEmptyFullName");
         }
-        if (!password || password.trim().length === 0) {
-            return i18n.t("dfEmptyPassword");
+        if (this.isNew()){
+            if (!password || password.trim().length === 0 ) {
+                return i18n.t("dfEmptyPassword");
+            }
         }
-
 
         return undefined;
     }

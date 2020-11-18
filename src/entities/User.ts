@@ -28,7 +28,6 @@ export const getRoleLabel= (role : UserRole) : string => {
 
 export enum UserRole {
     ADMINISTRATOR = "ADMINISTRATOR",
-    CLIENT = "CLIENT",
     VETERINARY = "VETERINARY",
     VETERINARY_TECHNICIAN = "VETERINARY_TECHNICIAN"
 }

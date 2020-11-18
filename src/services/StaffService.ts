@@ -24,7 +24,7 @@ export async function saveNewStaff(staff : Staff, id : number) : Promise<void> {
 }
 
 export async function updateStaff(staff : Staff, clinicId : number) : Promise<void> {
-    let response = await API.put(STAFF + '/' + staff.idUser + CLINIC + clinicId, staff)
+    let response = await API.put(STAFF + '/' + staff.idUser + CLINIC + "/" + clinicId, staff)
     await response.data;
 }
 

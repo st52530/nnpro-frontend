@@ -25,6 +25,9 @@ import ClinicConsumableListItem from "./ClinicConsumableListItem";
 
 import {Col, Nav, Row, Tab} from "react-bootstrap";
 import AddEditStaffDialog from "../../staff/addeditstaffdialog/AddEditStaffDialog";
+import {UserRole} from "../../../../entities/User";
+import Securable from "../../../common/secureable/Securable";
+import AddEditClinicDialog from "../addeditclinicdialog/AddEditClinicDialog";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -127,9 +130,8 @@ class ClinicDetails extends Component<Props, State> {
         this.setState({isOpenUpdateDialog : true, updateClinic : clinic})
     }
 
-    onUpdateClinicSubmit = () => {
+    onUpdateClinicSubmit = (clinic : Clinic) => {
         this.setState({isOpenUpdateDialog : false, isLoading : true})
-        let clinic = this.state.clinic;
         updateClinic(clinic).then(value => {
             this.setState({updateClinic : undefined})
             this.loadData();
@@ -141,19 +143,6 @@ class ClinicDetails extends Component<Props, State> {
     onUpdateClinicCancel = () => {
         this.setState({isOpenUpdateDialog : false, updateClinic : undefined})
     }
-
-    private renderUpdateDialog = () : ReactNode => {
-        let header : string = i18n.t("cpUpdate");
-        let body : string = i18n.t("cpUpdate")+ ": " + this.state.clinic.name + "?";
-
-        return <SubmitDialog 
-                    header={header} 
-                    body={body} 
-                    isOpen={this.state.isOpenUpdateDialog} 
-                    onSubmit={this.onUpdateClinicSubmit} 
-                    onCancel={this.onUpdateClinicCancel}/>
-    }
-
 
 
     /* DELETE */
@@ -304,8 +293,8 @@ class ClinicDetails extends Component<Props, State> {
             <div>
                 <ErrorMessage show={this.state.isError}/>
                 <AddEditStaffDialog onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
-                <AddEditStaffDialog item={this.state.editStaff} onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
-                {this.renderUpdateDialog()}
+                <AddEditStaffDialog item={this.state.editStaff} onSubmit={this.onEditStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.editStaffOpen}/>
+                <AddEditClinicDialog item={this.state.clinic} onSubmit={this.onUpdateClinicSubmit} onCancel={this.onUpdateClinicCancel} isOpen={this.state.isOpenUpdateDialog}/>
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">
@@ -313,18 +302,20 @@ class ClinicDetails extends Component<Props, State> {
                         <p>Adresa: {clinic.address}</p>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onUpdateClinic}>{t("update")}</button>
-                        <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                            <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onUpdateClinic}>{t("update")}</button>
+                            <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
+                        </Securable>
                     </div>
                 </div>
 
-                <Tab.Container id="left-tabs-example" defaultActiveKey="information">
+                <Tab.Container id="left-tabs-example" defaultActiveKey="personal">
                     <Row>
                         <Col sm={12} lg={3}>
                             <h5 className="mt-1 mb-3">Řízení</h5>
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="information">{t("cpInformation")}</Nav.Link>
+                                    <Nav.Link eventKey="personal">{t("cpStaff")}</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="medicine">{t("cpMedicine")}</Nav.Link>
@@ -336,15 +327,13 @@ class ClinicDetails extends Component<Props, State> {
                         </Col>
                         <Col sm={12} lg={9}>
                             <Tab.Content>
-                                <Tab.Pane eventKey="information">
-                                    <Row className="mb-3">
-                                        <Col sm={12}><h3 className="mb-3">{t("cpThisWeek")}</h3></Col>
-                                        <Col sm={12}>some data</Col>
-                                    </Row>
+                                <Tab.Pane eventKey="personal">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpStaff")}</h3></Col>
                                         <Col className="text-right">
-                                            <button type="button" className="btn btn-success px-4" onClick={this.onAddNewStaff}>+</button>
+                                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                                <button type="button" className="btn btn-success px-4" onClick={this.onAddNewStaff}>+</button>
+                                            </Securable>
                                         </Col>
                                     </Row>
                                     {this._renderClinicStaffList()}
@@ -352,14 +341,22 @@ class ClinicDetails extends Component<Props, State> {
                                 <Tab.Pane eventKey="medicine">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpMedicine")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4">+</button></Col>
+                                        <Col className="text-right">
+                                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                                <button type="button" className="btn btn-success px-4">+</button>
+                                            </Securable>
+                                        </Col>
                                     </Row>
                                     {this._renderClinicMedicineList()}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="consumables">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("cpConsumable")}</h3></Col>
-                                        <Col className="text-right"><button type="button" className="btn btn-success px-4">+</button></Col>
+                                        <Col className="text-right">
+                                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                                <button type="button" className="btn btn-success px-4">+</button>
+                                            </Securable>
+                                        </Col>
                                     </Row>
                                     {this._renderClinicConsumableList()}
                                 </Tab.Pane>

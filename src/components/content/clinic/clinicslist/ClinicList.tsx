@@ -7,6 +7,8 @@ import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import AddEditClinicDialog from "../addeditclinicdialog/AddEditClinicDialog";
 import {WithTranslation, withTranslation} from "react-i18next";
 import { Col, Row } from "react-bootstrap";
+import Securable from "../../../common/secureable/Securable";
+import {UserRole} from "../../../../entities/User";
 
 interface Props extends WithTranslation{
 
@@ -95,7 +97,9 @@ class ClinicList extends React.Component<Props, State> {
                         <h1>{t("cpHeader")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}>{t("add")}</button>
+                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                            <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClinic}>{t("add")}</button>
+                        </Securable>
                     </div>
                 </div>
                 {this._renderClinicsList()}

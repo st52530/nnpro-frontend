@@ -4,6 +4,9 @@ import {RouterConstants} from "../../../routes/RouterConstants";
 import {logout} from "../../../services/AuthService";
 import {withTranslation, WithTranslation} from "react-i18next";
 import DateStorage from "../../../services/DataStorage";
+import Securable from "../../common/secureable/Securable";
+import {UserRole} from "../../../entities/User";
+import {Col} from "react-bootstrap";
 
 interface Props extends WithTranslation{
 
@@ -27,12 +30,6 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                             <Link className="nav-link" to={RouterConstants.clinics}>{t("tmClinics")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/animals">{t("tmAnimals")}</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.staff}>{t("tmStaff")}</Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.medicine}>{t("tmMaterials")}</Link>
                         </li>
                         <li className="nav-item">
@@ -41,12 +38,11 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                         <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.clients}>{t("tmClients")}</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.import}>{t("import")}</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.export}>{t("export")}</Link>
-                        </li>
+                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                            <li className="nav-item">
+                                <Link className="nav-link" to={RouterConstants.import}>{t("import")}</Link>
+                            </li>
+                        </Securable>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">

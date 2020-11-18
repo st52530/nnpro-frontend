@@ -14,7 +14,7 @@ const ClientReservationsListItem : FC<Props> = (props : PropsWithChildren<Props>
             <div className="card-body py-2">
                 <div className="row">
                     <div className="col-6">
-                        <h5 className="card-title">{reservation.date}</h5>
+                        <h5 className="card-title">{new Date(reservation.date).toUTCString()}</h5>
                     </div>
                 </div>
             </div>
