@@ -10,6 +10,8 @@ import Reservation from "../entities/Reservation";
 
 import Consumable from "../entities/Consumable";
 import { getConsumables } from "./ConsumableService";
+import Medicine from "../entities/Medicine";
+import {getMedicines} from "./MedicineService";
 
 class DataStorage {
     @observable public currentUser? : User;
@@ -19,12 +21,14 @@ class DataStorage {
     public clientsStorage = observable<User>([]);
     public clinicsStorage = observable<Clinic>([]);
     public consumablesStorage = observable<Consumable>([]);
+    public medicineStorage = observable<Medicine>([]);
     public reservationsStorage = observable<Reservation>([]);
 
     public async initStorages() {
         await getClinics();
         await getClients();
         await getConsumables();
+        await getMedicines()
     }
 }
 

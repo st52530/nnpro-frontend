@@ -5,7 +5,7 @@ import i18n from "../../../../i18n";
 import Staff from "../../../../entities/Staff";
 import DataStorage from "../../../../services/DataStorage";
 import Combobox from "../../../common/combobox/Combobox";
-import {getRoleId, getRoleLabel, UserRole} from "../../../../entities/User";
+import User, {getRoleId, getRoleLabel, UserRole} from "../../../../entities/User";
 
 
 export default class AddEditStaffDialog extends AddEditDialog<Staff> {
@@ -29,7 +29,10 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
     }
 
     protected validate(): string | undefined {
-        let {email, username , fullName, password, role} = this.state.item
+        let {email, username , fullName, password, roles, role} = this.state.item
+        if (!role || !roles){
+            return "FIX";
+        }
         if (!email || email.trim().length === 0) {
             return i18n.t("dfEmptyEmail");
         }
@@ -88,12 +91,13 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
     private onRoleSelect = (role : UserRole) : void => {
         this.setState({ item : {
             ...this.state.item,
-            role : role
+            roles : role,
+                role : role
         }})
     }
 
     protected renderForm(): React.ReactNode {
-        let {email, username , fullName, password, role} = this.state.item
+        let {email, username , fullName, password, roles} = this.state.item
         return (
 
             <Form>
@@ -102,7 +106,7 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
                         {i18n.t("dfStaffRole")}
                     </Form.Label>
                     <Col sm="10">
-                        <Combobox items={Object.values(UserRole)} getID={getRoleId} getLabel={getRoleLabel} onSelect={this.onRoleSelect} />
+                        <Combobox items={Object.values(UserRole)} getID={getRoleId} getLabel={getRoleLabel} onSelect={this.onRoleSelect} selected={roles}/>
                     </Col>
                 </Form.Group>
 

@@ -13,14 +13,14 @@ import "./ClinicDetails.css"
 import Clinic from "../../../../entities/Clinic";
 
 import Staff from "../../../../entities/Staff";
-import {deleteStaff, getAllStaff, saveNewStaff, updateStaff} from "../../../../services/StaffService";
+import {deleteStaff, getAllStaff, getStaffByClinic, saveNewStaff, updateStaff} from "../../../../services/StaffService";
 import ClinicStaffListItem from "./ClinicStaffListItem";
 
 import ClinicMedicine from "../../../../entities/ClinicMedicine";
-import {getMedicinesByClinic} from "../../../../services/MedicineService";
+import {getMedicinesByClinic, saveNewMedicineByClinic} from "../../../../services/MedicineService";
 import ClinicMedicineListItem from "./ClinicMedicineListItem";
 import ClinicConsumable from "../../../../entities/ClinicConsumable";
-import {getConsumablesByClinic} from "../../../../services/ConsumableService";
+import {getConsumablesByClinic, saveNewConsumableByClinic} from "../../../../services/ConsumableService";
 import ClinicConsumableListItem from "./ClinicConsumableListItem";
 
 import {Col, Nav, Row, Tab} from "react-bootstrap";
@@ -28,6 +28,7 @@ import AddEditStaffDialog from "../../staff/addeditstaffdialog/AddEditStaffDialo
 import {UserRole} from "../../../../entities/User";
 import Securable from "../../../common/secureable/Securable";
 import AddEditClinicDialog from "../addeditclinicdialog/AddEditClinicDialog";
+import AddEditClinicMedicine from "../addEditDialogs/AddEditClinicMedicine";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -44,6 +45,7 @@ interface State {
     addNewStaffOpen : boolean
     addNewMedicineOpen : boolean
     addNewConsumableOpen : boolean
+
     clinic : Clinic
     staff : Staff[]
     clinicMedicine : ClinicMedicine[]
@@ -85,7 +87,8 @@ class ClinicDetails extends Component<Props, State> {
     
     loadStaff = () : void => {
         this.setState({isLoading : true})
-        getAllStaff().then(value => {
+        let clinicId = Number(this.props.match.params.id);
+        getStaffByClinic(clinicId).then(value => {
             this.setState({staff : value, isLoading : false});
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
@@ -249,7 +252,7 @@ class ClinicDetails extends Component<Props, State> {
     }
 
     onAddNewStaffCancel = () => {
-        this.setState({addNewStaffOpen : false})
+        this.setState({editStaffOpen : false, editStaff : undefined})
     }
 
     onEditStaff = (staff : Staff) : void => {
@@ -281,6 +284,25 @@ class ClinicDetails extends Component<Props, State> {
         })
     }
 
+    onAddClinicMedicine = () => {
+        this.setState({addNewMedicineOpen : true})
+    }
+
+    onAddClinicMedicineSubmit = (med : ClinicMedicine) => {
+        this.setState({addNewMedicineOpen: false})
+        med.clinic = this.state.clinic
+        saveNewMedicineByClinic(med).then(e => {
+            this.loadMedicines();
+        }).catch(error => {
+            this.setState({isError: true});
+        })
+    }
+
+
+    onAddClinicMedicineCancel = () => {
+        this.setState({addNewMedicineOpen : false})
+    }
+
 
     render() {
         let t = this.props.t;
@@ -295,6 +317,7 @@ class ClinicDetails extends Component<Props, State> {
                 <AddEditStaffDialog onSubmit={this.onAddNewStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.addNewStaffOpen}/>
                 <AddEditStaffDialog item={this.state.editStaff} onSubmit={this.onEditStaffSubmit} onCancel={this.onAddNewStaffCancel} isOpen={this.state.editStaffOpen}/>
                 <AddEditClinicDialog item={this.state.clinic} onSubmit={this.onUpdateClinicSubmit} onCancel={this.onUpdateClinicCancel} isOpen={this.state.isOpenUpdateDialog}/>
+                <AddEditClinicMedicine isOpen={this.state.addNewMedicineOpen} onSubmit={this.onAddClinicMedicineSubmit} onCancel={this.onAddClinicMedicineCancel}/>
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">
@@ -343,7 +366,7 @@ class ClinicDetails extends Component<Props, State> {
                                         <Col><h3 className="mb-3">{t("cpMedicine")}</h3></Col>
                                         <Col className="text-right">
                                             <Securable access={[UserRole.ADMINISTRATOR]}>
-                                                <button type="button" className="btn btn-success px-4">+</button>
+                                                <button type="button" className="btn btn-success px-4" onClick={this.onAddClinicMedicine}>+</button>
                                             </Securable>
                                         </Col>
                                     </Row>

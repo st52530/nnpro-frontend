@@ -46,9 +46,14 @@ export async function me() : Promise<User | undefined> {
     }
 
     let response = await API.get(ME)
-    let user : User = await response.data;
-    DataStorage.currentUser = user;
-    return user;
+    try {
+        let user : User = await response.data;
+        DataStorage.currentUser = user;
+        return user;
+    } catch (e) {
+        logout()
+    }
+
 }
 
 export const logout = () : void => {

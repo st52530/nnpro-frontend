@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import MedicineListItem from "./MedicineListItem";
 import Loader from "../../loader/Loader";
 import Medicine from "../../../../entities/Medicine";
-import {getMedicine, getMedicines, saveNewMedicine} from "../../../../services/MedicineService";
+import { getMedicines, saveNewMedicine} from "../../../../services/MedicineService";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import {WithTranslation, withTranslation} from "react-i18next";
 import AddEditMedicineDialog from "../addeditmedicinedialog/AddEditMedicineDialog";

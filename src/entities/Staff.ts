@@ -7,4 +7,5 @@ export default interface Staff {
     fullName : string,
     password : string,
     role: UserRole
+    roles : UserRole
 }

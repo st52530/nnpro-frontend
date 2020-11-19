@@ -12,3 +12,11 @@ export default interface Medicine {
     type : string,
     packageSize : string
 }
+
+export const getMedicineId = (medicine : Medicine) : number => {
+    return medicine.idMedicine || 0
+}
+
+export const getMedicineLabel = (medicine : Medicine) => {
+    return medicine.name
+}

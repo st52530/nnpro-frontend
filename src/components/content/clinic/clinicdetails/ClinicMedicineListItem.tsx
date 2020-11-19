@@ -14,6 +14,7 @@ const ClinicMedicineListItem : FC<Props> = (props : PropsWithChildren<Props>) =>
             <div className="card-body py-2">
                 <h5 className="card-title">{clinicMedicine.medicine.name}</h5>
                 <p className="m-0">{clinicMedicine.medicine.code}</p>
+                <p className="m-0">{clinicMedicine.quantityInStock} ks</p>
             </div>
         </div>
     )

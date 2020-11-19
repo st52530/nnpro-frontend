@@ -20,10 +20,9 @@ const ClinicStaffListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
             <div className="card-body">
                 <div className="row">
                     <div className="col-8">
-                        <h5 className="card-title">{staff.username}</h5>
-                        <h6 className="card-title">{staff.fullName}</h6>
+                        <h5 className="card-title">{staff.fullName}</h5>
                         <h6 className="card-title">{staff.email}</h6>
-                        <h6 className="card-title">{getRoleLabel(staff.role)}</h6>
+                        <h6 className="card-title">{getRoleLabel(staff.roles)}</h6>
                     </div>
                     <div className="col-4 text-right">
                         <Securable access={[UserRole.ADMINISTRATOR]}>

@@ -4,6 +4,7 @@ import {Dropdown} from "react-bootstrap";
 
 interface Props<T> {
     items: T[]
+    selected? : T
     onSelect: (item: T) => void
     getLabel: (item: T) => string
     getID: (item: T) => number | string
@@ -17,6 +18,7 @@ interface State<T> {
 export default class Combobox<T> extends React.Component<Props<T>, State<T>> {
     state: Readonly<State<T>> = {
         items: this.props.items,
+        selected : this.props.selected
     }
 
     private onClick = (item: T) => {
