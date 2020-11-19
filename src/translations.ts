@@ -25,6 +25,10 @@ export const CzechTranslations = {
     cpConsumable : "Spotřební materiál",
     cpInformation : "Informace",
     cpThisWeek : "Tento týden",
+    cpQuantity : "Kvantita",
+    cpQuantityNotChosen : "Kvantita nevybrana",
+    cpConsumableNotChosen : "Spotřební materiál nevybran",
+    cpMedicineNotChosen : "Medikament nevybran",
 
 
     // Staff page
@@ -90,10 +94,11 @@ export const CzechTranslations = {
     nothingFound : "Nic nenalezeno",
 
     // add/edit client form
-    dfEditClient : "Opravit",
+    dfEditClient : "Aktualizovat klienta",
     dfAddClient : "Přidat nového klienta",
 
     dfEmptyName : "Prázdné uživatelské jméno",
+    dfNotSelectedRole : "Role není vybrana",
     dfEmptyFullName : "Prázdné plné jméno uživatele",
     dfEmptyMail : "Prazdný e-mail",
     dfEmptyPassword : "Prazdné heslo",

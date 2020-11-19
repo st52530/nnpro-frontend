@@ -12,9 +12,9 @@ export default class AddEdicClinicConsumable extends AddEditDialog<ClinicConsuma
 
     getHeader(): string {
         if (this.props.item) {
-            return i18n.t("cpMedicine")
+            return i18n.t("cpConsumable")
         }
-        return i18n.t("cpMedicine")
+        return i18n.t("cpConsumable")
     }
 
     protected isMedicineNew = () : boolean => {
@@ -24,10 +24,10 @@ export default class AddEdicClinicConsumable extends AddEditDialog<ClinicConsuma
     protected validate(): string | undefined {
         let {quantityInStock , consumable} = this.state.item
         if (!quantityInStock || quantityInStock < 0) {
-            return "FIX"
+            return i18n.t("cpQuantityNotChosen")
         }
         if (this.isMedicineNew() && !consumable) {
-            return "FIX"
+            return i18n.t("cpConsumableNotChosen")
         }
 
         return undefined;
@@ -62,7 +62,7 @@ export default class AddEdicClinicConsumable extends AddEditDialog<ClinicConsuma
             <Form>
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        {"FIX IT"}
+                        {i18n.t("cpConsumable")}
                     </Form.Label>
                     <Col sm="10">
                         <Combobox items={DataStorage.consumablesStorage}
@@ -75,10 +75,10 @@ export default class AddEdicClinicConsumable extends AddEditDialog<ClinicConsuma
 
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        {"FIX IT"}
+                        {i18n.t("cpQuantity")}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="number" onChange={this.onChangeCount} value={quantityInStock || ""} placeholder={"FIX"}/>
+                        <Form.Control type="number" onChange={this.onChangeCount} value={quantityInStock || ""} placeholder={i18n.t("cpQuantity")}/>
                     </Col>
                 </Form.Group>
             </Form>

@@ -24,10 +24,10 @@ export default class AddEditClinicMedicine extends AddEditDialog<ClinicMedicine>
     protected validate(): string | undefined {
         let {quantityInStock , medicine} = this.state.item
         if (!quantityInStock || quantityInStock < 0) {
-            return "FIX"
+            return i18n.t("cpQuantityNotChosen")
         }
         if (this.isMedicineNew() && !medicine) {
-            return "FIX"
+            return i18n.t("cpMedicineNotChosen")
         }
 
         return undefined;
@@ -62,7 +62,7 @@ export default class AddEditClinicMedicine extends AddEditDialog<ClinicMedicine>
             <Form>
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        {"FIX IT"}
+                        {i18n.t("cpMedicine")}
                     </Form.Label>
                     <Col sm="10">
                         <Combobox items={DataStorage.medicineStorage}
@@ -75,10 +75,10 @@ export default class AddEditClinicMedicine extends AddEditDialog<ClinicMedicine>
 
                 <Form.Group as={Row} >
                     <Form.Label column sm="2">
-                        {"FIX IT"}
+                        {i18n.t("cpQuantity")}
                     </Form.Label>
                     <Col sm="10">
-                        <Form.Control type="number" onChange={this.onChangeCount} value={quantityInStock || ""} placeholder={"FIX"}/>
+                        <Form.Control type="number" onChange={this.onChangeCount} value={quantityInStock || ""} placeholder={i18n.t("cpQuantity")}/>
                     </Col>
                 </Form.Group>
             </Form>

@@ -31,7 +31,7 @@ export default class AddEditStaffDialog extends AddEditDialog<Staff> {
     protected validate(): string | undefined {
         let {email, username , fullName, password, roles, role} = this.state.item
         if (!role || !roles){
-            return "FIX";
+            return i18n.t("dfNotSelectedRole");
         }
         if (!email || email.trim().length === 0) {
             return i18n.t("dfEmptyEmail");
