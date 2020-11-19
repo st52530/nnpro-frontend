@@ -25,8 +25,8 @@ export const CzechTranslations = {
     cpConsumable : "Spotřební materiál",
     cpInformation : "Informace",
     cpThisWeek : "Tento týden",
-    cpQuantity : "Kvantita",
-    cpQuantityNotChosen : "Kvantita nevybrana",
+    cpQuantity : "Počet",
+    cpQuantityNotChosen : "Počet nevybran",
     cpConsumableNotChosen : "Spotřební materiál nevybran",
     cpMedicineNotChosen : "Medikament nevybran",
 
