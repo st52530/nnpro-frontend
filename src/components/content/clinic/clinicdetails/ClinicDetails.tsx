@@ -195,7 +195,7 @@ class ClinicDetails extends Component<Props, State> {
     }
 
     onAddNewStaffCancel = () => {
-        this.setState({editStaffOpen : false, editStaff : undefined})
+        this.setState({addNewStaffOpen : false, editStaff : undefined})
     }
 
     onEditStaff = (staff : Staff) : void => {
