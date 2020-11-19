@@ -18,6 +18,9 @@ import ClientReservationsListItem from "./ClientReservationsListItem";
 import {getReservationsByClient} from "../../../../services/ReservationService";
 import DataStorage from "../../../../services/DataStorage";
 import Securable from "../../../common/secureable/Securable";
+import {updateClient} from "../../../../services/ClientService";
+import {getClinic} from "../../../../services/ClinicService";
+import AddEditClientDialog from "../addeditclientdialog/AddEditClientDialog";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -35,6 +38,7 @@ interface State {
     reservations: Reservation[]
 
     addNewAnimalOpen : boolean
+    updateClientOpen : boolean
 
     isError : boolean,
     errorText? : string
@@ -47,6 +51,7 @@ class ClientDetails extends Component<Props, State> {
         isError : false,
         isOpenDeleteDialog: false,
         addNewAnimalOpen: false,
+        updateClientOpen : false,
         client: {} as User,
         animals: [],
         reservations: []
@@ -107,6 +112,35 @@ class ClientDetails extends Component<Props, State> {
         let body : string = "Delete client: " + this.state.client.fullName + " ?";
 
         return <SubmitDialog header={header} body={body} isOpen={this.state.isOpenDeleteDialog} onSubmit={this.onDeleteSubmit} onCancel={this.onDeleteCancel}/>
+    }
+
+    loadClient = () => {
+        let id = Number(this.props.match.params.id);
+        console.warn(id);
+
+        getClient(id).then(response => {
+            this.setState({isLoading: false, client: response})
+        }).catch(reason => {
+            this.setState({isError : true, isLoading : false});
+        })
+    }
+
+    onUpdateClient = () : void => {
+        let client = this.state.client;
+        this.setState({updateClientOpen : true})
+    }
+
+    onUpdateClientSubmit = (client : User) => {
+        this.setState({updateClientOpen : false, isLoading : true})
+        updateClient(client).then(value => {
+            this.loadClient();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onUpdateClientCancel = () => {
+        this.setState({updateClientOpen : false})
     }
 
     onAddNewAnimal = () : void => {
@@ -176,6 +210,7 @@ class ClientDetails extends Component<Props, State> {
             <div>
                 <ErrorMessage show={this.state.isError}/>
                 <AddEditAnimalDialog onSubmit={this.onAddNewAnimalSubmit} onCancel={this.onAddNewAnimalCancel} isOpen={this.state.addNewAnimalOpen}/>
+                <AddEditClientDialog onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">
@@ -184,7 +219,7 @@ class ClientDetails extends Component<Props, State> {
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         <Securable access={[UserRole.ADMINISTRATOR]}>
-                            <button type="button" className="btn btn-info px-4 mr-2">{t("update")}</button>
+                            <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onUpdateClient}>{t("update")}</button>
                             <button type="button" className="btn btn-danger px-4" onClick={this.onDeleteButtonClick}>{t("delete")}</button>
                         </Securable>
                     </div>
