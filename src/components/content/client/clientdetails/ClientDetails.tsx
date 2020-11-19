@@ -210,7 +210,7 @@ class ClientDetails extends Component<Props, State> {
             <div>
                 <ErrorMessage show={this.state.isError}/>
                 <AddEditAnimalDialog onSubmit={this.onAddNewAnimalSubmit} onCancel={this.onAddNewAnimalCancel} isOpen={this.state.addNewAnimalOpen}/>
-                <AddEditClientDialog onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
+                <AddEditClientDialog item={this.state.client} onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">
