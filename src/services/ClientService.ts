@@ -1,7 +1,8 @@
 import API from "../utils/API";
-import {CLIENTS, STAFF} from "../utils/APIPaths";
+import {CLIENTS, CLINICS, STAFF} from "../utils/APIPaths";
 import User from "../entities/User";
 import DataStorage from "./DataStorage"
+import Clinic from "../entities/Clinic";
 
 
 export async function getClients() : Promise<User[]> {
@@ -14,6 +15,11 @@ export async function getClients() : Promise<User[]> {
 export async function getClient(id : number) : Promise<User> {
     let response = await API.get(CLIENTS + "/" + id)
     return await response.data;
+}
+
+export async function updateClient(client : User) : Promise<void> {
+    let response = await API.put(CLIENTS + '/' + client.idUser, client)
+    await response.data;
 }
 
 export async function saveNewClient(client : User) : Promise<void> {

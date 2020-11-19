@@ -16,7 +16,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
 
     protected validate(): string | undefined {
         let {username , fullName, email, password} = this.state.item
-        if (!username || username.trim().length === 0) {
+        if (!this.props.item && (!username || username.trim().length === 0)) {
             return i18n.t("dfEmptyName");
         }
         if (!fullName || fullName.trim().length === 0) {
@@ -25,7 +25,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
         if (!email || email.trim().length === 0) {
             return i18n.t("dfEmptyMail");
         }
-        if (this.props.item || !password || password.trim().length === 0) {
+        if (!this.props.item && (!password || password.trim().length === 0)) {
             return i18n.t("dfEmptyPassword");
         }
 
@@ -70,45 +70,77 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
 
     protected renderForm(): React.ReactNode {
         let {username , fullName, email, password} = this.state.item
-        return (
+        if(this.props.item){
+            return (
 
-            <Form>
-                <Form.Group as={Row} >
-                    <Form.Label column sm="2">
-                        {i18n.t("dfFullName")}
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeFullName} value={fullName || ""} placeholder={i18n.t("dfFullName")}/>
-                    </Col>
-                </Form.Group>
+                <Form>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfFullName")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeFullName} value={fullName || ""}
+                                          placeholder={i18n.t("dfFullName")}/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfEmail")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""}
+                                          placeholder={i18n.t("dfEmail")}/>
+                        </Col>
+                    </Form.Group>
+                </Form>
+            );
+        }
+        else
+        {
+            return (
 
-                <Form.Group as={Row} >
-                    <Form.Label column sm="2">
-                        {i18n.t("dfName")}
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeUserName} value={username || ""} placeholder={i18n.t("dfName")}/>
-                    </Col>
-                </Form.Group>
+                <Form>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfFullName")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeFullName} value={fullName || ""}
+                                          placeholder={i18n.t("dfFullName")}/>
+                        </Col>
+                    </Form.Group>
 
-                <Form.Group as={Row} >
-                    <Form.Label column sm="2">
-                        {i18n.t("dfEmail")}
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""} placeholder={i18n.t("dfEmail")}/>
-                    </Col>
-                </Form.Group>
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfName")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeUserName} value={username || ""}
+                                          placeholder={i18n.t("dfName")}/>
+                        </Col>
+                    </Form.Group>
 
-                <Form.Group as={Row} >
-                    <Form.Label column sm="2">
-                        {i18n.t("dfPassword")}
-                    </Form.Label>
-                    <Col sm="10">
-                        <Form.Control type="password" onChange={this.onChangePassword} value={password || ""} placeholder={i18n.t("dfPassword")}/>
-                    </Col>
-                </Form.Group>
-            </Form>
-        );
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfEmail")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""}
+                                          placeholder={i18n.t("dfEmail")}/>
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfPassword")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="password" onChange={this.onChangePassword} value={password || ""}
+                                          placeholder={i18n.t("dfPassword")}/>
+                        </Col>
+                    </Form.Group>
+                </Form>
+            );
+        }
     }
 }
