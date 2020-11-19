@@ -33,6 +33,7 @@ export async function login(username : string, password : string, permanent : bo
         sessionStorage.setItem(TOKEN_KEY, user.token);
     }
     DataStorage.currentUser = user.user;
+    DateStorage.initStorages();
     return user;
 }
 
