@@ -28,7 +28,7 @@ class DataStorage {
         await getClinics();
         await getClients();
         await getConsumables();
-        await getMedicines()
+        await getMedicines();
     }
 }
 

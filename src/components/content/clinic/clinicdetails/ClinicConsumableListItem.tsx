@@ -2,9 +2,15 @@ import React from "react";
 import {FC, PropsWithChildren} from "react";
 
 import ClinicConsumable from "../../../../entities/ClinicConsumable";
+import ClinicMedicine from "../../../../entities/ClinicMedicine";
+import Securable from "../../../common/secureable/Securable";
+import {UserRole} from "../../../../entities/User";
+import {Button, ButtonGroup} from "react-bootstrap";
+import i18n from "../../../../i18n";
 
 interface Props {
     clinicConsumable : ClinicConsumable
+    onEdit: (clinicConsumable: ClinicConsumable) => void;
 }
 
 const ClinicConsumableListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
@@ -20,8 +26,14 @@ const ClinicConsumableListItem : FC<Props> = (props : PropsWithChildren<Props>) 
                         <p className="m-0">{clinicConsumable.quantityInStock} ks</p>
                     </div>
                     <div className="col-6 d-flex align-items-center justify-content-end">
-                        <p className="m-0">{clinicConsumable.consumable.price} Kč</p>
+                        <p className="m-0 mr-4">{clinicConsumable.consumable.price} Kč</p>
+                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                <ButtonGroup>
+                                    <Button variant="primary" onClick={event => {props.onEdit(clinicConsumable)}}>{i18n.t("update")}</Button>
+                                </ButtonGroup>
+                            </Securable>
                     </div>
+
                 </div>
             </div>
         </div>

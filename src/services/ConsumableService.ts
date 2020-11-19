@@ -7,7 +7,7 @@ import DateStorage from "./DataStorage";
 export async function getConsumables() : Promise<Consumable[]> {
     let response = await API.get(CONSUMABLES);
     let consumables = await response.data;
-    DateStorage.clinicsStorage.replace(consumables);
+    DateStorage.consumablesStorage.replace(consumables);
     return consumables;
 }
 
@@ -22,6 +22,11 @@ export async function saveNewConsumable(consumable : Consumable) : Promise<void>
 }
 
 export async function saveNewConsumableByClinic(consumable : ClinicConsumable) : Promise<void> {
-    let response = await API.post(CONSUMABLES, consumable)
+    let response = await API.post(`/clinics/${consumable.clinic.idClinic}/clinic-consumable/consumable/${consumable.consumable.idConsumable}`, consumable)
+    await response.data;
+}
+
+export async function updateConsumableByClinic(consumable : ClinicConsumable) : Promise<void> {
+    let response = await API.put(`/clinics/clinic-consumable/${consumable.idClinicConsumable}`, consumable)
     await response.data;
 }

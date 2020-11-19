@@ -29,6 +29,10 @@ export async function saveNewMedicineByClinic(medicine : ClinicMedicine) : Promi
     await response.data;
 }
 
+export async function updateMedicineByClinic(medicine : ClinicMedicine) : Promise<void> {
+    let response = await API.put(`/clinics/clinic-medicine/${medicine.idClinicMedicine}`, medicine)
+    await response.data;
+}
 
 export async function saveNewMedicine(medicine : Medicine) : Promise<void> {
     let response = await API.post(MEDICINES, medicine)
