@@ -20,6 +20,12 @@ export const CLINIC_MEDICINE = "/clinic-medicine"
 export const MEDICINE = "/medicine"
 export const MEDICINES = "/medicines"
 
+export const DIAGNOSIS = "/diagnoses"
+export const DIAGNOSES = "/diagnoses"
+
+export const OPERATIONS = "/operations"
+export const OPERATION = "/operations"
+
 export const CONSUMABLE = "/consumable"
 export const CONSUMABLES = "/consumables"
 

@@ -1,4 +1,4 @@
-import {observable} from "mobx";
+import {action, observable} from "mobx";
 
 import User, {UserRole} from "../entities/User";
 import {getClients} from "./ClientService";
@@ -15,8 +15,16 @@ import Medicine from "../entities/Medicine";
 import {getMedicines} from "./MedicineService";
 import Staff from "../entities/Staff";
 import {getAllStaff, getStaffByClinic} from "./StaffService";
+import Diagnosis from "../entities/Diagnosis";
+import {Operation} from "../entities/Operation";
+import {getDiagnoses, getOperations} from "./DiagnosisService";
+import {me} from "./AuthService";
+import {observer} from "mobx-react";
 
 class DataStorage {
+
+
+    @observable public loading : boolean = false;
     @observable public currentUser?: User;
     @observable public currentClient?: User;
     @observable public currentClinic?: Clinic;
@@ -27,22 +35,30 @@ class DataStorage {
     public medicineStorage = observable<Medicine>([]);
     public reservationsStorage = observable<Reservation>([]);
     public staffStorage = observable<Staff>([]);
+    public diagnosesStorage = observable<Diagnosis>([]);
+    public operationsStorage = observable<Operation>([]);
 
+    @action
     public async initStorages() {
-        await getClinics();
-        await getClients();
-        await getConsumables();
-        await getMedicines();
-        await this.loadStaff();
+        this.loading = true;
+        Promise.all([me(), getClinics(), getClients(), getConsumables(), getMedicines(), this.loadStaff(), getOperations(), getDiagnoses()]).then(e => {
+            this.disableLoader();
+        })
+
+    }
+
+    @action
+    public disableLoader() {
+        this.loading = false
     }
 
     public async loadStaff() {
         if (this.currentUser && this.currentUser.roles === UserRole.ADMINISTRATOR) {
-            getAllStaff().then(st => {
+           return getAllStaff().then(st => {
                 this.staffStorage.replace(st);
             });
         } else if (this.currentUser && this.currentUser.roles === UserRole.VETERINARY_TECHNICIAN) {
-            getStaffByClinic(this.currentUser.workplace.idClinic).then(st => {
+            return getStaffByClinic(this.currentUser.workplace.idClinic).then(st => {
                 this.staffStorage.replace(st);
             });
         }

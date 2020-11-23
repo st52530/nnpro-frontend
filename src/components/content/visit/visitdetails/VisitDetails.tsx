@@ -4,9 +4,11 @@ import Loader from "../../loader/Loader";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import Report, {ReportStatus} from "../../../../entities/Report";
-import {getReport, updateReport} from "../../../../services/ReportService";
+import {getReport, finishReport} from "../../../../services/ReportService";
 import {Col, Nav, Row, Tab} from "react-bootstrap";
 import FinishVisitDialog from "../finishvisitdialog/FinishVisitDialog";
+import ExportToPDF from "../../export/ExportToPDF";
+import {downloadReport} from "../../../../services/PDFService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -54,9 +56,16 @@ class ReportDetails extends Component<Props, State> {
         this.setState({updateReportOpen : true})
     }
 
+    private onExportReport = () : void => {
+        let report = this.state.report;
+        downloadReport(report.idReport || 0)
+    }
+
     private onFinishReportSubmit = (report : Report) => {
         this.setState({updateReportOpen : false, isLoading : true})
-        updateReport(report).then(value => {
+        report.veterinary = undefined
+        report.animal = undefined
+        finishReport(report).then(value => {
             this.loadData();
         }).catch(reason => {
             this.setState({isLoading : false, isError : true})
@@ -81,8 +90,16 @@ class ReportDetails extends Component<Props, State> {
 
         let description = (this.state.report.textDescription) ? this.state.report.textDescription : "Žádné informace";
         let diagnosis = (this.state.report.textDiagnosis) ? this.state.report.textDiagnosis : "Žádné informace";
+        if (report.diagnosis) {
+            diagnosis += "\n" + report.diagnosis.name
+        }
+
+
         let recommendation = (this.state.report.textRecommendation) ? this.state.report.textRecommendation : "Žádné informace";
-        let finishButton = this.state.report.reportState === ReportStatus.READY ? <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onFinishReport}>{t("finish")}</button> : ""
+        let finishButton = this.state.report.reportState === ReportStatus.READY ?
+            <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onFinishReport}>{t("finish")}</button> :
+            <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>
+
 
         return (
             <div>

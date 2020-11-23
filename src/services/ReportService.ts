@@ -1,6 +1,6 @@
 import API from "../utils/API";
 import {CLIENTS, REPORTS} from "../utils/APIPaths";
-import Report from "../entities/Report";
+import Report, {ReportStatus} from "../entities/Report";
 
 
 export async function getReports() : Promise<Report[]> {
@@ -18,13 +18,18 @@ export async function getReportsByClient(client_id : number) : Promise<Report[]>
     return await response.data;
 }
 
+export async function getReportsByClinic(clinicId : number, status : ReportStatus) : Promise<Report[]> {
+    let response = await API.get(REPORTS, {params : {clinicId : clinicId, state : status}})
+    return await response.data;
+}
+
 
 export async function saveNewReport(report : Report) : Promise<void> {
     let response = await API.post(REPORTS, report)
     await response.data;
 }
 
-export async function updateReport(report : Report) : Promise<void> {
-    let response = await API.put(REPORTS + "/" + report.idReport, report)
+export async function finishReport(report : Report) : Promise<void> {
+    let response = await API.post(REPORTS + "/" + report.idReport + "/finish", report)
     await response.data;
 }

@@ -2,7 +2,6 @@ import {FC, PropsWithChildren} from "react";
 import Animal from "../../../../entities/Animal";
 import React from "react";
 import { ButtonGroup, Button } from "react-bootstrap";
-import i18n from "../../../../i18n";
 
 interface Props {
     animals : Animal

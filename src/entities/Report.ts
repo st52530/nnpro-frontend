@@ -2,6 +2,8 @@ import Animal from "./Animal";
 import Consumable from "./Consumable";
 import Medicine from "./Medicine";
 import Staff from "./Staff";
+import Diagnosis from "./Diagnosis";
+import {Operation} from "./Operation";
 
 export default interface Report {
     idReport? : number,
@@ -12,10 +14,10 @@ export default interface Report {
     animal? : Animal,
     date: Date,
     veterinary? : Staff,
-    diagnosis? : string,
-    operation? : string,
-    medicine? : Medicine,
-    consumables? : Consumable,
+    diagnosis? : Diagnosis,
+    operation? : Operation,
+    medicine? : Medicine[],
+    consumables? : Consumable[],
 }
 
 export enum ReportStatus {

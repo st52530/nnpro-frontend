@@ -1,17 +1,23 @@
 import {withTranslation, WithTranslation} from "react-i18next";
-import Report from "../../../../entities/Report";
+import Report, {ReportStatus} from "../../../../entities/Report";
 import React, {ReactNode} from "react";
-import {getReports} from "../../../../services/ReportService";
+import {getReports, getReportsByClinic} from "../../../../services/ReportService";
 import VisitListItem from "./VisitListItem";
 import Loader from "../../loader/Loader";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
+import DataStorage from "../../../../services/DataStorage";
+import {UserRole} from "../../../../entities/User";
+import {Col} from "react-bootstrap";
+import {observer} from "mobx-react";
+import {me} from "../../../../services/AuthService";
 
 interface Props extends WithTranslation{
 
 }
 
 interface State {
-    reports : Report[]
+    reportsDone : Report[]
+    reportsWaiting : Report[]
 
     addNewReportOpen : boolean
 
@@ -20,10 +26,11 @@ interface State {
 }
 
 
-
+@observer
 class VisitList extends React.Component<Props, State> {
     state : Readonly<State> = {
-        reports : [],
+        reportsDone : [],
+        reportsWaiting : [],
 
         addNewReportOpen : false,
         isLoading : false,
@@ -36,15 +43,27 @@ class VisitList extends React.Component<Props, State> {
 
     loadReports = () : void => {
         this.setState({isLoading : true})
-        getReports().then(value => {
-            this.setState({reports : value, isLoading : false});
-        }).catch(reason =>{
-            this.setState({isLoading : false, isError : true, })
-        })
+        if (!DataStorage.currentUser){
+            me().then(e => {
+                this.loadReports();
+                return;
+            })
+        }
+        if (true){
+            getReports().then(value => {
+                this.setState({
+                    reportsDone : value.filter(r => r.reportState === ReportStatus.DONE),
+                    reportsWaiting : value.filter(r => r.reportState === ReportStatus.READY)
+                    , isLoading : false});
+            }).catch(reason =>{
+                this.setState({isLoading : false, isError : true, })
+            })
+        }
+
     }
 
-    _renderVisitList = () : ReactNode => {
-        let elements : ReactNode[] = this.state.reports.map(report => {
+    _renderVisitList = (reports : Report[]) : ReactNode => {
+        let elements : ReactNode[] = reports.map(report => {
             return <VisitListItem report={report} key={report.idReport}/>
         })
 
@@ -68,7 +87,14 @@ class VisitList extends React.Component<Props, State> {
                         <h1>{t("vpHeader")}</h1>
                     </div>
                 </div>
-                {this._renderVisitList()}
+                <Col>
+                    <h4>{t("vpDoneWaiting")}</h4>
+                    {this._renderVisitList(this.state.reportsWaiting)}
+                </Col>
+                <Col>
+                    <h4>{t("vpDoneReports")}</h4>
+                    {this._renderVisitList(this.state.reportsDone)}
+                </Col>
             </div>
         );
     }

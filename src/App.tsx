@@ -25,7 +25,10 @@ import ExportToPDF from "./components/content/export/ExportToPDF";
 import {UserRole} from "./entities/User";
 import VisitList from './components/content/visit/visitlist/VisitList';
 import VisitDetails from './components/content/visit/visitdetails/VisitDetails';
+import Loader from "./components/content/loader/Loader";
+import {inject, observer} from "mobx-react";
 
+@observer
 export default class App extends React.Component<any, any> {
 
     componentDidMount() {
@@ -40,6 +43,7 @@ export default class App extends React.Component<any, any> {
     render() {
         return (
             <div>
+                <Loader show={DateStorage.loading}/>
                 <BrowserRouter>
                     <Switch>
                         <Route exact path={RouterConstants.login} component={LoginPage}/>
