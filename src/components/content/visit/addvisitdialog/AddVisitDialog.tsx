@@ -64,7 +64,7 @@ export default class AddVisitDialog extends AddEditDialog<Report> {
             <Form>
                 <Form.Group as={Row} >
                     <Form.Label column sm="3">
-                        {i18n.t("dfVisitTextDescription")}
+                        {i18n.t("dfVisitAnimal")}
                     </Form.Label>
                     <Col sm="9">
                         <Form.Control type="text" value={this.props.item?.animal?.name || ""} disabled={true}/>
