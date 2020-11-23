@@ -1,12 +1,11 @@
-import React, {ReactNode} from "react";
-import Loader from "../../loader/Loader";
-import ErrorMessage from "../../../common/errormessage/ErrorMessage";
-import {WithTranslation, withTranslation} from "react-i18next";
-
+import {withTranslation, WithTranslation} from "react-i18next";
 import Report from "../../../../entities/Report";
-import { getReports } from "../../../../services/ReportService";
-
+import React, {ReactNode} from "react";
+import {getReports} from "../../../../services/ReportService";
 import VisitListItem from "./VisitListItem";
+import ErrorMessage from "../../../common/errormessage/ErrorMessage";
+import Loader from "../../loader/Loader";
+
 
 interface Props extends WithTranslation{
 
@@ -23,7 +22,7 @@ interface State {
 
 
 
-class MedicineList extends React.Component<Props, State> {
+class VisitList extends React.Component<Props, State> {
     state : Readonly<State> = {
         reports : [],
 
@@ -76,4 +75,4 @@ class MedicineList extends React.Component<Props, State> {
     }
 }
 
-export default withTranslation()(MedicineList)
+export default withTranslation()(VisitList)

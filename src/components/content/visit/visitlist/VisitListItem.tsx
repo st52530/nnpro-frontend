@@ -8,7 +8,7 @@ interface Props {
     report : Report
 }
 
-const MedicineListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
+const VisitListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
     let report : Report = props.report;
 
     const URL = RouterConstants.visitDetails.replace(":id", String(report.idReport))
@@ -27,4 +27,4 @@ const MedicineListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
     )
 }
 
-export default MedicineListItem;
+export default VisitListItem;
