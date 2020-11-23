@@ -3,9 +3,8 @@ import Report from "../../../../entities/Report";
 import React, {ReactNode} from "react";
 import {getReports} from "../../../../services/ReportService";
 import VisitListItem from "./VisitListItem";
-import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import Loader from "../../loader/Loader";
-
+import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 
 interface Props extends WithTranslation{
 

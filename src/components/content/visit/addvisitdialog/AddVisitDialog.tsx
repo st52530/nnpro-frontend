@@ -91,4 +91,4 @@ export default class AddVisitDialog extends AddEditDialog<Report> {
             </Form>
         );
     }
-}
+};
