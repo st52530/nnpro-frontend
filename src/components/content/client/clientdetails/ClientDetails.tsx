@@ -21,7 +21,8 @@ import Securable from "../../../common/secureable/Securable";
 import AddEditClientDialog from "../addeditclientdialog/AddEditClientDialog";
 import AddVisitDialog from "../../visit/addvisitdialog/AddVisitDialog";
 import Report from "../../../../entities/Report";
-import {saveNewReport} from "../../../../services/ReportService";
+import {getReportsByClient, saveNewReport} from "../../../../services/ReportService";
+import ClientReportsListItem from "./ClientReportsListItem";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -37,6 +38,7 @@ interface State {
     client: User
     animals: Animal[]
     reservations: Reservation[]
+    reports: Report[]
 
     addNewAnimalOpen : boolean
     updateClientOpen : boolean
@@ -59,7 +61,8 @@ class ClientDetails extends Component<Props, State> {
         addVisitOpen: false,
         client: {} as User,
         animals: [],
-        reservations: []
+        reservations: [],
+        reports: []
     }
 
     componentDidMount() {
@@ -89,6 +92,11 @@ class ClientDetails extends Component<Props, State> {
 
         getReservationsByClient(id).then(value => {
             this.setState({reservations : value, isLoading : false});
+        }).catch(reason =>{
+            this.setState({isLoading : false, isError : true, })
+        })
+        getReportsByClient(id).then(value => {
+            this.setState({reports : value, isLoading : false});
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
@@ -224,6 +232,25 @@ class ClientDetails extends Component<Props, State> {
         )
     }
 
+    _renderClientReportsList = () : ReactNode => {
+
+        let elements : ReactNode[] = this.state.reports.map(report => {
+            return <ClientReportsListItem report={report} key={report.idReport}/>
+        })
+
+        if (elements === undefined || elements.length == 0) {
+            return (
+                <p>{i18n.t("nothingFound")}</p>
+            )
+        }
+
+        return (
+            <div>
+                {elements}
+            </div>
+        )
+    }
+
 
     render() {
         let t = this.props.t;
@@ -275,6 +302,7 @@ class ClientDetails extends Component<Props, State> {
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageInformation")}</h3></Col>
                                     </Row>
+                                    {this._renderClientReportsList()}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="animals">
                                     <Row>

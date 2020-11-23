@@ -2,7 +2,7 @@ import {FC, PropsWithChildren} from "react";
 import React from "react";
 import Report from "../../../../../../../src/entities/Report";
 import { NavLink } from "react-router-dom";
-import { RouterConstants } from "../../../../../../../src/routes/RouterConstants";
+import {RouterConstants} from "../../../../routes/RouterConstants";
 
 interface Props {
     report : Report

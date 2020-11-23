@@ -7,8 +7,6 @@ import Combobox from "../../../common/combobox/Combobox";
 import DataStorage from "../../../../services/DataStorage";
 import Staff, {getStaffId, getStaffLabel} from "../../../../entities/Staff";
 import {UserRole} from "../../../../entities/User";
-import MultiSelect from "../../../common/multiselect/MultiSelect";
-import {getMedicineId, getMedicineLabel} from "../../../../entities/Medicine";
 
 
 export default class AddVisitDialog extends AddEditDialog<Report> {
