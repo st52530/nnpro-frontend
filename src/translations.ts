@@ -113,6 +113,15 @@ export const CzechTranslations = {
     dfEmail : "E-mail",
     dfPassword : "Heslo",
 
+    dfVisitTextDescription : "Popis návštěvy",
+    dfVisitAnimal : "Zvíře",
+    dfVisitVeterinary : "Veterinář",
+    dfVisitTextRecommendation : "Doporučení k návštěvě",
+    dfDiagnosesDescription : "Popis diagnózy",
+
+    dfMedicines : "Medikamenty",
+    dfConsumables : "Spotřební materiál",
+
     // add/edit clinic form
     dfEmptyAddress : "Prazdná adresa",
     dfClinicName : "Jméno klinily",
