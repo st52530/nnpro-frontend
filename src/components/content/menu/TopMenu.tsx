@@ -38,6 +38,9 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                         <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.clients}>{t("tmClients")}</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={RouterConstants.visit}>{t("tmVisits")}</Link>
+                        </li>
                         <Securable access={[UserRole.ADMINISTRATOR]}>
                             <li className="nav-item">
                                 <Link className="nav-link" to={RouterConstants.import}>{t("import")}</Link>

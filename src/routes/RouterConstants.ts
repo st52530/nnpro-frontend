@@ -17,6 +17,10 @@ export const RouterConstants = {
     reservation : "/reservations",
     reservationDetails : "/reservations/:id",
 
+    visit : "/visits",
+    visitDetails : "/visits/:id",
+
+
     animals : "/animals",
     animalDetails : "/animals/:id",
 

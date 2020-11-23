@@ -5,7 +5,6 @@ import Securable from "../../../common/secureable/Securable";
 import {UserRole} from "../../../../entities/User";
 import {Button, ButtonGroup} from "react-bootstrap";
 import i18n from "../../../../i18n";
-import Staff from "../../../../entities/Staff";
 
 interface Props {
     clinicMedicine: ClinicMedicine

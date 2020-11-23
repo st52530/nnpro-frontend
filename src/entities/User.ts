@@ -1,4 +1,5 @@
 import i18n from "../i18n"
+import Clinic from "./Clinic";
 
 export default interface User {
     idUser : number
@@ -8,6 +9,7 @@ export default interface User {
     password? : string,
     roles : UserRole | null,
     token : string
+    workplace : Clinic
 }
 
 export const getUserId = (user : User) => {

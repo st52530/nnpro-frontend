@@ -11,6 +11,7 @@ export const CzechTranslations = {
     tmStaff : "Personál",
     tmMaterials : "Medikamenty",
     tmReservations : "Rezervace",
+    tmVisits : "Návštěvy",
     tmClients : "Klienti",
     tmAnimals : "Zvířata",
 
@@ -36,6 +37,7 @@ export const CzechTranslations = {
     spDelete : "Odstranit zaměstnance",
     spEdit : "Upravit zaměstnance",
     spAdd : "Přidat nového zaměstnance",
+    vpAdd : "Přidat novou návštěvu",
 
     // Client page 
     clientPageInformation : 'Informace',
@@ -44,6 +46,9 @@ export const CzechTranslations = {
 
     // Medicine page
     mpHeader : "Medikamenty",
+
+    // Visits page
+    vpHeader : "Návštěvy",
 
     // Reservation page
     rpHeader : "Rezervace",

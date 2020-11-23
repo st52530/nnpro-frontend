@@ -6,7 +6,7 @@ import SubmitDialog from "../../../common/submitdialog/SubmitDialog";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import User, {UserRole} from "../../../../entities/User";
-import {deleteClient, getClient} from "../../../../services/ClientService";
+import {deleteClient, getClient, updateClient} from "../../../../services/ClientService";
 import {Col, Nav, Row, Tab} from "react-bootstrap";
 import AddEditAnimalDialog from "../../animal/addeditanimaldialog/AddEditAnimalDialog";
 import {getAnimalsByClient, saveNewAnimal} from "../../../../services/AnimalService";
@@ -18,9 +18,10 @@ import ClientReservationsListItem from "./ClientReservationsListItem";
 import {getReservationsByClient} from "../../../../services/ReservationService";
 import DataStorage from "../../../../services/DataStorage";
 import Securable from "../../../common/secureable/Securable";
-import {updateClient} from "../../../../services/ClientService";
-import {getClinic} from "../../../../services/ClinicService";
 import AddEditClientDialog from "../addeditclientdialog/AddEditClientDialog";
+import AddVisitDialog from "../../visit/addvisitdialog/AddVisitDialog";
+import Report from "../../../../entities/Report";
+import {saveNewReport} from "../../../../services/ReportService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -40,6 +41,9 @@ interface State {
     addNewAnimalOpen : boolean
     updateClientOpen : boolean
 
+    addVisitOpen : boolean
+    addVisitEntity? : Report
+
     isError : boolean,
     errorText? : string
 }
@@ -52,6 +56,7 @@ class ClientDetails extends Component<Props, State> {
         isOpenDeleteDialog: false,
         addNewAnimalOpen: false,
         updateClientOpen : false,
+        addVisitOpen: false,
         client: {} as User,
         animals: [],
         reservations: []
@@ -161,10 +166,30 @@ class ClientDetails extends Component<Props, State> {
         this.setState({addNewAnimalOpen : false})
     }
 
+    onAddVisit = (animal : Animal) => {
+        let report = {} as Report
+        animal.owner = null
+        report.animal = animal
+        this.setState({addVisitOpen : true, addVisitEntity : report})
+    }
+
+    onAddVisitSubmit = (report : Report) => {
+        this.setState({addVisitOpen: false, addVisitEntity : undefined, isLoading : true})
+        saveNewReport(report).then(resp => {
+            this.setState({isLoading : false})
+        }).catch(error => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onAddVisitCancel = () => {
+        this.setState({addVisitOpen : false, addVisitEntity : undefined})
+    }
+
     _renderClientAnimalsList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.animals.map(animal => {
-            return <ClientAnimalsListItem animals={animal} key={animal.idAnimal}/>
+            return <ClientAnimalsListItem onAdd={this.onAddVisit} animals={animal} key={animal.idAnimal}/>
         })
 
         if (elements.length == 0 || elements === undefined) {
@@ -211,6 +236,9 @@ class ClientDetails extends Component<Props, State> {
                 <ErrorMessage show={this.state.isError}/>
                 <AddEditAnimalDialog onSubmit={this.onAddNewAnimalSubmit} onCancel={this.onAddNewAnimalCancel} isOpen={this.state.addNewAnimalOpen}/>
                 <AddEditClientDialog item={this.state.client} onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
+               
+                <AddVisitDialog isOpen={this.state.addVisitOpen} item={this.state.addVisitEntity} onSubmit={this.onAddVisitSubmit} onCancel={this.onAddVisitCancel}/>
+                
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
                     <div className="col">

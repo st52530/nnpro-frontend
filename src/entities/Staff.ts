@@ -9,3 +9,11 @@ export default interface Staff {
     role: UserRole
     roles : UserRole
 }
+
+export const getStaffId = (staff : Staff) => {
+    return staff.idUser;
+}
+
+export const getStaffLabel = (staff : Staff) => {
+    return staff.fullName;
+}

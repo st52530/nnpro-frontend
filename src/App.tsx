@@ -23,6 +23,8 @@ import DateStorage from "./services/DataStorage";
 import ImportFromExcel from "./components/content/import/ImportFromExcel";
 import ExportToPDF from "./components/content/export/ExportToPDF";
 import {UserRole} from "./entities/User";
+import VisitList from './components/content/visit/visitlist/VisitList';
+import VisitDetails from './components/content/visit/visitdetails/VisitDetails';
 
 export default class App extends React.Component<any, any> {
 
@@ -52,6 +54,8 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.medicineDetails} component={MedicineDetails}/>
                         <DashboardRoute exact path={RouterConstants.reservation} component={ReservationList}/>
                         <DashboardRoute exact path={RouterConstants.reservationDetails} component={ReservationDetails}/>
+                        <DashboardRoute exact path={RouterConstants.visit} component={VisitList}/>
+                        <DashboardRoute exact path={RouterConstants.visitDetails} component={VisitDetails}/>
                         <DashboardRoute exact path={RouterConstants.animals} component={AnimalList}/>
                         <DashboardRoute exact path={RouterConstants.animalDetails} component={AnimalDetails}/>
                         <DashboardRoute exact path={RouterConstants.import} access={[UserRole.ADMINISTRATOR]} component={ImportFromExcel}/>

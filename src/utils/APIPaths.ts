@@ -8,6 +8,8 @@ export const CLIENTS = "/clients"
 export const RESERVATION = "/reservation"
 export const RESERVATIONS = "/reservations"
 
+export const REPORTS = "/reports-v2"
+
 export const ANIMALS = "/animals"
 
 export const CLINIC = "/clinic"
