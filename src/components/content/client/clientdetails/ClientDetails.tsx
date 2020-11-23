@@ -12,7 +12,7 @@ import AddEditAnimalDialog from "../../animal/addeditanimaldialog/AddEditAnimalD
 import {getAnimalsByClient, saveNewAnimal} from "../../../../services/AnimalService";
 import Animal from "../../../../entities/Animal";
 import i18n from "../../../../i18n";
-import ClientAnimalsListItem from "./ClientAnimalsListItem";
+import ClientAnimalsListItem from "./ClientAnimalListItem";
 import Reservation from "../../../../entities/Reservation";
 import ClientReservationsListItem from "./ClientReservationsListItem";
 import {getReservationsByClient} from "../../../../services/ReservationService";
@@ -23,6 +23,7 @@ import AddVisitDialog from "../../visit/addvisitdialog/AddVisitDialog";
 import Report from "../../../../entities/Report";
 import {getReportsByClient, saveNewReport} from "../../../../services/ReportService";
 import ClientReportsListItem from "./ClientReportsListItem";
+import ClientAnimalListItem from "./ClientAnimalListItem";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -197,7 +198,7 @@ class ClientDetails extends Component<Props, State> {
     _renderClientAnimalsList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.animals.map(animal => {
-            return <ClientAnimalsListItem onAdd={this.onAddVisit} animals={animal} key={animal.idAnimal}/>
+            return <ClientAnimalListItem onAdd={this.onAddVisit} animals={animal} key={animal.idAnimal}/>
         })
 
         if (elements.length == 0 || elements === undefined) {
