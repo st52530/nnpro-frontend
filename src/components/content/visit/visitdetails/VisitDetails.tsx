@@ -7,7 +7,6 @@ import Report, {ReportStatus} from "../../../../entities/Report";
 import {getReport, finishReport} from "../../../../services/ReportService";
 import {Col, Nav, Row, Tab} from "react-bootstrap";
 import FinishVisitDialog from "../finishvisitdialog/FinishVisitDialog";
-import ExportToPDF from "../../export/ExportToPDF";
 import {downloadReport} from "../../../../services/PDFService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {

@@ -4,7 +4,7 @@ import DataStorage from "./DataStorage"
 import axios from "axios";
 import {API_ADDRESS} from "../Constants";
 
-const FileAPI = axios.create({
+export const FileAPI = axios.create({
     baseURL: API_ADDRESS,
     responseType: "json",
     headers: {

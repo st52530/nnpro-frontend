@@ -16,6 +16,7 @@
     "bootstrap": "^4.5.3",
     "cors-anywhere": "^0.4.3",
     "i18next": "^19.8.3",
+    "js-file-download": "^0.4.12",
     "mobx": "^6.0.1",
     "mobx-react": "^7.0.5",
     "moment": "^2.29.1",

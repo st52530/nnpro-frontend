@@ -1,26 +1,18 @@
-import API from "../utils/API";
+import API, {getAuthenticationToken} from "../utils/API";
 import {PDF} from "../utils/APIPaths";
 import DateStorage from "./DataStorage";
-
-
-export async function getPDFs() : Promise<File[]> {
-    let response = await API.get(PDF)
-    let clinics = await response.data;
-    DateStorage.clinicsStorage.replace(clinics);
-    return clinics;
-}
+import axios from "axios";
+import {API_ADDRESS} from "../Constants";
+const FileDownload = require('js-file-download');
 
 export async function downloadReport(id : number) : Promise<void> {
-    let req = new XMLHttpRequest();
-    req.open("GET", PDF + "/" + id, true)
-    req.responseType = "blob"
+    axios.get(API_ADDRESS + PDF + "/" + id, {
+        responseType : 'blob',
+        headers: {
+            'Accept': 'application/pdf',
+            'Authorization' : getAuthenticationToken()
+        },
+    }).then(r => r.data)
+        .then(data => FileDownload(data, "export.pdf"))
 
-    req.onload = () => {
-        let file = new File([req.response], "Report.pdf" ,{ type : 'application/pdf'})
-        let fileUrl = URL.createObjectURL(file);
-        window.open(fileUrl, "_blank")
-    }
-
-
-    req.send();
 }
