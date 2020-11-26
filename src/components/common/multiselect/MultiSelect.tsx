@@ -5,6 +5,7 @@ import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import {Col, Dropdown} from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import CheckBox from "../checkbox/Checkbox";
+import i18n from "../../../i18n";
 
 
 interface Props<T> {
@@ -64,7 +65,7 @@ export default class MultiSelect<T> extends React.Component<Props<T>, State<T>> 
             <div style={{width: "100%"}}>
                 <Dropdown style={{width: "100%"}}>
                     <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width: "100%"}}>
-                        { "Selected " + this.state.selectedItems.length + " items"}
+                        { i18n.t("multiSelect") + " " + this.state.selectedItems.length + " " + i18n.t("items")}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{width: "100%"}} alignRight>

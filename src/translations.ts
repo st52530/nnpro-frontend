@@ -38,6 +38,8 @@ export const CzechTranslations = {
     spEdit : "Upravit zaměstnance",
     spAdd : "Přidat nového zaměstnance",
     vpAdd : "Přidat novou návštěvu",
+    vpDoneWaiting : "Čeká na veterináře",
+    vpDoneReports : "Minulé návštěvy",
 
     // Client page 
     clientPageInformation : 'Informace',
@@ -79,6 +81,10 @@ export const CzechTranslations = {
     address : "Adresa",
     save : "Uložit",
     cancel : "Zrušit",
+    finish : "Ukončit návštěvu",
+    select : "Vyběr",
+    multiSelect : "Vybráno",
+    items : "položek",
 
     //Excel
     import : "Import",
@@ -119,6 +125,8 @@ export const CzechTranslations = {
     dfVisitVeterinary : "Veterinář",
     dfVisitTextRecommendation : "Doporučení k návštěvě",
     dfDiagnosesDescription : "Popis diagnózy",
+    dfDiagnosis : "Diagnóza",
+    dfDiagnosesRecommendation : "Doporučení k diagnóze",
 
     dfMedicines : "Medikamenty",
     dfConsumables : "Spotřební materiál",
