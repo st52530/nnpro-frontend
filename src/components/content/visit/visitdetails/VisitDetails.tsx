@@ -204,11 +204,11 @@ class ReportDetails extends Component<Props, State> {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <h5>Medicines</h5>
+                                            <h5>{t("dfMedicines")}</h5>
                                             {this._renderVisitMedicineList()}
                                         </Col>
                                         <Col>
-                                            <h5>Consumables</h5>
+                                            <h5>{t("dfConsumables")}</h5>
                                             {this._renderVisitConsumableList()}
                                         </Col>
                                     </Row>
