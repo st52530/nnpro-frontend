@@ -118,13 +118,15 @@ class ClientDetails extends Component<Props, State> {
     }
 
     private loadMessages = () => {
+        let messages : AnimalMessage[] = []
         this.state.animals.forEach(animal => {
             getMessagesByAnimal(animal.idAnimal).then(value => {
-                this.setState({messages : value, isLoading : false});
+                messages.push(...value);
             }).catch(reason =>{
                 this.setState({isLoading : false, isError : true, })
             })
         });
+        this.setState({messages : messages, isLoading : false})
     }
 
 
@@ -227,9 +229,9 @@ class ClientDetails extends Component<Props, State> {
 
     onAddMessageSubmit = (message : AnimalMessage) => {
         this.setState({addMessageOpen: false, addMessageEntity : undefined, isLoading : true})
-        if (DataStorage.currentUser) {
-            message.text = DataStorage.currentUser.fullName + ": " + message.text;
-        }
+        //if (DataStorage.currentUser) {
+        //    message.text = DataStorage.currentUser.fullName + ": " + message.text;
+        //}
 
         saveNewMessage(message).then(resp => {
             this.loadMessages();
@@ -283,10 +285,25 @@ class ClientDetails extends Component<Props, State> {
     _renderClientMessagesList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.messages.map(message => {
-            return '1';
+            return <div>
+                <Row>
+                    <Col md={1}>
+                        {message.animal.name}
+                    </Col>
+                    <Col md={6}>
+                        {message.text}
+                    </Col>
+                    <Col md={5}>
+                        {message.sender.fullName}
+                        <br/>
+                        {new Date(message.date).toUTCString()}
+                    </Col>
+                </Row>
+
+            </div>;
         })
 
-        if (elements.length == 0 || elements === undefined) {
+        if (elements.length === 0) {
             return (
                 <p>{i18n.t("nothingFound")}</p>
             )
@@ -402,7 +419,19 @@ class ClientDetails extends Component<Props, State> {
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageMessages")}</h3></Col>
                                     </Row>
-                                    <button type="button" onClick={this.onAddMessage} className="btn btn-success px-4 w-100" >Add</button>                                            
+                                    <button type="button" onClick={this.onAddMessage} className="btn btn-success px-4 w-100 mb-5" >Add</button>  
+
+                                    <Row>
+                                        <Col md={3}>
+                                            <h6>Zvíře</h6>
+                                        </Col>
+                                        <Col md={6}>
+                                            <h6>Zpráva</h6>
+                                        </Col>
+                                        <Col md={3}>
+                                            <h6>VETERINÁŘ</h6>
+                                        </Col>
+                                    </Row>                                         
                                     {this._renderClientMessagesList()}
                                 </Tab.Pane>
                             </Tab.Content>
