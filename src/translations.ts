@@ -43,6 +43,7 @@ export const CzechTranslations = {
     clientPageInformation : 'Informace',
     clientPageAnimals : 'Zvířata',
     clientPageReservations : 'Rezervace',
+    clientPageMessages : 'Zprávy',
 
     // Medicine page
     mpHeader : "Medikamenty",
@@ -166,6 +167,13 @@ export const CzechTranslations = {
     dfAnimalName : "Jméno zvířete",
     dfAnimalOwner : "Majitel zvířete",
     dfEmptyOwner : "Prázdné id majitele",
+
+    // add message form
+    mfAdd : 'Přidat novou zprávu',
+    mfTextEmpty : 'Text je prázdný',
+    mfAnimal : 'Zvíře',
+    mfText : 'Zpráva',
+
 
     // months
     January : "Leden",

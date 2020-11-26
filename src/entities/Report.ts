@@ -16,8 +16,8 @@ export default interface Report {
     veterinary? : Staff,
     diagnosis? : Diagnosis,
     operation? : Operation,
-    medicine? : Medicine[],
-    consumables? : Consumable[],
+    medicines : Medicine[],
+    consumables : Consumable[],
 }
 
 export enum ReportStatus {

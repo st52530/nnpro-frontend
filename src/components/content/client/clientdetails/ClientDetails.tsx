@@ -7,9 +7,9 @@ import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import User, {UserRole} from "../../../../entities/User";
 import {deleteClient, getClient, updateClient} from "../../../../services/ClientService";
-import {Col, Nav, Row, Tab} from "react-bootstrap";
+import {Col, Form, Nav, Row, Tab} from "react-bootstrap";
 import AddEditAnimalDialog from "../../animal/addeditanimaldialog/AddEditAnimalDialog";
-import {getAnimalsByClient, saveNewAnimal} from "../../../../services/AnimalService";
+import {getAnimalsByClient, getMessagesByAnimal, saveNewAnimal} from "../../../../services/AnimalService";
 import Animal from "../../../../entities/Animal";
 import i18n from "../../../../i18n";
 import ClientAnimalsListItem from "./ClientAnimalListItem";
@@ -24,6 +24,10 @@ import Report from "../../../../entities/Report";
 import {getReportsByClient, saveNewReport} from "../../../../services/ReportService";
 import ClientReportsListItem from "./ClientReportsListItem";
 import ClientAnimalListItem from "./ClientAnimalListItem";
+import AnimalMessage from "../../../../entities/AnimalMessage";
+import Combobox from "../../../common/combobox/Combobox";
+import AddMessageDialog from "../../message/addmessageform/AddMessageDialog";
+import { saveNewMessage } from "../../../../services/MessageService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -40,12 +44,16 @@ interface State {
     animals: Animal[]
     reservations: Reservation[]
     reports: Report[]
+    messages: AnimalMessage[]
 
     addNewAnimalOpen : boolean
     updateClientOpen : boolean
 
     addVisitOpen : boolean
     addVisitEntity? : Report
+
+    addMessageOpen : boolean
+    addMessageEntity? : AnimalMessage
 
     isError : boolean,
     errorText? : string
@@ -60,10 +68,12 @@ class ClientDetails extends Component<Props, State> {
         addNewAnimalOpen: false,
         updateClientOpen : false,
         addVisitOpen: false,
+        addMessageOpen: false,
         client: {} as User,
         animals: [],
         reservations: [],
-        reports: []
+        reports: [],
+        messages: []
     }
 
     componentDidMount() {
@@ -96,11 +106,20 @@ class ClientDetails extends Component<Props, State> {
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
+
         getReportsByClient(id).then(value => {
             this.setState({reports : value, isLoading : false});
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
+
+        this.state.animals.forEach(animal => {
+            getMessagesByAnimal(animal.idAnimal).then(value => {
+                this.setState({messages : value, isLoading : false});
+            }).catch(reason =>{
+                this.setState({isLoading : false, isError : true, })
+            })
+        });
     }
 
     private onDeleteButtonClick = (): void => {
@@ -195,6 +214,24 @@ class ClientDetails extends Component<Props, State> {
         this.setState({addVisitOpen : false, addVisitEntity : undefined})
     }
 
+    onAddMessage = () => {
+        let message = {} as AnimalMessage
+        this.setState({addMessageOpen : true, addMessageEntity : message})
+    }
+
+    onAddMessageSubmit = (message : AnimalMessage) => {
+        this.setState({addMessageOpen: false, addMessageEntity : undefined, isLoading : true})
+        saveNewMessage(message).then(resp => {
+            this.setState({isLoading : false})
+        }).catch(error => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onAddMessageCancel = () => {
+        this.setState({addVisitOpen : false, addVisitEntity : undefined})
+    }
+
     _renderClientAnimalsList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.animals.map(animal => {
@@ -218,6 +255,25 @@ class ClientDetails extends Component<Props, State> {
 
         let elements : ReactNode[] = this.state.reservations.map(reservation => {
             return <ClientReservationsListItem reservation={reservation} key={reservation.idReservation}/>
+        })
+
+        if (elements.length == 0 || elements === undefined) {
+            return (
+                <p>{i18n.t("nothingFound")}</p>
+            )
+        }
+
+        return (
+            <div>
+                {elements}
+            </div>
+        )
+    }
+
+    _renderClientMessagesList = () : ReactNode => {
+
+        let elements : ReactNode[] = this.state.messages.map(message => {
+            return '1';
         })
 
         if (elements.length == 0 || elements === undefined) {
@@ -266,6 +322,7 @@ class ClientDetails extends Component<Props, State> {
                 <AddEditClientDialog item={this.state.client} onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
                
                 <AddVisitDialog isOpen={this.state.addVisitOpen} item={this.state.addVisitEntity} onSubmit={this.onAddVisitSubmit} onCancel={this.onAddVisitCancel}/>
+                <AddMessageDialog isOpen={this.state.addMessageOpen} item={this.state.addMessageEntity} onSubmit={this.onAddMessageSubmit} onCancel={this.onAddMessageCancel}/>
                 
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
@@ -295,6 +352,9 @@ class ClientDetails extends Component<Props, State> {
                                 <Nav.Item>
                                     <Nav.Link eventKey="reservations">Rezervace</Nav.Link>
                                 </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="messages">Zprávy</Nav.Link>
+                                </Nav.Item>
                             </Nav>
                         </Col>
                         <Col sm={12} lg={9}>
@@ -319,13 +379,15 @@ class ClientDetails extends Component<Props, State> {
                                 <Tab.Pane eventKey="reservations">
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageReservations")}</h3></Col>
-                                        <Col className="text-right">
-                                            <Securable access={[UserRole.ADMINISTRATOR, UserRole.VETERINARY_TECHNICIAN]}>
-                                                <button type="button" className="btn btn-success px-4" >+</button>
-                                            </Securable>
-                                        </Col>
                                     </Row>
                                     {this._renderClientReservationsList()}
+                                </Tab.Pane>
+                                <Tab.Pane eventKey="messages">
+                                    <Row>
+                                        <Col><h3 className="mb-3">{t("clientPageMessages")}</h3></Col>
+                                    </Row>
+                                    <button type="button" onClick={this.onAddMessage} className="btn btn-success px-4 w-100" >Add</button>                                            
+                                    {this._renderClientMessagesList()}
                                 </Tab.Pane>
                             </Tab.Content>
                         </Col>

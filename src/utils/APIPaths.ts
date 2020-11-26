@@ -10,7 +10,10 @@ export const RESERVATIONS = "/reservations"
 
 export const REPORTS = "/reports-v2"
 
+export const ANIMAL = "/animal"
 export const ANIMALS = "/animals"
+
+export const MESSAGES = "/messages"
 
 export const CLINIC = "/clinic"
 export const CLINICS = "/clinics"

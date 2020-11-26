@@ -37,8 +37,10 @@ export default class MultiSelect<T> extends React.Component<Props<T>, State<T>> 
             selectedItems.push(e);
         }
         this.setState({selectedItems : selectedItems});
-        console.warn(e)
-        console.warn(selectedItems)
+
+        if(this.props.onSelectCallback) {
+            this.props.onSelectCallback(selectedItems)
+        }
     }
 
     private isSelected = (e : T) => {
