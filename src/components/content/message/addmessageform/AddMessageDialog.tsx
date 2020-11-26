@@ -7,9 +7,22 @@ import DataStorage from "../../../../services/DataStorage";
 import AnimalMessage from "../../../../entities/AnimalMessage";
 import Animal, { getAnimalId, getAnimalLabel } from "../../../../entities/Animal";
 import { getAnimalsByClient } from "../../../../services/AnimalService";
+import {observable} from "mobx";
+import {observer} from "mobx-react";
 
-
+@observer
 export default class AddMessageDialog extends AddEditDialog<AnimalMessage> {
+    clientAnimals  = observable<Animal>([])
+
+    componentDidMount() {
+        if (this.props.params && this.props.params["clientId"] !== null){
+            getAnimalsByClient(Number(this.props.params["clientId"])).then(resp => {
+                    this.clientAnimals.replace(resp);
+                }
+            )
+        }
+    }
+
 
     getHeader(): string {
         return i18n.t("mfAdd")
@@ -49,7 +62,7 @@ export default class AddMessageDialog extends AddEditDialog<AnimalMessage> {
 
     protected renderForm(): React.ReactNode {
         let {text} = this.state.item
-        let animals = getAnimalsByClient(257)
+
         
         
         return (
@@ -60,7 +73,7 @@ export default class AddMessageDialog extends AddEditDialog<AnimalMessage> {
                         {i18n.t("mfAnimal")}
                     </Form.Label>
                     <Col sm="9">
-                    <Combobox items={animals} onSelect={this.onChangeAnimal} getLabel={getAnimalLabel}
+                    <Combobox items={this.clientAnimals} onSelect={this.onChangeAnimal} getLabel={getAnimalLabel}
                                 getID={getAnimalId}/>
                     </Col>
                 </Form.Group>

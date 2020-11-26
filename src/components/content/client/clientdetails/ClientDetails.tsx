@@ -28,6 +28,7 @@ import AnimalMessage from "../../../../entities/AnimalMessage";
 import Combobox from "../../../common/combobox/Combobox";
 import AddMessageDialog from "../../message/addmessageform/AddMessageDialog";
 import { saveNewMessage } from "../../../../services/MessageService";
+import {me} from "../../../../services/AuthService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -97,6 +98,8 @@ class ClientDetails extends Component<Props, State> {
 
         getAnimalsByClient(id).then(value => {
             this.setState({animals : value, isLoading : false});
+        }).then(resp => {
+            this.loadMessages();
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
@@ -112,7 +115,9 @@ class ClientDetails extends Component<Props, State> {
         }).catch(reason =>{
             this.setState({isLoading : false, isError : true, })
         })
+    }
 
+    private loadMessages = () => {
         this.state.animals.forEach(animal => {
             getMessagesByAnimal(animal.idAnimal).then(value => {
                 this.setState({messages : value, isLoading : false});
@@ -121,6 +126,7 @@ class ClientDetails extends Component<Props, State> {
             })
         });
     }
+
 
     private onDeleteButtonClick = (): void => {
         this.setState({isOpenDeleteDialog: true})
@@ -221,8 +227,12 @@ class ClientDetails extends Component<Props, State> {
 
     onAddMessageSubmit = (message : AnimalMessage) => {
         this.setState({addMessageOpen: false, addMessageEntity : undefined, isLoading : true})
+        if (DataStorage.currentUser) {
+            message.text = DataStorage.currentUser.fullName + ": " + message.text;
+        }
+
         saveNewMessage(message).then(resp => {
-            this.setState({isLoading : false})
+            this.loadMessages();
         }).catch(error => {
             this.setState({isLoading : false, isError : true})
         })
@@ -310,6 +320,12 @@ class ClientDetails extends Component<Props, State> {
 
 
     render() {
+        let id = Number(this.props.match.params.id);
+        let params : {[key : string] : string} = {
+            clientId : String(id)
+        }
+
+
         let t = this.props.t;
         let client: User = this.state.client;
         if (this.state.isLoading) {
@@ -322,7 +338,7 @@ class ClientDetails extends Component<Props, State> {
                 <AddEditClientDialog item={this.state.client} onSubmit={this.onUpdateClientSubmit} onCancel={this.onUpdateClientCancel} isOpen={this.state.updateClientOpen}/>
                
                 <AddVisitDialog isOpen={this.state.addVisitOpen} item={this.state.addVisitEntity} onSubmit={this.onAddVisitSubmit} onCancel={this.onAddVisitCancel}/>
-                <AddMessageDialog isOpen={this.state.addMessageOpen} item={this.state.addMessageEntity} onSubmit={this.onAddMessageSubmit} onCancel={this.onAddMessageCancel}/>
+                <AddMessageDialog isOpen={this.state.addMessageOpen} item={this.state.addMessageEntity} onSubmit={this.onAddMessageSubmit} onCancel={this.onAddMessageCancel} params={params}/>
                 
                 {this.renderDeleteDialog()}
                 <div className="row mb-3 border-bottom">
