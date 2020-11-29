@@ -18,8 +18,13 @@ export async function getReportsByClient(client_id : number) : Promise<Report[]>
     return await response.data;
 }
 
-export async function getReportsByClinic(clinicId : number, status : ReportStatus) : Promise<Report[]> {
-    let response = await API.get(REPORTS, {params : {clinicId : clinicId, state : status}})
+export async function getReportsByClinic(clinicId : number) : Promise<Report[]> {
+    let response = await API.get(REPORTS, {params : {clinicId : clinicId}})
+    return await response.data;
+}
+
+export async function getReportsByVeterinary(veterinaryId : number) : Promise<Report[]> {
+    let response = await API.get(REPORTS, {params : {veterinaryId : veterinaryId}})
     return await response.data;
 }
 

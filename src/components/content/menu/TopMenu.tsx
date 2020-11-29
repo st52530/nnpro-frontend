@@ -6,7 +6,6 @@ import {withTranslation, WithTranslation} from "react-i18next";
 import DateStorage from "../../../services/DataStorage";
 import Securable from "../../common/secureable/Securable";
 import {UserRole} from "../../../entities/User";
-import {Col} from "react-bootstrap";
 
 interface Props extends WithTranslation{
 
@@ -30,9 +29,6 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                             <Link className="nav-link" to={RouterConstants.clinics}>{t("tmClinics")}</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to={RouterConstants.medicine}>{t("tmMaterials")}</Link>
-                        </li>
-                        <li className="nav-item">
                             <Link className="nav-link" to={RouterConstants.reservation}>{t("tmReservations")}</Link>
                         </li>
                         <li className="nav-item">
@@ -46,6 +42,9 @@ const TopMenu: React.FunctionComponent<Props> = ({t}) => {
                                 <Link className="nav-link" to={RouterConstants.import}>{t("import")}</Link>
                             </li>
                         </Securable>
+                        <li className="nav-item">
+                            <Link className="nav-link" to={RouterConstants.database}>{t("tmDatabase")}</Link>
+                        </li>
                     </ul>
 
                     <ul className="navbar-nav ml-auto">

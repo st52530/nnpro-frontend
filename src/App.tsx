@@ -26,6 +26,7 @@ import VisitList from './components/content/visit/visitlist/VisitList';
 import VisitDetails from './components/content/visit/visitdetails/VisitDetails';
 import Loader from "./components/content/loader/Loader";
 import {inject, observer} from "mobx-react";
+import DatabaseList from './components/content/database/databaselist/DatabaseList';
 
 @observer
 export default class App extends React.Component<any, any> {
@@ -52,6 +53,7 @@ export default class App extends React.Component<any, any> {
                         <DashboardRoute exact path={RouterConstants.clients} component={ClientList}/>
                         <DashboardRoute exact path={RouterConstants.clientDetails} component={ClientDetails}/>
                         <DashboardRoute exact path={RouterConstants.staff} component={StaffList}/>
+                        <DashboardRoute exact path={RouterConstants.database} component={DatabaseList}/>
                         <DashboardRoute exact path={RouterConstants.staffDetails} component={StaffDetails}/>
                         <DashboardRoute exact path={RouterConstants.medicine} component={MedicineList}/>
                         <DashboardRoute exact path={RouterConstants.medicineDetails} component={MedicineDetails}/>

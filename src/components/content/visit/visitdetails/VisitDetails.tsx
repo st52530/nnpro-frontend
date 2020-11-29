@@ -1,13 +1,18 @@
-import React, {Component} from "react";
+import React, {Component, ReactNode} from "react";
 import {RouteComponentProps, withRouter} from "react-router";
 import Loader from "../../loader/Loader";
 import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import Report, {ReportStatus} from "../../../../entities/Report";
-import {getReport, finishReport} from "../../../../services/ReportService";
+import {finishReport, getReport} from "../../../../services/ReportService";
 import {Col, Nav, Row, Tab} from "react-bootstrap";
 import FinishVisitDialog from "../finishvisitdialog/FinishVisitDialog";
 import {downloadReport} from "../../../../services/PDFService";
+import Medicine from "../../../../entities/Medicine";
+import Consumable from "../../../../entities/Consumable";
+import i18n from "../../../../i18n";
+import DataStorage from "../../../../services/DataStorage";
+import {UserRole} from "../../../../entities/User";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -23,6 +28,9 @@ interface State {
     updateReportOpen : boolean
     report: Report
 
+    medicines: Medicine[]
+    consumables: Consumable[]
+
     isError : boolean,
     errorText? : string
 }
@@ -34,7 +42,10 @@ class ReportDetails extends Component<Props, State> {
         isError : false,
         isOpenDeleteDialog: false,
         updateReportOpen : false,
-        report: {} as Report
+        report: {} as Report,
+
+        medicines : [],
+        consumables : [],
     }
 
     componentDidMount() {
@@ -75,30 +86,76 @@ class ReportDetails extends Component<Props, State> {
         this.setState({updateReportOpen : false})
     }
 
+    _renderVisitConsumableList = () : ReactNode => {
+
+        let elements : ReactNode[];
+        
+        if (this.state.report.consumables !== undefined && this.state.report.consumables.length > 0) {
+            elements = this.state.report.consumables.map(consumable => {
+                return <div>{consumable.name}</div>;
+            })
+        } else {
+            return (
+                <p>{i18n.t("nothingFound")}</p>
+            )
+        }
+        
+        return (
+            <div>
+                {elements}
+            </div>
+        )
+    }
+    
+    _renderVisitMedicineList = () : ReactNode => {
+
+        let elements : ReactNode[];
+
+        if (this.state.report.medicines !== undefined && this.state.report.medicines.length > 0) {
+            elements = this.state.report.medicines.map(medicine => {
+                return <div>{medicine.name}</div>;
+            })
+        } else {
+            return (
+                <p>{i18n.t("nothingFound")}</p>
+            )
+        }
+        
+        return (
+            <div>
+                {elements}
+            </div>
+        )
+    }
+
     render() {
         let t = this.props.t;
         let report: Report = this.state.report;
+        let currentRole = DataStorage.currentUser?.roles;
         if (this.state.isLoading) {
             return <Loader show={true}/>
         }
 
-
-        let visitDate = new Date(this.state.report.date);
-
-        console.log(visitDate)
-
         let description = (this.state.report.textDescription) ? this.state.report.textDescription : "Žádné informace";
-        let diagnosis = (this.state.report.textDiagnosis) ? this.state.report.textDiagnosis : "Žádné informace";
+        let diagnosis = (this.state.report.textDiagnosis) ? this.state.report.textDiagnosis : "";
         if (report.diagnosis) {
             diagnosis += "\n" + report.diagnosis.name
         }
 
+        if (!diagnosis) {
+            diagnosis += "Žádné informace"
+        }
 
         let recommendation = (this.state.report.textRecommendation) ? this.state.report.textRecommendation : "Žádné informace";
         let finishButton = this.state.report.reportState === ReportStatus.READY ?
             <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onFinishReport}>{t("finish")}</button> :
             <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>
 
+        if (currentRole && currentRole === UserRole.VETERINARY_TECHNICIAN) {
+            finishButton = this.state.report.reportState === ReportStatus.READY ?
+                <noscript/> :
+                <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>
+        }
 
         return (
             <div>
@@ -145,6 +202,16 @@ class ReportDetails extends Component<Props, State> {
                                 <Tab.Pane eventKey="recommendation">
                                     <Row>
                                         <Col><p className="mb-3">{recommendation}</p></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <h5>{t("dfMedicines")}</h5>
+                                            {this._renderVisitMedicineList()}
+                                        </Col>
+                                        <Col>
+                                            <h5>{t("dfConsumables")}</h5>
+                                            {this._renderVisitConsumableList()}
+                                        </Col>
                                     </Row>
                                 </Tab.Pane>
                             </Tab.Content>

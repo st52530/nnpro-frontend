@@ -1,6 +1,7 @@
 import React, {ReactNode} from "react";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import {Dropdown} from "react-bootstrap";
+import i18n from "../../../i18n";
 
 interface Props<T> {
     items: T[]
@@ -38,7 +39,7 @@ export default class Combobox<T> extends React.Component<Props<T>, State<T>> {
     }
 
     render() {
-        let toogleText = this.state.selected ? this.props.getLabel(this.state.selected) : "Select"
+        let toogleText = this.state.selected ? this.props.getLabel(this.state.selected) : i18n.t("select")
         return (
             <div style={{width: "100%"}}>
                 <Dropdown style={{width: "100%"}}>

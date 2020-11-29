@@ -25,7 +25,7 @@ export default class FinishVisitDialog extends AddEditDialog<Report> {
     }
 
     protected validate(): string | undefined {
-        let {textDiagnosis, diagnosis, medicine, consumables, operation} = this.state.item
+        let {textDiagnosis, diagnosis, medicines, consumables, operation} = this.state.item
         if (!textDiagnosis || textDiagnosis.trim().length === 0) {
             return i18n.t("dfEmpty");
         }
@@ -85,7 +85,7 @@ export default class FinishVisitDialog extends AddEditDialog<Report> {
     private onChangeMedicines = (cons : Medicine[]) => {
         this.setState({ item : {
                 ...this.state.item,
-                medicine : cons,
+                medicines : cons,
             }})
     }
 

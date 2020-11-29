@@ -1,10 +1,11 @@
-import {FC, PropsWithChildren} from "react";
+import React, {FC, PropsWithChildren} from "react";
 import {RouterConstants} from "../../../../routes/RouterConstants";
 import "./ReservationListItem.css"
 import Reservation from "../../../../entities/Reservation";
-import React from "react";
 import {Button, ButtonGroup} from "react-bootstrap";
 import i18n from "../../../../i18n";
+import Securable from "../../../common/secureable/Securable";
+import {UserRole} from "../../../../entities/User";
 
 interface Props {
     reservation : Reservation
@@ -27,10 +28,12 @@ const ReservationListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
                             <h6>{i18n.t("dfClient")}: {reservation.client?.fullName}</h6>
                         </div>
                         <div className="col-2">
-                            <ButtonGroup>
-                                <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>{i18n.t("update")}</Button>
-                                <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>{i18n.t("delete")}</Button>
-                            </ButtonGroup>
+                            <Securable access={[UserRole.ADMINISTRATOR, UserRole.VETERINARY_TECHNICIAN]}>
+                                <ButtonGroup>
+                                    <Button variant="primary" onClick={event => {props.onEdit(reservation)}}>{i18n.t("update")}</Button>
+                                    <Button variant="danger" onClick={event => {props.onDelete(reservation)}}>{i18n.t("delete")}</Button>
+                                </ButtonGroup>
+                            </Securable>
                         </div> 
                     </div>
 

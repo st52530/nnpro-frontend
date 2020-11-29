@@ -5,6 +5,10 @@ import ErrorMessage from "../errormessage/ErrorMessage";
 import "./AddEditDialog.css"
 import i18n from "../../../i18n";
 
+interface Params {
+    [key: string]: string;
+}
+
 interface Props<T> {
     isOpen : boolean,
 
@@ -12,6 +16,7 @@ interface Props<T> {
     onSubmit : (item : T) => void
     onCancel : () => void
 
+    params? : Params;
 }
 
 interface State<T> {

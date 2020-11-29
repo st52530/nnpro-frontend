@@ -1,0 +1,8 @@
+.db-nohover .card:hover {
+    background: #fff;
+}
+
+.db-nohover .card:hover .card-body {
+    color: #fff;
+    background: #80B918;
+}

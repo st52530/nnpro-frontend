@@ -5,6 +5,7 @@ export default interface Clinic {
     name : string,
     address : string
 }
+
 export const getClinicId = (clinic : Clinic) : number => {
     return clinic.idClinic;
 }

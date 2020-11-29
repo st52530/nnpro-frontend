@@ -1,7 +1,7 @@
 import API from "../utils/API";
-import {ANIMALS, CLIENTS} from "../utils/APIPaths";
-import User from "../entities/User";
+import {ANIMALS, CLIENTS, MESSAGES} from "../utils/APIPaths";
 import Animal from "../entities/Animal";
+import AnimalMessage from "../entities/AnimalMessage";
 
 export async function getAnimals() : Promise<Animal[]> {
     let response = await API.get(ANIMALS)
@@ -10,6 +10,11 @@ export async function getAnimals() : Promise<Animal[]> {
 
 export async function getAnimalsByClient(id : number) : Promise<Animal[]> {
     let response = await API.get(CLIENTS + '/' + id + ANIMALS)
+    return await response.data;
+}
+
+export async function getMessagesByAnimal(id : number) : Promise<AnimalMessage[]> {
+    let response = await API.get(ANIMALS + '/' + id + MESSAGES)
     return await response.data;
 }
 
