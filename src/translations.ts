@@ -1,3 +1,4 @@
+import React from "react";
 
 export const CzechTranslations = {
 
@@ -75,6 +76,33 @@ export const CzechTranslations = {
     dbPageListConsumables : "Spotřební materiál",
     dbPageListDiagnoses : "Diagnózy",
     dbPageListOperations : "Operace",
+    dbName : "Název",
+    dbCode : "Kód",
+    dbSubstances : "Látky",
+    dbAnimals : "Cílová zvířata",
+    dbForm : "Forma",
+    dbDateOfApproval : "Datum schválení",
+    dbNumberOfApproval : "Číslo schválení",
+    dbApprovalHolder : "Držitel schválení",
+    dbProtectionPeriod : "Ochranné období",
+    dbType : "Druh",
+    dbPackageSize : "Velikost balení",
+    dbPrice : "Cena",
+    dbNameAddition : "Název přidání",
+    dbGroupType : "Typ skupiny",
+    dbPrescriptionDesignation : "Označení předpisu",
+    dbUnitMeasure : "Měrná jednotka",
+    dbProducer : "Výrobce",
+    dbCountryOrigin : "Země původu",
+    dbDateExpiration : "Datum vypršení platnosti",
+    dbSymptoms : "Příznaky",
+    dbIncubationPeriod : "Inkubační doba",
+    dbTreatment : "Léčba",
+    dbLength : "Trvání",
+    dbNote : "Poznámka",
+    dbDescription : "Popis",
+    dbPrevention : "Prevence",
+
 
     // Common
     username : "Uživatelské jméno",

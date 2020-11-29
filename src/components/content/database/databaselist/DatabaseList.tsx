@@ -90,6 +90,7 @@ class DatabaseList extends React.Component<Props, State> {
     }
 
     _renderListMedicines = () : ReactNode => {
+        let t = this.props.t;
 
         let elements : ReactNode[] = this.state.dataMedicines.map(medicine => {
             return (
@@ -102,17 +103,17 @@ class DatabaseList extends React.Component<Props, State> {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <p>Name: {medicine.name}</p>
-                                <p>Code: {medicine.code}</p>
-                                <p>Substances: {medicine.substances}</p>
-                                <p>Animals: {medicine.targetAnimals}</p>
-                                <p>Form: {medicine.form}</p>
-                                <p>Data of approval: {medicine.dateOfApproval}</p>
-                                <p>Number of approval: {medicine.numberOfApproval}</p>
-                                <p>Approval holder: {medicine.approvalHolder}</p>
-                                <p>Protection period: {medicine.protectionPeriod}</p>
-                                <p>Type: {medicine.type}</p>
-                                <p>Package size: {medicine.packageSize}</p>
+                                <p>{t('dbName')}: {medicine.name}</p>
+                                <p>{t('dbCode')}: {medicine.code}</p>
+                                <p>{t('dbSubstances')}: {medicine.substances}</p>
+                                <p>{t('dbAnimals')}: {medicine.targetAnimals}</p>
+                                <p>{t('dbForm')}: {medicine.form}</p>
+                                <p>{t('dbDateOfApproval')}: {medicine.dateOfApproval}</p>
+                                <p>{t('dbNumberOfApproval')}: {medicine.numberOfApproval}</p>
+                                <p>{t('dbApprovalHolder')}: {medicine.approvalHolder}</p>
+                                <p>{t('dbProtectionPeriod')}: {medicine.protectionPeriod}</p>
+                                <p>{t('dbType')}: {medicine.type}</p>
+                                <p>{t('dbPackageSize')}: {medicine.packageSize}</p>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -126,6 +127,7 @@ class DatabaseList extends React.Component<Props, State> {
     }
 
     _renderListConsumables = () : ReactNode => {
+        let t = this.props.t;
 
         let elements : ReactNode[] = this.state.dataConsumables.map(consumable => {
             return (
@@ -138,16 +140,16 @@ class DatabaseList extends React.Component<Props, State> {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <p>Name: {consumable.name}</p>
-                                <p>Code: {consumable.code}</p>
-                                <p>Price: {consumable.price}</p>
-                                <p>Name addition: {consumable.nameAddition}</p>
-                                <p>Group type: {consumable.groupType}</p>
-                                <p>Prescription designation: {consumable.prescriptionDesignation}</p>
-                                <p>Unit of measure: {consumable.unitOfMeasure}</p>
-                                <p>Producer: {consumable.producer}</p>
-                                <p>Country of origin: {consumable.countryOfOrigin}</p>
-                                <p>Date of expiration: {consumable.dateOfExpiration}</p>
+                                <p>{t('dbName')}: {consumable.name}</p>
+                                <p>{t('dbCode')}: {consumable.code}</p>
+                                <p>{t('dbPrice')}: {consumable.price}</p>
+                                <p>{t('dbNameAddition')}: {consumable.nameAddition}</p>
+                                <p>{t('dbGroupType')}: {consumable.groupType}</p>
+                                <p>{t('dbPrescriptionDesignation')}: {consumable.prescriptionDesignation}</p>
+                                <p>{t('dbUnitMeasure')}: {consumable.unitOfMeasure}</p>
+                                <p>{t('dbProducer')}: {consumable.producer}</p>
+                                <p>{t('dbCountryOrigin')}: {consumable.countryOfOrigin}</p>
+                                <p>{t('dbDateExpiration')}: {consumable.dateOfExpiration}</p>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -161,6 +163,7 @@ class DatabaseList extends React.Component<Props, State> {
     }
 
     _renderListDiagnoses = () : ReactNode => {
+        let t = this.props.t;
 
         let elements : ReactNode[] = this.state.dataDiagnoses.map(diagnosis => {
             return (
@@ -173,13 +176,13 @@ class DatabaseList extends React.Component<Props, State> {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <p>Name: {diagnosis.name}</p>
-                                <p>Type: {diagnosis.type}</p>
-                                <p>Animals: {diagnosis.targetAnimals}</p>
-                                <p>Symptoms: {diagnosis.symptoms}</p>
-                                <p>Incubation period: {diagnosis.incubationPeriod}</p>
-                                <p>Treatment: {diagnosis.treatment}</p>
-                                <p>Prevention: {diagnosis.prevention}</p>
+                                <p>{t('dbName')}: {diagnosis.name}</p>
+                                <p>{t('dbType')}: {diagnosis.type}</p>
+                                <p>{t('dbAnimals')}: {diagnosis.targetAnimals}</p>
+                                <p>{t('dbSymptoms')}: {diagnosis.symptoms}</p>
+                                <p>{t('dbIncubationPeriod')}: {diagnosis.incubationPeriod}</p>
+                                <p>{t('dbTreatment')}: {diagnosis.treatment}</p>
+                                <p>{t('dbPrevention')}: {diagnosis.prevention}</p>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -193,6 +196,7 @@ class DatabaseList extends React.Component<Props, State> {
     }
 
     _renderListOperations = () : ReactNode => {
+        let t = this.props.t;
 
         let elements : ReactNode[] = this.state.dataOperations.map(operation => {
             return (
@@ -205,13 +209,13 @@ class DatabaseList extends React.Component<Props, State> {
                         </Card.Header>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <p>Name: {operation.name}</p>
-                                <p>Price: {operation.price}</p>
-                                <p>Type: {operation.type}</p>
-                                <p>Description: {operation.description}</p>
-                                <p>Length: {operation.length}</p>
-                                <p>Note: {operation.note}</p>
-                                <p>Animals: {operation.targetAnimals}</p>
+                                <p>{t('dbName')}: {operation.name}</p>
+                                <p>{t('dbPrice')}: {operation.price}</p>
+                                <p>{t('dbType')}: {operation.type}</p>
+                                <p>{t('dbDescription')}: {operation.description}</p>
+                                <p>{t('dbLength')}: {operation.length}</p>
+                                <p>{t('dbNote')}: {operation.note}</p>
+                                <p>{t('dbAnimals')}: {operation.targetAnimals}</p>
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
