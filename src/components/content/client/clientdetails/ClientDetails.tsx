@@ -7,12 +7,12 @@ import {withTranslation, WithTranslation} from "react-i18next";
 import ErrorMessage from "../../../common/errormessage/ErrorMessage";
 import User, {UserRole} from "../../../../entities/User";
 import {deleteClient, getClient, updateClient} from "../../../../services/ClientService";
-import {Col, Form, Nav, Row, Tab} from "react-bootstrap";
+import {Col, Nav, Row, Tab} from "react-bootstrap";
 import AddEditAnimalDialog from "../../animal/addeditanimaldialog/AddEditAnimalDialog";
 import {getAnimalsByClient, getMessagesByAnimal, saveNewAnimal} from "../../../../services/AnimalService";
 import Animal from "../../../../entities/Animal";
 import i18n from "../../../../i18n";
-import ClientAnimalsListItem from "./ClientAnimalListItem";
+import ClientAnimalListItem from "./ClientAnimalListItem";
 import Reservation from "../../../../entities/Reservation";
 import ClientReservationsListItem from "./ClientReservationsListItem";
 import {getReservationsByClient} from "../../../../services/ReservationService";
@@ -23,12 +23,9 @@ import AddVisitDialog from "../../visit/addvisitdialog/AddVisitDialog";
 import Report from "../../../../entities/Report";
 import {getReportsByClient, saveNewReport} from "../../../../services/ReportService";
 import ClientReportsListItem from "./ClientReportsListItem";
-import ClientAnimalListItem from "./ClientAnimalListItem";
 import AnimalMessage from "../../../../entities/AnimalMessage";
-import Combobox from "../../../common/combobox/Combobox";
 import AddMessageDialog from "../../message/addmessageform/AddMessageDialog";
-import { saveNewMessage } from "../../../../services/MessageService";
-import {me} from "../../../../services/AuthService";
+import {saveNewMessage} from "../../../../services/MessageService";
 
 interface Props extends RouteComponentProps<MatchParams>, WithTranslation {
 
@@ -400,7 +397,7 @@ class ClientDetails extends Component<Props, State> {
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageAnimals")}</h3></Col>
                                         <Col className="text-right">
-                                            <Securable access={[UserRole.ADMINISTRATOR]}>
+                                            <Securable access={[UserRole.ADMINISTRATOR, UserRole.VETERINARY_TECHNICIAN]}>
                                                 <button type="button" onClick={this.onAddNewAnimal} className="btn btn-success px-4" >+</button>
                                             </Securable>
                                         </Col>
