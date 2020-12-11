@@ -137,6 +137,11 @@ export const CzechTranslations = {
     // statistics
     statistics : "Statistiky",
 
+    // visit details
+    visit : "Návštěva",
+    description : "Popis",
+    diagnosis : "Diagnóza",
+
 
     yes : "Ano",
     no : "Ne",
