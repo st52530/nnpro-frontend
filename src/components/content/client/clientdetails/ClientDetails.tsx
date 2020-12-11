@@ -117,7 +117,7 @@ class ClientDetails extends Component<Props, State> {
     private loadMessages = () => {
         this.state.animals.forEach(animal => {
             getMessagesByAnimal(animal.idAnimal).then(value => {
-                this.setState({messages : value, isLoading : false});
+                this.setState({messages : this.state.messages.concat(value), isLoading : false});
             }).catch(reason =>{
                 this.setState({isLoading : false, isError : true, })
             })
@@ -424,7 +424,7 @@ class ClientDetails extends Component<Props, State> {
                                             <h6>Zpráva</h6>
                                         </Col>
                                         <Col md={3}>
-                                            <h6>VETERINÁŘ</h6>
+                                            <h6>ODESÍLATEL</h6>
                                         </Col>
                                     </Row>                                         
                                     {this._renderClientMessagesList()}
