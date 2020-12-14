@@ -138,7 +138,7 @@ export default class AddEditReservationDialog extends AddEditDialog<Reservation>
                             {i18n.t("dfDate")}
                         </Form.Label>
                         <Col sm="10">
-                            <Datetime onChange={this.onChangeDate}/>
+                            <Datetime onChange={this.onChangeDate} isValidDate={this.isValidDate}/>
                         </Col>
                     </Form.Group>
                 </Form>
