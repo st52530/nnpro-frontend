@@ -88,7 +88,7 @@ class ClientList extends React.Component<Props, State> {
                         <h1>{t("tmClients")}</h1>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
-                        <Securable access={[UserRole.ADMINISTRATOR]}>
+                        <Securable access={[UserRole.ADMINISTRATOR, UserRole.VETERINARY_TECHNICIAN]}>
                             <button type="button" className="btn btn-success px-4" onClick={this.onAddNewClient}>{t("add")}</button>
                         </Securable>
                     </div>

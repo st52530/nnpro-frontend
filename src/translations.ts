@@ -137,6 +137,11 @@ export const CzechTranslations = {
     // statistics
     statistics : "Statistiky",
 
+    // visit details
+    visit : "Návštěva",
+    description : "Popis",
+    diagnosis : "Diagnóza",
+
 
     yes : "Ano",
     no : "Ne",
@@ -163,6 +168,7 @@ export const CzechTranslations = {
     dfVisitTextRecommendation : "Doporučení k návštěvě",
     dfDiagnosesDescription : "Popis diagnózy",
     dfDiagnosis : "Diagnóza",
+    dfOperations : "Úkony",
     dfDiagnosesRecommendation : "Doporučení k diagnóze",
 
     dfMedicines : "Medikamenty",
