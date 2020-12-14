@@ -168,6 +168,7 @@ export const CzechTranslations = {
     dfVisitTextRecommendation : "Doporučení k návštěvě",
     dfDiagnosesDescription : "Popis diagnózy",
     dfDiagnosis : "Diagnóza",
+    dfOperations : "Úkony",
     dfDiagnosesRecommendation : "Doporučení k diagnóze",
 
     dfMedicines : "Medikamenty",

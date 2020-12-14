@@ -57,6 +57,10 @@ export default class AddEditReservationDialog extends AddEditDialog<Reservation>
         this.props.onSubmit(this.state.item);
     }
 
+    private isValidDate = (date : Moment ) => {
+        return date.isAfter(moment());
+    }
+
     private onChangeDate = (date: Moment | string): void => {
         if (moment.isMoment(date)) {
             this.setState({
@@ -110,7 +114,7 @@ export default class AddEditReservationDialog extends AddEditDialog<Reservation>
                             {i18n.t("dfDate")}
                         </Form.Label>
                         <Col sm="10">
-                            <Datetime onChange={this.onChangeDate} closeOnSelect={true} timeConstraints={{ minutes : { min: 0, max: 59, step : 30 }}}/>
+                            <Datetime onChange={this.onChangeDate} isValidDate={this.isValidDate} closeOnSelect={true} timeConstraints={{ minutes : { min: 0, max: 59, step : 30 }}}/>
                         </Col>
 
                         {clientSelectLabel} {clientSelect}
