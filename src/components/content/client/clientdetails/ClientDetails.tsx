@@ -421,7 +421,7 @@ class ClientDetails extends Component<Props, State> {
                                     <Row>
                                         <Col><h3 className="mb-3">{t("clientPageMessages")}</h3></Col>
                                     </Row>
-                                    <button type="button" onClick={this.onAddMessage} className="btn btn-success px-4 w-100 mb-5" >Add</button>  
+                                    <button type="button" onClick={this.onAddMessage} className="btn btn-success px-4 w-100 mb-5" >{i18n.t("dfNewMessage")}</button>
 
                                     <Row>
                                         <Col md={3}>

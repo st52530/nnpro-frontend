@@ -205,6 +205,7 @@ export const CzechTranslations = {
     dfMedicineProtectionPeriod : "Doba ochrany",
     dfMedicineType : "Typ",
     dfMedicinePackageSize : "Rozměr balíku",
+    dfNewMessage : "Nová zpráva",
 
     // add/edit reservation form
     dfDate : "Datum",
