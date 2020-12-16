@@ -242,7 +242,7 @@ class ClientDetails extends Component<Props, State> {
     }
 
     onAddMessageCancel = () => {
-        this.setState({addVisitOpen : false, addVisitEntity : undefined})
+        this.setState({addMessageOpen : false, addMessageEntity : undefined})
     }
 
     _renderClientAnimalsList = () : ReactNode => {
