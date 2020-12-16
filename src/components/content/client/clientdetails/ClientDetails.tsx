@@ -379,7 +379,7 @@ class ClientDetails extends Component<Props, State> {
                             <h5 className="mt-1 mb-3">Řízení</h5>
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="information">Information</Nav.Link>
+                                    <Nav.Link eventKey="information">Informace</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="animals">Zvířata</Nav.Link>

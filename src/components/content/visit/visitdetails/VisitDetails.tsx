@@ -177,13 +177,13 @@ class ReportDetails extends Component<Props, State> {
                             <h5 className="mt-1 mb-3">Information</h5>
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
-                                    <Nav.Link eventKey="description">Description</Nav.Link>
+                                    <Nav.Link eventKey="description">{t("vpDescription")}</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="diagnosis">Diagnosis</Nav.Link>
+                                    <Nav.Link eventKey="diagnosis">{t("vpDiagnosis")}</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="recommendation">Recommendation</Nav.Link>
+                                    <Nav.Link eventKey="recommendation">{t("vpRecommendation")}</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Col>

@@ -54,6 +54,9 @@ export const CzechTranslations = {
 
     // Visits page
     vpHeader : "Návštěvy",
+    vpDescription : "Popis",
+    vpDiagnosis : "Diagnóza",
+    vpRecommendation : "Rekomendace",
 
     // Reservation page
     rpHeader : "Rezervace",
@@ -154,6 +157,7 @@ export const CzechTranslations = {
     dfEmptyName : "Prázdné uživatelské jméno",
     dfNotSelectedRole : "Role není vybrana",
     dfEmptyFullName : "Prázdné plné jméno uživatele",
+    dfEmptyPhoneNumber : "Telefonní číslo",
     dfEmptyMail : "Prazdný e-mail",
     dfEmptyPassword : "Prazdné heslo",
 
