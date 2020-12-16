@@ -46,20 +46,39 @@ class VisitList extends React.Component<Props, State> {
         if (!DataStorage.currentUser) {
             me().then(e => {
                 this.loadReports();
-                if (e?.roles === UserRole.VETERINARY) {
-                    this.loadReportsByVeterinary(Number(e.idUser))
-                } else {
-                    this.loadReportsByClinic(Number(e?.workplace.idClinic));
-                }
+                if (!e) {
+                    this.loadReportsAll()
+                } else { 
+                    if (e?.roles === UserRole.VETERINARY) {
+                        this.loadReportsByVeterinary(Number(e?.idUser))
+                    } else {
+                        this.loadReportsAll()
+                        //this.loadReportsByClinic(Number(e?.workplace.idClinic));
+                    }
+                }                
             })
         } else {
             let e = DataStorage.currentUser;
             if (e?.roles === UserRole.VETERINARY) {
                 this.loadReportsByVeterinary(Number(e.idUser))
             } else {
-                this.loadReportsByClinic(Number(e?.workplace.idClinic));
+                this.loadReportsAll()
+                //this.loadReportsByClinic(Number(e?.workplace.idClinic));
             }
         }
+    }
+
+    loadReportsAll = () => {
+        getReports()
+            .then(value => {
+                this.setState({
+                    reportsDone: value.filter(r => r.reportState === ReportStatus.DONE),
+                    reportsWaiting: value.filter(r => r.reportState === ReportStatus.READY)
+                    , isLoading: false
+                });
+            }).catch(reason => {
+            this.setState({isLoading: false, isError: true,})
+        })
     }
 
     loadReportsByVeterinary = (veterinaryId: number) => {

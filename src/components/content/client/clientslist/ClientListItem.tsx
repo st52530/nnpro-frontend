@@ -18,6 +18,7 @@ const ClientListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
                     <div className="card-body">
                         <h5 className="card-title">{client.fullName}</h5>
                         <h6 className="card-subtitle mb-2 text-muted">{client.email}</h6>
+                        <h6 className="card-subtitle mb-2 text-muted">{client.phoneNumber}</h6>
                     </div>
                 </div>
         </NavLink>

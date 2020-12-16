@@ -18,6 +18,7 @@ import ClinicStaffListItem from "./ClinicStaffListItem";
 
 import ClinicMedicine from "../../../../entities/ClinicMedicine";
 import {
+    deleteMedicineByClinic,
     getMedicinesByClinic,
     saveNewMedicineByClinic,
     updateMedicineByClinic
@@ -25,6 +26,7 @@ import {
 import ClinicMedicineListItem from "./ClinicMedicineListItem";
 import ClinicConsumable from "../../../../entities/ClinicConsumable";
 import {
+    deleteConsumableByClinic,
     getConsumablesByClinic,
     saveNewConsumableByClinic,
     updateConsumableByClinic
@@ -89,7 +91,7 @@ class ClinicDetails extends Component<Props, State> {
         staff : [],
         clinicMedicine : [],
         consumables : [],
-        
+
         addNewStaffOpen : false,
         editStaffOpen : false,
         addNewMedicineOpen : false,
@@ -263,6 +265,24 @@ class ClinicDetails extends Component<Props, State> {
         this.setState({editMedicineOpen : false, editMedicine : undefined})
     }
 
+    onDeleteClinicMedicine = (clinicMedicine : ClinicMedicine) => {
+        this.setState({isLoading : true})
+        deleteMedicineByClinic(clinicMedicine.idClinicMedicine).then(value => {
+            this.loadMedicines();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
+    onDeleteClinicConsumable = (clinicConsumable : ClinicConsumable) => {
+        this.setState({isLoading : true})
+        deleteConsumableByClinic(clinicConsumable.idClinicConsumable).then(value => {
+            this.loadConsumables();
+        }).catch(reason => {
+            this.setState({isLoading : false, isError : true})
+        })
+    }
+
     onAddClinicConsumable = () => {
         this.setState({addNewConsumableOpen : true})
     }
@@ -313,13 +333,6 @@ class ClinicDetails extends Component<Props, State> {
         return <SubmitDialog header={header} body={body} isOpen={this.state.deleteClinicOpen} onSubmit={this.onDeleteClinicSubmit} onCancel={this.onDeleteCancelClinic}/>
     }
 
-    _renderDeleteCliniMedicineDialog = () : ReactNode => {
-        let header : string = i18n.t("cpDelete");
-        let body : string = i18n.t("cpDelete")+ ": " + this.state.clinic.name + "?";
-
-        return <SubmitDialog header={header} body={body} isOpen={this.state.deleteClinicOpen} onSubmit={this.onDeleteClinicSubmit} onCancel={this.onDeleteCancelClinic}/>
-    }
-
     _renderClinicStaffList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.staff.map(staff => {
@@ -342,7 +355,7 @@ class ClinicDetails extends Component<Props, State> {
     _renderClinicMedicineList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.clinicMedicine.map(clinicMedicine => {
-            return <ClinicMedicineListItem onEdit={this.onEditClinicMedicine} clinicMedicine={clinicMedicine} key={clinicMedicine.medicine.idMedicine}/>
+            return <ClinicMedicineListItem onEdit={this.onEditClinicMedicine} onDelete={this.onDeleteClinicMedicine} clinicMedicine={clinicMedicine} key={clinicMedicine.medicine.idMedicine}/>
         })
 
         if (elements.length == 0 || elements === undefined) {
@@ -361,7 +374,7 @@ class ClinicDetails extends Component<Props, State> {
     _renderClinicConsumableList = () : ReactNode => {
 
         let elements : ReactNode[] = this.state.consumables.map(consumable => {
-            return <ClinicConsumableListItem onEdit={this.onEditClinicConsumable} clinicConsumable={consumable} key={consumable.idClinicConsumable}/>
+            return <ClinicConsumableListItem onEdit={this.onEditClinicConsumable} onDelete={this.onDeleteClinicConsumable} clinicConsumable={consumable} key={consumable.idClinicConsumable}/>
         })
 
         if (elements.length == 0 || elements === undefined) {

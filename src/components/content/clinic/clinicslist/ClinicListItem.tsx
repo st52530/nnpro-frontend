@@ -18,7 +18,7 @@ const ClinicListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
             <div className="card">
                 <div className="card-body">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-8">
                             <h5 className="card-title">{clinic.name}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">{clinic.address}</h6>
                         </div>

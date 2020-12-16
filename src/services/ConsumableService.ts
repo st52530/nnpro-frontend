@@ -26,6 +26,11 @@ export async function saveNewConsumableByClinic(consumable : ClinicConsumable) :
     await response.data;
 }
 
+export async function deleteConsumableByClinic(id : number) : Promise<void> {
+    let response = await API.delete(`/clinics/clinic-consumable/` + id)
+    await response;
+}
+
 export async function updateConsumableByClinic(consumable : ClinicConsumable) : Promise<void> {
     let response = await API.put(`/clinics/clinic-consumable/${consumable.idClinicConsumable}`, consumable)
     await response.data;

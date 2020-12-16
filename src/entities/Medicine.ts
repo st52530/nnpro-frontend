@@ -1,5 +1,5 @@
 export default interface Medicine {
-    idMedicine? : number,
+    idMedicine : number,
     name : string,
     code : string,
     substances : string,

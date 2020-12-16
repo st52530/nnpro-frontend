@@ -54,7 +54,8 @@ interface State {
     addMessageEntity? : AnimalMessage
 
     isError : boolean,
-    errorText? : string
+    errorText? : string,
+    currentLabel: string
 }
 
 class ClientDetails extends Component<Props, State> {
@@ -71,7 +72,8 @@ class ClientDetails extends Component<Props, State> {
         animals: [],
         reservations: [],
         reports: [],
-        messages: []
+        messages: [],
+        currentLabel: "information"
     }
 
     componentDidMount() {
@@ -115,6 +117,7 @@ class ClientDetails extends Component<Props, State> {
     }
 
     private loadMessages = () => {
+        this.setState({messages : []});
         this.state.animals.forEach(animal => {
             getMessagesByAnimal(animal.idAnimal).then(value => {
                 this.setState({messages : this.state.messages.concat(value), isLoading : false});
@@ -191,6 +194,7 @@ class ClientDetails extends Component<Props, State> {
         }).catch(reason => {
             this.setState({isLoading : false, isError : true})
         })
+        this.setState({currentLabel : "animals"})
     }
 
     onAddNewAnimalCancel = () => {
@@ -211,6 +215,7 @@ class ClientDetails extends Component<Props, State> {
         }).catch(error => {
             this.setState({isLoading : false, isError : true})
         })
+        this.setState({currentLabel : "reservations"})
     }
 
     onAddVisitCancel = () => {
@@ -233,6 +238,7 @@ class ClientDetails extends Component<Props, State> {
         }).catch(error => {
             this.setState({isLoading : false, isError : true})
         })
+        this.setState({currentLabel : "messages"})
     }
 
     onAddMessageCancel = () => {
@@ -356,7 +362,8 @@ class ClientDetails extends Component<Props, State> {
                 <div className="row mb-3 border-bottom">
                     <div className="col">
                         <h1>Klient <span className="client-title">{client.fullName}</span></h1>
-                        <p>{client.email}</p>
+                        <p>{client.phoneNumber} [{client.email}]</p>
+                        <p>{client.address}</p>
                     </div>
                     <div className="col d-flex justify-content-end align-items-center">
                         <Securable access={[UserRole.ADMINISTRATOR]}>
@@ -366,7 +373,7 @@ class ClientDetails extends Component<Props, State> {
                     </div>
                 </div>
 
-                <Tab.Container id="left-tabs-example" defaultActiveKey="information">
+                <Tab.Container id="left-tabs-example" defaultActiveKey={this.state.currentLabel}>
                     <Row>
                         <Col sm={12} lg={3}>
                             <h5 className="mt-1 mb-3">Řízení</h5>

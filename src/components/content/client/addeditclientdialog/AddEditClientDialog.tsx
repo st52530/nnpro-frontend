@@ -15,7 +15,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
     }
 
     protected validate(): string | undefined {
-        let {username , fullName, email, password} = this.state.item
+        let {username , fullName, email, password, address, phoneNumber} = this.state.item
         if (!this.props.item && (!username || username.trim().length === 0)) {
             return i18n.t("dfEmptyName");
         }
@@ -24,6 +24,12 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
         }
         if (!email || email.trim().length === 0) {
             return i18n.t("dfEmptyMail");
+        }
+        if (!address || address.trim().length === 0) {
+            return i18n.t("dfEmptyAddress");
+        }
+        if (!phoneNumber || phoneNumber.trim().length === 0) {
+            return i18n.t("dfEmptyPhoneNumber");
         }
         if (!this.props.item && (!password || password.trim().length === 0)) {
             return i18n.t("dfEmptyPassword");
@@ -61,6 +67,20 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
             }})
     }
 
+    private onChangePhoneNumber = (e : any) : void => {
+        this.setState({ item : {
+                ...this.state.item,
+                phoneNumber : e.target.value,
+            }})
+    }
+
+    private onChangeAddress = (e : any) : void => {
+        this.setState({ item : {
+                ...this.state.item,
+                address : e.target.value,
+            }})
+    }
+
     private onChangePassword = (e : any) : void => {
         this.setState({ item : {
                 ...this.state.item,
@@ -69,7 +89,7 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
     }
 
     protected renderForm(): React.ReactNode {
-        let {username , fullName, email, password} = this.state.item
+        let {username , fullName, email, password, phoneNumber, address} = this.state.item
         if(this.props.item){
             return (
 
@@ -90,6 +110,26 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         <Col sm="10">
                             <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""}
                                           placeholder={i18n.t("dfEmail")}/>
+                        </Col>
+                    </Form.Group>
+                    
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfPhoneNumber")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangePhoneNumber} value={phoneNumber || ""}
+                                          placeholder={i18n.t("dfPhoneNumber")}/>
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfAddress")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeAddress} value={address || ""}
+                                          placeholder={i18n.t("dfAddress")}/>
                         </Col>
                     </Form.Group>
                 </Form>
@@ -127,6 +167,26 @@ export default class AddEditClientDialog extends AddEditDialog<User> {
                         <Col sm="10">
                             <Form.Control type="text" onChange={this.onChangeEmail} value={email || ""}
                                           placeholder={i18n.t("dfEmail")}/>
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfPhoneNumber")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangePhoneNumber} value={phoneNumber || ""}
+                                          placeholder={i18n.t("dfPhoneNumber")}/>
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row}>
+                        <Form.Label column sm="2">
+                            {i18n.t("dfAddress")}
+                        </Form.Label>
+                        <Col sm="10">
+                            <Form.Control type="text" onChange={this.onChangeAddress} value={address || ""}
+                                          placeholder={i18n.t("dfAddress")}/>
                         </Col>
                     </Form.Group>
 

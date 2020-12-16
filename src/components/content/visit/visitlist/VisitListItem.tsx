@@ -20,6 +20,7 @@ const VisitListItem : FC<Props> = (props : PropsWithChildren<Props>) => {
                         <h5 className="card-title">Zvíře {report.animal?.name}</h5>
                         <h5 className="card-title">Klient {report.animal?.owner?.fullName}</h5>
                         <p className="text-dark">{report.textDescription}</p>
+                        <p className="text-dark">{report.date}</p>
                     </div>
                 </div>
             </div>

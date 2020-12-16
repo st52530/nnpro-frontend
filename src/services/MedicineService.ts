@@ -34,6 +34,11 @@ export async function updateMedicineByClinic(medicine : ClinicMedicine) : Promis
     await response.data;
 }
 
+export async function deleteMedicineByClinic(id : number) : Promise<void> {
+    let response = await API.delete(`/clinics/clinic-medicine/` + id)
+    await response;
+}
+
 export async function saveNewMedicine(medicine : Medicine) : Promise<void> {
     let response = await API.post(MEDICINES, medicine)
     await response.data;
