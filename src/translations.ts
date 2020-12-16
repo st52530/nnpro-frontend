@@ -157,7 +157,7 @@ export const CzechTranslations = {
     dfEmptyName : "Prázdné uživatelské jméno",
     dfNotSelectedRole : "Role není vybrana",
     dfEmptyFullName : "Prázdné plné jméno uživatele",
-    dfEmptyPhoneNumber : "Telefonní číslo",
+    dfEmptyPhoneNumber : "Prázdné telefonní číslo",
     dfEmptyMail : "Prazdný e-mail",
     dfEmptyPassword : "Prazdné heslo",
 
@@ -165,6 +165,7 @@ export const CzechTranslations = {
     dfName : "Uživatelské jméno",
     dfEmail : "E-mail",
     dfPassword : "Heslo",
+    dfPhoneNumber : "Telefonní číslo",
 
     dfVisitTextDescription : "Popis návštěvy",
     dfVisitAnimal : "Zvíře",
