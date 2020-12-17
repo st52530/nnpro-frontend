@@ -1,5 +1,5 @@
 
-import User from "../entities/User";
+import User, {UserRole} from "../entities/User";
 import {TOKEN_KEY} from "../Constants";
 import API from "../utils/API";
 import {ME, USER_LOGIN} from "../utils/APIPaths";
@@ -27,6 +27,10 @@ export async function login(username : string, password : string, permanent : bo
     }
     let response = await API.post(USER_LOGIN, request);
     let user : any = await response.data
+    if(user.user.roles === UserRole.CLIENT){
+        logout();
+        return user;
+    }
     if (permanent) {
         localStorage.setItem(TOKEN_KEY, user.token);
     } else {
