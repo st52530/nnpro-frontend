@@ -179,6 +179,8 @@ export const CzechTranslations = {
     dfMedicines : "Medikamenty",
     dfConsumables : "Spotřební materiál",
 
+    idClinicMedicine : "Identifikační číslo",
+
     // add/edit clinic form
     dfEmptyAddress : "Prazdná adresa",
     dfClinicName : "Jméno klinily",
