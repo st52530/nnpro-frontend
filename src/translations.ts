@@ -180,6 +180,7 @@ export const CzechTranslations = {
     dfConsumables : "Spotřební materiál",
 
     idClinicMedicine : "Identifikační číslo",
+    clinicConsumableId : "Identifikační číslo",
 
     // add/edit clinic form
     dfEmptyAddress : "Prazdná adresa",
