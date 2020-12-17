@@ -154,7 +154,13 @@ class ReportDetails extends Component<Props, State> {
         if (currentRole && currentRole === UserRole.VETERINARY_TECHNICIAN) {
             finishButton = this.state.report.reportState === ReportStatus.READY ?
                 <noscript/> :
-                <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>
+                <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>          
+        }
+        
+        if (currentRole && currentRole !== UserRole.VETERINARY) {
+            finishButton = this.state.report.reportState === ReportStatus.READY ?
+                <noscript/> :
+                <button type="button" className="btn btn-info px-4 mr-2" onClick={this.onExportReport}>{t("export")}</button>          
         }
 
         return (
