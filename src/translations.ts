@@ -56,7 +56,8 @@ export const CzechTranslations = {
     vpHeader : "Návštěvy",
     vpDescription : "Popis",
     vpDiagnosis : "Diagnóza",
-    vpRecommendation : "Rekomendace",
+    vpRecommendation : "Doporučení",
+    vpInformation : "Informace",
 
     // Reservation page
     rpHeader : "Rezervace",

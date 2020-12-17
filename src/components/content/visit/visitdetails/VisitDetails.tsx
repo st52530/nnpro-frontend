@@ -180,7 +180,7 @@ class ReportDetails extends Component<Props, State> {
                 <Tab.Container id="left-tabs-example" defaultActiveKey="description">
                     <Row>
                         <Col sm={12} lg={3}>
-                            <h5 className="mt-1 mb-3">Information</h5>
+                            <h5 className="mt-1 mb-3">{t("vpInformation")}</h5>
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
                                     <Nav.Link eventKey="description">{t("vpDescription")}</Nav.Link>
