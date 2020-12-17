@@ -24,7 +24,7 @@ const ClinicMedicineListItem : FC<Props> = (props : PropsWithChildren<Props>) =>
                         <p className="m-0">{clinicMedicine.medicine.code}</p>
                         <p className="m-0">{clinicMedicine.quantityInStock} ks</p>
 
-                        idClinicMedicine {clinicMedicine.idClinicMedicine}
+                        {i18n.t("idClinicMedicine")} {clinicMedicine.idClinicMedicine}
                     </div>
                     <div className="col-6 d-flex align-items-center justify-content-end">
                         <Securable access={[UserRole.ADMINISTRATOR]}>

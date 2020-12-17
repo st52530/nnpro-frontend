@@ -25,7 +25,7 @@ const ClinicConsumableListItem : FC<Props> = (props : PropsWithChildren<Props>) 
                         <h5 className="card-title">{clinicConsumable.consumable.name}</h5>
                         <p className="m-0">{clinicConsumable.consumable.code}</p>
                         <p className="m-0">{clinicConsumable.quantityInStock} ks</p>
-                        clinicConsumableId {clinicConsumable.idClinicConsumable}
+                        {i18n.t("clinicConsumableId")} {clinicConsumable.idClinicConsumable}
                     </div>
                     <div className="col-6 d-flex align-items-center justify-content-end">
                         <p className="m-0 mr-4">{clinicConsumable.consumable.price} Kč</p>
