@@ -123,7 +123,7 @@ export default class FinishVisitDialog extends AddEditDialog<Report> {
 
                 <Form.Group as={Row}>
                     <Form.Label column sm="3">
-                        {i18n.t("dfOperations")}
+                        {i18n.t("dfDiagnosis")}
                     </Form.Label>
                     <Col sm="9">
                         <Combobox onSelect={this.onChangeDiagnosis} items={DataStorage.diagnosesStorage} getLabel={getDiagnosisLabel}
@@ -152,7 +152,7 @@ export default class FinishVisitDialog extends AddEditDialog<Report> {
 
                 <Form.Group as={Row}>
                     <Form.Label column sm="3">
-                        {i18n.t("dfDiagnosis")}
+                        {i18n.t("dfOperations")}
                     </Form.Label>
                     <Col sm="9">
                         <Combobox onSelect={this.onChangeOperation} items={DataStorage.operationsStorage} getLabel={getOperationLabel}
